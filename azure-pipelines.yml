@@ -1,0 +1,73 @@
+schedules:
+  - cron: 0 10 1 * *
+    displayName: 'At 10:00 AM on day-of-month 1'
+    branches:
+      include:
+        - SIT-dev
+    always: false
+variables:
+  - name: BuildParameters.mavenPOMFile
+    value: pom.xml
+  - name: '$(date:yyyyMMdd)$(rev:.r)'
+    
+resources:
+  repositories:
+    - repository: self
+      type: git
+      ref: refs/heads/SIT-dev
+      
+stages:
+ - stage: build
+   jobs:
+   - job: RDGSPFx_Regression_test_SIT_dev
+     displayName: Agent job 1_SIT_dev
+     pool:
+      vmImage: windows-latest
+      name: Azure Pipelines
+     timeoutInMinutes: 100
+     cancelTimeoutInMinutes: 5
+     steps:
+      - checkout: self
+        clean: true
+      - task: Maven@3
+        displayName: Maven pom.xml
+        condition: always()
+        inputs:
+          mavenPOMFile: $(BuildParameters.mavenPOMFile)
+          goals: clean test
+          testResultsFiles: test-output/SparkReport/SparkAutoTest.html
+          testRunTitle: RDG SPFx SIT Regression
+      - task: CopyFiles@2
+        displayName: 'Copy Files jar files to: $(build.artifactstagingdirectory)'
+        condition: always()
+        inputs:
+          SourceFolder: $(system.defaultworkingdirectory)
+          Contents: '**/*.jar'
+          TargetFolder: $(build.artifactstagingdirectory)
+      - task: CopyFiles@2
+        displayName: 'Copy Spark Report to: $(build.artifactstagingdirectory)'
+        condition: always()
+        inputs:
+          SourceFolder: $(system.defaultworkingdirectory)
+          Contents: '**\test-output\SparkReport\**'
+          TargetFolder: $(build.artifactstagingdirectory)
+      - task: CopyFiles@2
+        displayName: Copy Actual Report Files to $(build.artifactstagingdirectory)
+        inputs:
+          SourceFolder: $(system.defaultworkingdirectory)
+          Contents: '**\src\test\resources\ActualReportFiles\**'
+          TargetFolder: $(build.artifactstagingdirectory)
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: TEST AUTOMATION REPORT'
+        condition: always()
+        inputs:
+          ArtifactName: SparkAutoTest.html
+      - task: DownloadBuildArtifacts@1
+        displayName: Download Actual Report Files
+        inputs:
+          buildType: current
+          downloadType: specific
+          itemPattern: '**''**/*.pdf'''
+          downloadPath: $(System.ArtifactsDirectory)
+          checkDownloadedFiles: false
+...

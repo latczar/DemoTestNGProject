@@ -1,0 +1,11 @@
+/test-output/
+/target/test-classes
+/target/classes
+*/target/
+*/maven-status
+*/surefire-reports
+*.classpath
+*.settings
+*.project
+*.metadata
+/target/
