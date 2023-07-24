@@ -99,15 +99,17 @@ public class UserAdmin extends CommonFunctions {
 	/*
 	 * Method for Adding Users To an Organization
 	*/
-	
-	public void addUserToOrg() throws Exception {
+		
+	public void addUserToOrg(String orgInput) throws Exception {
 		clickUserAdminButton();
 		WAITFORVISIBLEELEMENT(driver, inviteUserButton);
 		CLICK(inviteUserButton, "Invite User button is clicked");
 		WAITFORVISIBLEELEMENT(driver, emailAddressInput);
 		CLICK(emailAddressInput, "Email Address Input is clicked");
-		ENTERTEXT(selectOrganizationInput, "");
-		ENTERTEXT(selectRolesInput, "");
+		ENTERTEXT(selectOrganizationInput, "111test111");
+		SELECTDROPDOWNVALUE("//section[@id='bre-select-null-0']", "111test111");
+		CLICK(selectRolesInput, "Select Roles Input is clicked");
+		SELECTVALUEDROPDOWN("//section[@class='select_bre-select__menu__kZzhM scrollbar']//label[contains(text(), '"+ orgInput +"')]')]", "");
 		CLICK(addUserButton, "Add User button is clicked");
 	}
 }

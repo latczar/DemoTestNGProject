@@ -133,6 +133,11 @@ public class CommonFunctions {
 	public static void SENDKEYSTAB(WebElement element) throws Exception {
 		element.sendKeys(Keys.TAB);
 	}
+	
+	public static void SENDKEYSTABANDCLICK(WebElement element) throws Exception {
+		element.sendKeys(Keys.TAB);
+		element.click();
+	}
 
 	public static void SENDKEYSENTER(WebElement element) throws Exception {
 		element.sendKeys(Keys.ENTER);
@@ -346,14 +351,6 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(xpath))));
 	}
 
-	public String GETDEFAULTOPTIONDROPDOWN(String xpath) {
-		Select dropdown = new Select(driver.findElement(By.xpath(obj.getProperty(xpath))));
-		WebElement selectedOption = dropdown.getFirstSelectedOption();
-		String actualSelectedOption = selectedOption.getText();
-		Extent.getTest().info("Default Selected option is " + actualSelectedOption);
-		return actualSelectedOption;
-	}
-
 	public String GETDEFAULTVALUEDROPDOWN(String xpath) {
 		Select dropdown = new Select(driver.findElement(By.xpath(obj.getProperty(xpath))));
 		WebElement selectedOption = dropdown.getFirstSelectedOption();
@@ -436,20 +433,14 @@ public class CommonFunctions {
 		selectDropDown.selectByIndex(index);
 	}
 
-	public void SELECTDROPDOWNVALUE(String xpath, WebElement element, String dropValue) throws Exception {
-		element.click();
-		WAITFORVISIBLEELEMENT(driver, element);
-		// Select select = new Select(element);
-		Select dropBrand = new Select(driver.findElement(By.xpath(xpath)));
-		dropBrand.selectByValue(dropValue);
+	public void SELECTDROPDOWNVALUE(String xpath, String dropValue) throws Exception {
+		Select dropdown = new Select(driver.findElement(By.xpath(xpath)));
+		dropdown.selectByValue(dropValue);
 	}
 
-	public void SELECTDROPDOWNINDEX(String xpath, WebElement element, int index) throws Exception {
-		element.click();
-		WAITFORVISIBLEELEMENT(driver, element);
-		// Select select = new Select(element);
-		Select dropBrand = new Select(driver.findElement(By.xpath(xpath)));
-		dropBrand.selectByIndex(index);
+	public void SELECTDROPDOWNINDEX(String xpath, int index) throws Exception {
+		Select dropdown = new Select(driver.findElement(By.xpath(xpath)));
+		dropdown.selectByIndex(index);
 	}
 
 	public void SELECTVALUEDROPDOWN(String xpath, String value) {
