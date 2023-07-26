@@ -8,10 +8,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.zensar.pages.LoginPage;
-import com.zensar.pages.UserAdmin;
-import com.zensar.pages.UserPage;
-import com.zensar.pages.UserPage_CreateOrganizations;
+import com.breeam.pages.LoginPage;
+import com.breeam.pages.UserAdmin;
+import com.breeam.pages.UserPage;
+import com.breeam.pages.UserPage_CreateOrganizations;
 
 import base.CommonFunctions;
 import base.UserDefinedFunctions;

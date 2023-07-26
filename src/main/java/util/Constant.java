@@ -24,18 +24,35 @@ public class Constant extends CommonFunctions {
 	public static String selfSignUpVerificationCode;
 	public static final String ProjectPath = System.getProperty("user.dir");
 	
-	public static String organisationAdministrator = "";    
-	public static String userAdministrator = "";
-	public static String seniorTechnicalSupport = "";
-	public static String schemeDesigner = "";
-	public static String schemeManager = "";
-	public static String schemeOwner = "";
-	public static String assetAdministrator = "";
-	public static String assetManager = "";
-	public static String assetContributor = "";
-	public static String assessmentAdministrator = "";
+	public static String organisationAdministrator = "fevog73281@sparkroi.com";    
+	public static String userAdministrator = "fiten53394@sparkroi.com";
+	public static String seniorTechnicalSupport = ""; //missing role in my org
+	public static String schemeDesigner = ""; //missing role in my org
+	public static String schemeManager = ""; //missing role in my org
+	public static String schemeOwner = ""; //missing role in my org
+	public static String assetAdministrator = ""; //missing role in my org
+	public static String assetManager = ""; //missing role in my org
+	public static String assetContributor = ""; //missing role in my org
+	public static String assessmentAdministrator = "tonacav798@ridteam.com";
 	public static String assessmentManager = "";
-	public static String assessmentContributor = "";
+	public static String assessmentContributor = "yorepow934@paldept.com";
 	public static String assessmentStakeholder = "";
 	public static String userPassword = "";
+	
+	/*Roles
+	Global Administrator
+	Organisation Administrator
+	User Administrator
+	Senior Technical Support
+	Scheme Designer
+	Scheme Manager
+	Scheme Owner
+	Asset Administrator
+	Asset Manager
+	Asset Contributor
+	Assessment Administrator
+	Assessment Manager
+	Assessment Contributor
+	Assessment Stakeholder
+	*/
 }
