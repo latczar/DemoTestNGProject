@@ -34,23 +34,16 @@ public class Constant extends CommonFunctions {
 	public static String assetManager = ""; //missing role in my org
 	public static String assetContributor = ""; //missing role in my org
 	public static String assessmentAdministrator = "tonacav798@ridteam.com";
-	public static String assessmentManager = "";
+	public static String assessmentManager = "wofarid794@quipas.com";
 	public static String assessmentContributor = "yorepow934@paldept.com";
-	public static String assessmentStakeholder = "";
-	public static String userPassword = "";
+	public static String assessmentStakeholder = "pitow73067@inkiny.com";
+	public static String userPassword = "@Test123";
 	
-	/*Roles
-	Global Administrator
+	/*Roles UAT - test123###
+	Global Administrator - bre
 	Organisation Administrator
 	User Administrator
-	Senior Technical Support
-	Scheme Designer
-	Scheme Manager
-	Scheme Owner
-	Asset Administrator
-	Asset Manager
-	Asset Contributor
-	Assessment Administrator
+	Assessment Administrator - fegav96005@nmaller.com 
 	Assessment Manager
 	Assessment Contributor
 	Assessment Stakeholder

@@ -27,10 +27,10 @@ public class LoginPage extends CommonFunctions{
 	@FindBy(xpath="//input[contains(@placeholder,'Password')]")
 	static WebElement enterPassword;
 	
-	@FindBy(xpath="(//button[contains(text(),'Sign in')])[2]")
+	@FindBy(xpath="(//button[contains(text(),'Sign in')])[1]")
 	static WebElement breSignInButton;
 	
-	@FindBy(xpath="(//button[contains(text(),'Sign in')])[1]")
+	@FindBy(xpath="(//button[contains(text(),'Sign in')])[2]")
 	static WebElement signInButton;
 	
 	@FindBy(xpath="(//a[contains(text(), 'Sign up now')]")
@@ -47,7 +47,8 @@ public class LoginPage extends CommonFunctions{
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void BRELogin() throws Exception {		
+	public void BRELogin() throws Exception {	
+		CLICK(loginButton, "Log in button clicked");
 		WAITFORVISIBLEELEMENT(driver, enterEmail);
 		CLICK(breSignInButton,"Sign in button clicked");
 		WAITFORVISIBLEELEMENT(driver, breEmailButton);
@@ -58,15 +59,17 @@ public class LoginPage extends CommonFunctions{
 	}
 		
 	public void Login(String username, String password) throws Exception {		
+		CLICK(loginButton, "Log in button clicked");
 		WAITFORVISIBLEELEMENT(driver, enterEmail);
-		ENTERTEXT(enterEmail, Constant.username);
-		ENTERTEXT(enterPassword, Constant.password);
+		ENTERTEXT(enterEmail, username);
+		ENTERTEXT(enterPassword, password);
 		CLICK(signInButton,"Sign in button clicked");
 		Extent.getTest().info("Successfully logged in");
 	}
 	
 	public void Login() throws Exception {
 		CredsConfigFile.loadCreds();
+		CLICK(loginButton, "Log in button clicked");
 		WAITFORVISIBLEELEMENT(driver, enterEmail);
 		ENTERTEXT(enterEmail, Constant.username);
 		ENTERTEXT(enterPassword, Constant.password);
@@ -75,7 +78,8 @@ public class LoginPage extends CommonFunctions{
 	}
 	
 	public void LoginApp() throws Exception {
-		WAITFORVISIBLEELEMENT(driver,enterEmail);
+		CLICK(loginButton, "Log in button clicked");
+		WAITFORVISIBLEELEMENT(driver,enterEmail);		
 		ENTERTEXT(enterEmail, Credentials.username);
 		ENTERTEXT(enterPassword, Credentials.password);
 		CLICK(signInButton,"Sign in button clicked");

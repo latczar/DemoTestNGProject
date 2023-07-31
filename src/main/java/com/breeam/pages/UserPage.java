@@ -2,6 +2,7 @@ package com.breeam.pages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
 
@@ -21,6 +22,11 @@ public class UserPage extends CommonFunctions {
 
 	@FindBy(xpath="//a[contains(text(),'Stop impersonating')]")
 	static WebElement stopImpersonatingButton;
+	
+	public UserPage() {
+		super();
+		PageFactory.initElements(driver, this);
+	}
 
 	public void clickUserPageMenuButton() throws Exception {
 		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);

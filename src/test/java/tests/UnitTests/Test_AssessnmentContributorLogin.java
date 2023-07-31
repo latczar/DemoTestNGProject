@@ -8,17 +8,17 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.breeam.pages.Assets;
+import com.breeam.pages.Dashboard;
 import com.breeam.pages.LoginPage;
+import com.breeam.pages.LoginPage_SelfSignUp;
 import com.breeam.pages.UserAdmin;
-import com.breeam.pages.UserPage;
-import com.breeam.pages.UserPage_CreateOrganizations;
-
 import base.CommonFunctions;
 import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_createOrgs extends TestListener {
+public class Test_AssessnmentContributorLogin extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -27,13 +27,14 @@ public class Test_createOrgs extends TestListener {
 	ExtentSparkReporter spark;
 	ExtentReports extent;
 	LoginPage loginPage;
-	UserPage_CreateOrganizations createOrgs;
+	UserAdmin userAdmin;
+	Dashboard dashboard;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_createOrgs() throws IOException {
+	public Test_AssessnmentContributorLogin() throws IOException {
 		super();
 	}
 	
@@ -44,11 +45,12 @@ public class Test_createOrgs extends TestListener {
 
 	@BeforeMethod
 	public void before() throws IOException, Exception {
+		// class = new class();
 		CommonFunctions.INVOKECHROMEBROWSER();
 		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
 		loginPage = new LoginPage();
+		dashboard = new Dashboard();
 		baseTest = new UserDefinedFunctions();
-		createOrgs = new UserPage_CreateOrganizations();
 	}
 	
 	/*
@@ -56,9 +58,9 @@ public class Test_createOrgs extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userCreateOrgs() throws Exception {
-		loginPage.Login();
-		createOrgs.createOrganizations(); // Add user to organization
+	public void Test_userLogin() throws Exception {
+		loginPage.Login(Constant.assessmentContributor, Constant.userPassword); // User sign in as the ff role
+		dashboard.testDashboardMenuButtonExistsAfterLogin();
 	}
 	
 	/*
