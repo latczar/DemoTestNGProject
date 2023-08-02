@@ -1,12 +1,15 @@
 package com.breeam.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
 
-public class UserPage_CreateOrganizations extends CommonFunctions{
+public class UserPage_CreateOrganizations extends CommonFunctions {
+	
+	UserAdmin userAdmin = new UserAdmin();
 	
 	@FindBy(xpath="(//span[contains(text(),'Cancel')])[1]")
 	static WebElement cancelButton;
@@ -73,6 +76,9 @@ public class UserPage_CreateOrganizations extends CommonFunctions{
 	@FindBy(xpath="//label[@for = 'termsConditions']")
 	static WebElement termsAndConditionsCheckbox;
 	
+	@FindBy(xpath="(//span[contains(text(), 'Add child organisation')])[1]") 
+	WebElement userAdminAddChildOrganisationButton;
+	
 	public UserPage_CreateOrganizations() {
 		super();
 		PageFactory.initElements(driver, this);
@@ -83,44 +89,47 @@ public class UserPage_CreateOrganizations extends CommonFunctions{
 	 * Fill up Organization address
 	*/
 	
-	public void clickSelectCountryInput() throws Exception {
+	public void addSelectCountryInput(String country) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, selectCountryInput);
 	    CLICK(selectCountryInput, "Select Country input is clicked");
+	    ENTERTEXT(organizationNameInput, country);
+	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
+	    ROBOTENTER();
 	}
 
-	public void clickAddressLineOneInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, addressLineOneInput);
+	public void addAddressLineOneInput(String addressLineOne) throws Exception {
 	    CLICK(addressLineOneInput, "Address Line 1 input is clicked");
+	    ENTERTEXT(organizationNameInput, addressLineOne);
 	}
 
-	public void clickAddressLineTwoInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, addressLineTwoInput);
+	public void addAddressLineTwoInput(String addressLineTwo) throws Exception {
 	    CLICK(addressLineTwoInput, "Address Line 2 input is clicked");
+	    ENTERTEXT(organizationNameInput, addressLineTwo);
 	}
 
-	public void clickTownOrCityInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, townOrCityInput);
+	public void addTownOrCityInput(String townCity) throws Exception {
 	    CLICK(townOrCityInput, "Town / City input is clicked");
+	    ENTERTEXT(organizationNameInput, townCity);
 	}
 
-	public void clickCountryOrRegionInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, countryOrRegionInput);
+	public void addCountryOrRegionInput(String countryOrRegion) throws Exception {
 	    CLICK(countryOrRegionInput, "Country / Region / State input is clicked");
+	    ENTERTEXT(organizationNameInput, countryOrRegion);
 	}
 
-	public void clickPostalCodeInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, postalCodeInput);
+	public void addPostalCodeInput(String countryOrRegion) throws Exception {
 	    CLICK(postalCodeInput, "Postal / Zip code input is clicked");
+	    ENTERTEXT(organizationNameInput, countryOrRegion);
 	}
 
-	public void clickLatitudeInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, latitudeInput);
+	public void addLatitudeInput(String latitude) throws Exception {
 	    CLICK(latitudeInput, "Latitude input is clicked");
+	    ENTERTEXT(organizationNameInput, latitude);
 	}
 
-	public void clickLongitudeInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, longitudeInput);
+	public void addLongitudeInput(String longitude) throws Exception {
 	    CLICK(longitudeInput, "Longitude input is clicked");
+	    ENTERTEXT(organizationNameInput, longitude);
 	}
 
 	/*
@@ -128,39 +137,44 @@ public class UserPage_CreateOrganizations extends CommonFunctions{
 	 * Fill up Organization Details
 	*/
 	
-	public void clickOrganizationNameInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, organizationNameInput);
+	public void addOrganizationNameInput(String orgNameInput) throws Exception {
+
 	    CLICK(organizationNameInput, "Organization Name input is clicked");
+	    ENTERTEXT(organizationNameInput, orgNameInput);
 	}
 
-	public void clickSelectParentInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, selectParentInput);
+	public void addSelectParentInput(String parentOrgInput) throws Exception {
 	    CLICK(selectParentInput, "Select Parent input is clicked");
+	    ENTERTEXT(selectParentInput, parentOrgInput);
 	}
 
-	public void clickPhoneNumberInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, phoneNumberInput);
+	public void addPhoneNumberInput(String phoneNumber) throws Exception {
 	    CLICK(phoneNumberInput, "Phone Number input is clicked");
+	    ENTERTEXT(organizationNameInput, phoneNumber);
 	}
 
-	public void clickEmailInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, emailInput);
+	public void addEmailInput(String email) throws Exception {
 	    CLICK(emailInput, "Email input is clicked");
+	    ENTERTEXT(organizationNameInput, email);
 	}
 
-	public void clickWebsiteInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, websiteInput);
+	public void addWebsiteInput(String websiteName) throws Exception {
 	    CLICK(websiteInput, "Website input is clicked");
+	    ENTERTEXT(organizationNameInput, websiteName);
 	}
 
-	public void clickNotesInput() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, notesInput);
+	public void addNotesInput(String notes) throws Exception {
 	    CLICK(notesInput, "Notes input is clicked");
+	    ENTERTEXT(organizationNameInput, notes);
 	}
 
-	public void clickSearchNSOsInput() throws Exception {
+	public void addSearchNSOsInput(String nso) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, searchNSOsInput);
 	    CLICK(searchNSOsInput, "Search NSOs input is clicked");
+	    ENTERTEXT(organizationNameInput, nso);
+	    MOUSEHOVER("//label[contains(text(), '" + nso + "')]");
+	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + nso + "')]"));
+	    elementToClick.click();
 	}
 
 	public void clickTermsAndConditionsCheckbox() throws Exception {
@@ -168,8 +182,92 @@ public class UserPage_CreateOrganizations extends CommonFunctions{
 	    CLICK(termsAndConditionsCheckbox, "Terms and Conditions checkbox is clicked");
 	}
 	
-	public void createOrganizations() throws Exception {
-		
+	public void clickSave() throws Exception {
+		CLICK(saveButton, "Save button is clicked");
 	}
 	
+	public void createOrganizations() throws Exception {
+		
+	    String country = "United States";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String orgNameInput = "Your Organization";
+	    String parentOrgInput = "Parent Organization";
+	    String phoneNumber = "123-456-7890";
+	    String email = "info@example.com";
+	    String websiteName = "https://www.example.com";
+	    String notes = "This is a test organization.";
+	    String nso = "ITG";
+	    
+		WAITFORVISIBLEELEMENT(driver, userAdmin.userAdminButton);
+		MOUSEHOVER("//a[contains(text(),'User admin')]");
+		CLICK(userAdmin.organisationButton, "Organisation button is clicked");
+		WAITFORVISIBLEELEMENT(driver, userAdmin.userAdminAddOrganisationButton);
+		CLICK(userAdmin.userAdminAddOrganisationButton, "Add an Organisation button is clicked");
+		
+	    // Add your string values for each argument here:
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    addLatitudeInput(latitude);
+	    addLongitudeInput(longitude);
+	    addOrganizationNameInput(orgNameInput);
+	    addSelectParentInput(parentOrgInput);
+	    addPhoneNumberInput(phoneNumber);
+	    addEmailInput(email);
+	    addWebsiteInput(websiteName);
+	    addNotesInput(notes);
+	    addSearchNSOsInput(nso);
+		clickTermsAndConditionsCheckbox();
+		clickSave();
+	}
+	
+	public void addChildOrganisation() throws Exception {
+		
+	    String country = "Albania";
+	    String addressLineOne = "123 Main Test123";
+	    String addressLineTwo = "Apt test123";
+	    String townCity = "Albania test";
+	    String countryOrRegion = "AlbaniaTest";
+	    String postalCode = "123456344";
+	    String latitude = "40.124428";
+	    String longitude = "-23.32422";
+	    String orgNameInput = "Child Organization";
+	    String parentOrgInput = "Parent Organization";
+	    String phoneNumber = "123-456-7890";
+	    String email = "info@example.com";
+	    String websiteName = "https://www.example.com";
+	    String notes = "This is a child test organization.";
+	    String nso = "DGBC";
+	    
+		createOrganizations();
+		CLICK(userAdminAddChildOrganisationButton, "Add Child Organisation button is clicked");
+		
+	    // Add your string values for each argument here:
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    addLatitudeInput(latitude);
+	    addLongitudeInput(longitude);
+	    addOrganizationNameInput(orgNameInput);
+	    addSelectParentInput(parentOrgInput);
+	    addPhoneNumberInput(phoneNumber);
+	    addEmailInput(email);
+	    addWebsiteInput(websiteName);
+	    addNotesInput(notes);
+	    addSearchNSOsInput(nso);
+		clickTermsAndConditionsCheckbox();
+		clickSave();
+	}
 }

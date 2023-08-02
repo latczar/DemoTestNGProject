@@ -41,11 +41,13 @@ public class Constant extends CommonFunctions {
 	
 	/*Roles UAT - test123###
 	Global Administrator - bre
-	Organisation Administrator
-	User Administrator
+	Organisation Administrator - wofarid794@quipas.com
+	User Administrator - sayiwa8839@naymedia.com
 	Assessment Administrator - fegav96005@nmaller.com 
-	Assessment Manager
-	Assessment Contributor
-	Assessment Stakeholder
+	Assessment Manager - vojare3434@wiemei.com
+	Assessment Contributor - hejobi9069@kkoup.com
+	Assessment Stakeholder - yicakaw414@sportrid.com
+	Asset Manager - yicakaw414@sportrid.com
+	Asset Administrator - yicakaw414@sportrid.com
 	*/
 }

@@ -8,8 +8,8 @@ import base.CommonFunctions;
 
 public class UserAdmin extends CommonFunctions {
 	
-	@FindBy(xpath="(//div[@class='headerMenu_bre-headermenu-list-link-overlay__U8ngJ'])[3]")
-	static WebElement userAdminButton;
+	@FindBy(xpath="(//a[contains(text(),'User admin')]") 
+	WebElement userAdminButton;
 	
 	@FindBy(xpath="//a[contains(text(),'Assessor')]")
 	static WebElement assessorButton;
@@ -17,15 +17,15 @@ public class UserAdmin extends CommonFunctions {
 	@FindBy(xpath="//a[contains(text(),'Licence config')]")
 	static WebElement licenceConfigButton;
 	
-	@FindBy(xpath="//a[contains(text(),'Organization')]")
-	static WebElement organizationButton;
+	@FindBy(xpath="//a[contains(text(),'Organisation')]") 
+	WebElement organisationButton;
 	
 	@FindBy(xpath="//a[contains(text(),'Role config')]")
 	static WebElement roleConfigButton;
 	
 	@FindBy(xpath="//a[contains(text(),'User organization config')]")
 	static WebElement userOrganizationConfigButton;
-	
+		
 	/*
 	 * User admin - Users page web elements
 	*/
@@ -56,6 +56,13 @@ public class UserAdmin extends CommonFunctions {
 	static WebElement cancelButton;
 	
 	/*
+	 * User Admin - Organisations web elements
+	 */
+	
+	@FindBy(xpath="(//span[contains(text(), 'Add an organisation')])[1]") 
+	WebElement userAdminAddOrganisationButton;
+	
+	/*
 	 * Constructor of UserAdmin page
 	 * Initialize elements of the page class
 	 * Methods and test classes of the page class
@@ -82,8 +89,8 @@ public class UserAdmin extends CommonFunctions {
 	}
 
 	public void clickOrganizationButton() throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, organizationButton);
-	    CLICK(organizationButton, "Organization Menu button is clicked");
+	    WAITFORVISIBLEELEMENT(driver, organisationButton);
+	    CLICK(organisationButton, "Organization Menu button is clicked");
 	}
 
 	public void clickRoleConfigButton() throws Exception {
