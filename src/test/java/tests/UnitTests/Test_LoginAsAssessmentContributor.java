@@ -18,7 +18,7 @@ import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_AssessmentManagerLogin extends TestListener {
+public class Test_LoginAsAssessmentContributor extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -34,7 +34,7 @@ public class Test_AssessmentManagerLogin extends TestListener {
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_AssessmentManagerLogin() throws IOException {
+	public Test_LoginAsAssessmentContributor() throws IOException {
 		super();
 	}
 	
@@ -59,7 +59,7 @@ public class Test_AssessmentManagerLogin extends TestListener {
 
 	@Test()
 	public void Test_userLogin() throws Exception {
-		loginPage.Login(Constant.assessmentManager, Constant.userPassword); // User sign in as the ff role
+		loginPage.Login(Constant.assessmentContributor, Constant.userPassword); // User sign in as the ff role
 		dashboard.testDashboardMenuButtonExistsAfterLogin();
 	}
 	
