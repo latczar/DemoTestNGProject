@@ -426,7 +426,7 @@ public class CommonFunctions {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 
 	public static void SELECTINDEX(WebElement element, int index) {
 		Select selectDropDown = new Select(element);
@@ -488,7 +488,7 @@ public class CommonFunctions {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
 	}
 
-	public void MOUSEHOVER(String xpath) {
+	public static void MOUSEHOVER(String xpath) {
 		WebElement element = driver.findElement(By.xpath(xpath));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
@@ -499,5 +499,17 @@ public class CommonFunctions {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+	}
+	
+	public static void HOVERANDCLICK(WebElement elementToClick, String hoverOnElement) throws Exception {
+	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
+	    elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
+	    elementToClick.click();
+	}
+	
+	public void HOVERANDCLICK(String hoverOnElement) throws Exception {
+	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
+	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
+	    elementToClick.click();
 	}
 }

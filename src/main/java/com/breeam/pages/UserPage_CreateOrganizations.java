@@ -92,44 +92,44 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	public void addSelectCountryInput(String country) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, selectCountryInput);
 	    CLICK(selectCountryInput, "Select Country input is clicked");
-	    ENTERTEXT(organizationNameInput, country);
+	    ENTERTEXT(selectCountryInput, country);
 	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
 	    ROBOTENTER();
 	}
 
 	public void addAddressLineOneInput(String addressLineOne) throws Exception {
 	    CLICK(addressLineOneInput, "Address Line 1 input is clicked");
-	    ENTERTEXT(organizationNameInput, addressLineOne);
+	    ENTERTEXT(addressLineOneInput, addressLineOne);
 	}
 
 	public void addAddressLineTwoInput(String addressLineTwo) throws Exception {
 	    CLICK(addressLineTwoInput, "Address Line 2 input is clicked");
-	    ENTERTEXT(organizationNameInput, addressLineTwo);
+	    ENTERTEXT(addressLineTwoInput, addressLineTwo);
 	}
 
 	public void addTownOrCityInput(String townCity) throws Exception {
 	    CLICK(townOrCityInput, "Town / City input is clicked");
-	    ENTERTEXT(organizationNameInput, townCity);
+	    ENTERTEXT(townOrCityInput, townCity);
 	}
 
 	public void addCountryOrRegionInput(String countryOrRegion) throws Exception {
 	    CLICK(countryOrRegionInput, "Country / Region / State input is clicked");
-	    ENTERTEXT(organizationNameInput, countryOrRegion);
+	    ENTERTEXT(countryOrRegionInput, countryOrRegion);
 	}
 
 	public void addPostalCodeInput(String countryOrRegion) throws Exception {
 	    CLICK(postalCodeInput, "Postal / Zip code input is clicked");
-	    ENTERTEXT(organizationNameInput, countryOrRegion);
+	    ENTERTEXT(postalCodeInput, countryOrRegion);
 	}
 
 	public void addLatitudeInput(String latitude) throws Exception {
 	    CLICK(latitudeInput, "Latitude input is clicked");
-	    ENTERTEXT(organizationNameInput, latitude);
+	    ENTERTEXT(latitudeInput, latitude);
 	}
 
 	public void addLongitudeInput(String longitude) throws Exception {
 	    CLICK(longitudeInput, "Longitude input is clicked");
-	    ENTERTEXT(organizationNameInput, longitude);
+	    ENTERTEXT(longitudeInput, longitude);
 	}
 
 	/*
@@ -150,31 +150,29 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 
 	public void addPhoneNumberInput(String phoneNumber) throws Exception {
 	    CLICK(phoneNumberInput, "Phone Number input is clicked");
-	    ENTERTEXT(organizationNameInput, phoneNumber);
+	    ENTERTEXT(phoneNumberInput, phoneNumber);
 	}
 
 	public void addEmailInput(String email) throws Exception {
 	    CLICK(emailInput, "Email input is clicked");
-	    ENTERTEXT(organizationNameInput, email);
+	    ENTERTEXT(emailInput, email);
 	}
 
 	public void addWebsiteInput(String websiteName) throws Exception {
 	    CLICK(websiteInput, "Website input is clicked");
-	    ENTERTEXT(organizationNameInput, websiteName);
+	    ENTERTEXT(websiteInput, websiteName);
 	}
 
 	public void addNotesInput(String notes) throws Exception {
 	    CLICK(notesInput, "Notes input is clicked");
-	    ENTERTEXT(organizationNameInput, notes);
+	    ENTERTEXT(notesInput, notes);
 	}
 
 	public void addSearchNSOsInput(String nso) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, searchNSOsInput);
 	    CLICK(searchNSOsInput, "Search NSOs input is clicked");
-	    ENTERTEXT(organizationNameInput, nso);
-	    MOUSEHOVER("//label[contains(text(), '" + nso + "')]");
-	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + nso + "')]"));
-	    elementToClick.click();
+	    ENTERTEXT(searchNSOsInput, nso);
+	    HOVERANDCLICK(nso);
 	}
 
 	public void clickTermsAndConditionsCheckbox() throws Exception {
