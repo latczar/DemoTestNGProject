@@ -99,8 +99,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Asset value')]//following::input)[1]")
 	static WebElement assetValueInput;
 	
-	@FindBy(xpath="(//label[contains(text(), 'Gross enternal area')]//following::input)[1]")
-	static WebElement grossEnternalAreaInput;
+	@FindBy(xpath="(//label[contains(text(), 'Gross external area')]//following::input)[1]")
+	static WebElement grossExternalAreaInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Site area')]//following::input)[1]")
 	static WebElement siteAreaInput;
@@ -126,6 +126,38 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	@FindBy(xpath="(//label[contains(text(), 'Asset Record Holder')]//following::input)[1]")
 	static WebElement assetRecordInput;
+	
+	
+	/*
+	 * Infrastructure Create Assets page web elements
+	 * Asset Information - Infrastructure
+	*/
+	
+	@FindBy(xpath="(//label[contains(text(), 'Which of the following best reflects your Asset?')]//following::input)[1]")
+	static WebElement reflectsAssetInput;
+	
+	@FindBy(xpath="(//label[contains(text(), 'Length (if linear asset)')]//following::input)[1]")
+	static WebElement lengthOfAssetInput;
+	
+	@FindBy(xpath="(//label[contains(text(), 'Capacity')]//following::input)[1]")
+	static WebElement capacityInput;
+	
+	/*
+	 * Community Create Assets page web elements
+	 * Asset Information - Community
+	*/
+	
+	@FindBy(xpath="(//label[contains(text(), 'Size of development')]//following::input)[1]")
+	static WebElement sizeOfDevelopmentInput;
+	
+	@FindBy(xpath="(//label[contains(text(), 'No of domestic buildings')]//following::input)[1]")
+	static WebElement numOfDomesticBuildingsInput;
+	
+	@FindBy(xpath="(//label[contains(text(), 'No of non-domestic buildings')]//following::input)[1]")
+	static WebElement numOfNonDomesticBuildingsInput;
+	
+	@FindBy(xpath="(//label[contains(text(), 'Total development cost')]//following::input)[1]")
+	static WebElement totalDevelopmentCostInput;
 	
 	
 	public Assets_CreateAssetsPage() {
@@ -260,9 +292,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    ENTERTEXT(assetValueInput, assetValue);
 	}
 
-	public void clickAndEnterGrossEnternalAreaInput(String grossArea) throws Exception {
-	    CLICK(grossEnternalAreaInput, "Gross Enternal Area input is clicked");
-	    ENTERTEXT(grossEnternalAreaInput, grossArea);
+	public void clickAndEnterGrossExternalAreaInput(String grossArea) throws Exception {
+	    CLICK(grossExternalAreaInput, "Gross External Area input is clicked");
+	    ENTERTEXT(grossExternalAreaInput, grossArea);
 	}
 
 	public void clickAndEnterSiteAreaInput(String siteArea) throws Exception {
@@ -307,6 +339,52 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    ENTERTEXT(assetRecordInput, assetRecord);
 	}
 	
+	/*
+	 * Click methods for exclusive Infrastructure elements 
+	*/
+	
+	public void clickAndEnterReflectAssets(String reflectsAsset) throws Exception { 
+	    CLICK(reflectsAssetInput, "Reflect assets input is clicked");
+	    ENTERTEXT(reflectsAssetInput, reflectsAsset);
+	    HOVERANDCLICK(reflectsAsset);
+	}
+	
+	public void clickAndEnterLengthOfAsset(String lengthOfAsset) throws Exception {
+	    CLICK(lengthOfAssetInput, "Length of asset input is clicked");
+	    ENTERTEXT(lengthOfAssetInput, lengthOfAsset);
+	}
+	
+	public void clickAndEnterCapacityInput(String capacity) throws Exception {
+	    CLICK(capacityInput, "Capacity of asset is clicked");
+	    ENTERTEXT(capacityInput, capacity);
+	}
+	
+	/*
+	 * Click methods for exclusive Community elements 
+	*/
+	
+	public void clickAndEnterSizeOfDevelopment(String size) throws Exception { 
+	    CLICK(sizeOfDevelopmentInput, "Reflect assets input is clicked");
+	    ENTERTEXT(sizeOfDevelopmentInput, size);
+	}
+	
+	public void clickAndEnterNumOfDomesticBuildings(String numOfDomesticBuildings) throws Exception {
+	    CLICK(numOfDomesticBuildingsInput, "Number of domestic buildings input is clicked");
+	    ENTERTEXT(numOfDomesticBuildingsInput, numOfDomesticBuildings);
+	}
+	
+	public void clickAndEnterNumOfNonDomesticBuildings(String numOfNonDomesticBuildings) throws Exception {
+	    CLICK(numOfNonDomesticBuildingsInput, "Number of non-domestic buildings input is clicked");
+	    ENTERTEXT(numOfNonDomesticBuildingsInput, numOfNonDomesticBuildings);
+	}
+	
+	public void clickAndEnterTotalDevelopmentCost(String totalCost) throws Exception {
+	    CLICK(totalDevelopmentCostInput, "Total develpoment cost is clicked");
+	    ENTERTEXT(totalDevelopmentCostInput, totalCost);
+	}
+	
+	//Start test cases creation for Assets
+	
 	public void createAsset_Building() throws Exception {
 		
 	    String country = "United States";
@@ -317,20 +395,20 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String postalCode = "12345";
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
-	    String assetType = "Building";
-	    String assetSubType = "Commercial";
-	    String assetSubTypeTwo = "Office";
+	    String assetType = "Healthcare";
+	    String assetSubType = "Hospital";
+	    String assetSubTypeTwo = "Community and mental health hospitals";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Main Office Building";
 	    String description = "Headquarters of the company";
-	    String parentAsset = "Corporate Campus";
-	    String neighbourAsset = "Neighbouring Building";
+	    String parentAsset = "assetest123";
+	    String neighbourAsset = "assetest contributor123";
 	    String yearOfConstruction = "2005";
-	    String assetLifecycle = "Operational";
+	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
-	    String grossEnternalArea = "1200";
+	    String grossExternalArea = "1200";
 	    String siteArea = "5000";
-	    String assetOwningOrg = "Company XYZ";
+	    String assetOwningOrg = "indiaTest";
 	    String plotArea = "6000";
 	    String netFloorArea = "1100";
 	    String assetRecord = "Asset Management Department";
@@ -375,7 +453,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickYearEstimatedCheckbox();
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
-	    clickAndEnterGrossEnternalAreaInput(grossEnternalArea);
+	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
 	    clickNoMultipleUnits();
 	    clickAndEnterAssetOwningOrgInput(assetOwningOrg);
@@ -384,4 +462,185 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterAssetRecordInput(assetRecord);
 		clickSave();
 	}
+	
+	public void createAsset_Infrastructure() throws Exception {
+		
+	    String country = "United States";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String assetType = "Water";
+	    String assetSubType = "Water distrubution";
+	    String grossInternalArea = "1000";
+	    String nameOfAsset = "Infrastructure";
+	    String description = "Infrastructure of the company";
+	    String parentAsset = "test asset";
+	    String neighbourAsset = "Water Asset";
+	    String yearOfConstruction = "2005";
+	    String assetLifecycle = "Design";
+	    String assetValue = "50000";
+	    String siteArea = "5000";
+	    String assetOwningOrg = "indiaTest";
+	    String plotArea = "6000";
+	    String netFloorArea = "1100";
+	    String assetRecord = "Asset Management Department";
+	    
+	    /*
+	     * Exclusive variables for Infrastructure
+	     *  
+	    */
+	    
+	    String reflectsAsset = "Linear & Non-linear";
+	    String lengthOfAsset = "523";
+	    String capacity = "3244";
+
+		WAITFORVISIBLEELEMENT(driver, assets.assetsButton);
+		MOUSEHOVER("//a[contains(text(),'Assets')]");
+		CLICK(assets.assetsButton, "Assets button is clicked");
+		WAITFORVISIBLEELEMENT(driver, assets.createAssetButton);
+		CLICK(assets.createAssetButton, "Create Assets button is clicked");
+		selectCreateAssetType("Infrastructure");
+				
+		/*
+		 * Start input for Asset address
+		*/
+	
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    addLatitudeInput(latitude);
+	    addLongitudeInput(longitude);
+	    
+		/*
+		 * Start input for Asset type and subtypes
+		*/
+	    
+	    clickAndEnterAssetTypeInput(assetType);
+	    clickAndEnterAssetSubTypeInput(assetSubType);
+	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
+	    
+		/*
+		 * Start input for Asset information - Infrastructure
+		*/
+	    
+	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterDescriptionInput(description);
+	    addParentAssetInput(parentAsset);
+	    addNeighbourAssetInput(neighbourAsset);
+	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
+	    clickYearEstimatedCheckbox();
+	    clickAndEnterAssetLifecycleInput(assetLifecycle);
+	    clickAndEnterAssetValueInput(assetValue);
+	    clickAndEnterSiteAreaInput(siteArea);
+	    clickAndEnterReflectAssets(reflectsAsset);
+	    clickAndEnterLengthOfAsset(lengthOfAsset);
+	    clickAndEnterCapacityInput(capacity);
+	    clickNoMultipleUnits();
+	    clickAndEnterAssetOwningOrgInput(assetOwningOrg);
+	    clickAndEnterPlotAreaInput(plotArea);
+	    clickAndEnterNetFloorAreainput(netFloorArea);
+	    clickAndEnterAssetRecordInput(assetRecord);
+		clickSave();
+	}
+	
+	public void createAsset_Community() throws Exception {
+		
+	    String country = "United States";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String assetType = "Water";
+	    String assetSubType = "Water distrubution";
+	    String grossInternalArea = "1000";
+	    String nameOfAsset = "Infrastructure";
+	    String description = "Infrastructure of the company";
+	    String parentAsset = "test asset";
+	    String neighbourAsset = "Water Asset";
+	    String yearOfConstruction = "2005";
+	    String assetLifecycle = "Design";
+	    String assetValue = "51233";
+	    String siteArea = "623";
+	    String assetOwningOrg = "indiaTest";
+	    String plotArea = "945";
+	    String netFloorArea = "5576";
+	    String assetRecord = "Asset Management Department";
+	    
+	    /*
+	     * Exclusive variables for Community
+	     *  
+	    */
+	    
+	    String sizeOfDevelopment = "1234";
+	    String noOfDomesticBuildings = "523";
+	    String noOfNonDomesticBuildings = "3244";
+	    String totalDevelopmentCost = "3244";
+
+		WAITFORVISIBLEELEMENT(driver, assets.assetsButton);
+		MOUSEHOVER("//a[contains(text(),'Assets')]");
+		CLICK(assets.assetsButton, "Assets button is clicked");
+		WAITFORVISIBLEELEMENT(driver, assets.createAssetButton);
+		CLICK(assets.createAssetButton, "Create Assets button is clicked");
+		WAITFORVISIBLEELEMENT(driver, assets.assetsButton);
+		selectCreateAssetType("Community");
+						
+		/*
+		 * Start input for Asset address
+		*/
+	
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    addLatitudeInput(latitude);
+	    addLongitudeInput(longitude);
+	    
+		/*
+		 * Start input for Asset type and subtypes
+		*/
+	    
+	    clickAndEnterAssetTypeInput(assetType);
+	    clickAndEnterAssetSubTypeInput(assetSubType);
+	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
+	    
+		/*
+		 * Start input for Asset information - Infrastructure
+		 * 
+		*/
+	    
+	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterDescriptionInput(description);
+	    addParentAssetInput(parentAsset);
+	    addNeighbourAssetInput(neighbourAsset);
+	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
+	    clickYearEstimatedCheckbox();
+	    clickAndEnterAssetLifecycleInput(assetLifecycle);
+	    clickAndEnterAssetValueInput(assetValue);
+	    clickAndEnterSiteAreaInput(siteArea);
+	    clickAndEnterSizeOfDevelopment(sizeOfDevelopment);
+	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
+	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
+	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
+	    clickNoMultipleUnits();
+	    clickAndEnterAssetOwningOrgInput(assetOwningOrg);
+	    clickAndEnterPlotAreaInput(plotArea);
+	    clickAndEnterNetFloorAreainput(netFloorArea);
+	    clickAndEnterAssetRecordInput(assetRecord);
+		clickSave();
+	}
+	
+	
+	
 }

@@ -19,7 +19,7 @@ import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_createAsset extends TestListener {
+public class Test_createAsset_Building extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -34,7 +34,7 @@ public class Test_createAsset extends TestListener {
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_createAsset() throws IOException {
+	public Test_createAsset_Building() throws IOException {
 		super();
 	}
 	
@@ -59,7 +59,7 @@ public class Test_createAsset extends TestListener {
 	@Test()
 	public void Test_userCreateOrgs() throws Exception {
 		loginPage.Login();
-		createAsset.createAsset_Building(); // Star Asset creation - Building
+		createAsset.createAsset_Building(); // Start Asset creation - Building
 	}
 	
 	/*
