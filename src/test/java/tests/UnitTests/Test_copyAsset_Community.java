@@ -8,17 +8,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.breeam.pages.Assets;
-import com.breeam.pages.Dashboard;
+import com.breeam.pages.Assets_CopyAssets;
+import com.breeam.pages.Assets_CreateAssetsPage;
 import com.breeam.pages.LoginPage;
-import com.breeam.pages.LoginPage_SelfSignUp;
 import com.breeam.pages.UserAdmin;
+import com.breeam.pages.UserPage;
+import com.breeam.pages.UserPage_CreateOrganizations;
+
 import base.CommonFunctions;
 import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_LoginAsAssessmentContributor extends TestListener {
+public class Test_copyAsset_Community extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -27,14 +29,13 @@ public class Test_LoginAsAssessmentContributor extends TestListener {
 	ExtentSparkReporter spark;
 	ExtentReports extent;
 	LoginPage loginPage;
-	UserAdmin userAdmin;
-	Dashboard dashboard;
+	Assets_CopyAssets copyAsset;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_LoginAsAssessmentContributor() throws IOException {
+	public Test_copyAsset_Community() throws IOException {
 		super();
 	}
 	
@@ -45,12 +46,11 @@ public class Test_LoginAsAssessmentContributor extends TestListener {
 
 	@BeforeMethod
 	public void before() throws IOException, Exception {
-		// class = new class();
 		CommonFunctions.INVOKECHROMEBROWSER();
 		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
 		loginPage = new LoginPage();
-		dashboard = new Dashboard();
 		baseTest = new UserDefinedFunctions();
+		copyAsset = new Assets_CopyAssets();
 	}
 	
 	/*
@@ -58,9 +58,9 @@ public class Test_LoginAsAssessmentContributor extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userLogin() throws Exception {
-		loginPage.Login(Constant.assessmentContributor, Constant.userPassword); // User sign in as the ff role
-		dashboard.testDashboardMenuButtonExistsAfterLogin();
+	public void Test_copyAssetCommunity() throws Exception {
+		loginPage.Login();
+		copyAsset.copyAsset_Community(); // Start Asset creation - Community
 	}
 	
 	/*

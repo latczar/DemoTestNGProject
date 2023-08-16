@@ -57,7 +57,7 @@ public class Test_createAsset_Community extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userCreateOrgs() throws Exception {
+	public void Test_createAssetCommunity() throws Exception {
 		loginPage.Login();
 		createAsset.createAsset_Community(); // Start Asset creation - Community
 	}

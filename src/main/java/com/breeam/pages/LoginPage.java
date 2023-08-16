@@ -55,7 +55,7 @@ public class LoginPage extends CommonFunctions{
 		ENTERTEXT(breEmailButton, Constant.username);
 		WAITFORVISIBLEELEMENT(driver, brePasswordButton);
 		ENTERTEXT(brePasswordButton, Constant.password);
-		Extent.getTest().info("Successfully logged in");
+		Extent.getTest().info("Successfully logged in as " + Constant.username);
 	}
 		
 	public void Login(String username, String password) throws Exception {		
@@ -64,7 +64,7 @@ public class LoginPage extends CommonFunctions{
 		ENTERTEXT(enterEmail, username);
 		ENTERTEXT(enterPassword, password);
 		CLICK(signInButton,"Sign in button clicked");
-		Extent.getTest().info("Successfully logged in");
+		Extent.getTest().info("Successfully logged in as " + username);
 	}
 	
 	public void Login() throws Exception {
@@ -74,7 +74,7 @@ public class LoginPage extends CommonFunctions{
 		ENTERTEXT(enterEmail, Constant.username);
 		ENTERTEXT(enterPassword, Constant.password);
 		CLICK(signInButton,"Sign in button clicked");
-		Extent.getTest().info("Successfully logged in");
+		Extent.getTest().info("Successfully logged in as " + Constant.username);
 	}
 	
 	public void LoginApp() throws Exception {
@@ -83,6 +83,6 @@ public class LoginPage extends CommonFunctions{
 		ENTERTEXT(enterEmail, Credentials.username);
 		ENTERTEXT(enterPassword, Credentials.password);
 		CLICK(signInButton,"Sign in button clicked");
-		Extent.getTest().info("Successfully logged in");
+		Extent.getTest().info("Successfully logged in as " + Credentials.username);
 	}
 }

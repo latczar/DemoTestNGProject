@@ -57,7 +57,7 @@ public class Test_createAsset_Infrastructure extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userCreateOrgs() throws Exception {
+	public void Test_createAssetInfrastructure() throws Exception {
 		loginPage.Login();
 		createAsset.createAsset_Infrastructure(); // Start Asset creation - Infrastructure
 	}

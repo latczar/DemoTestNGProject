@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class Assets extends CommonFunctions {
 	
@@ -40,5 +41,6 @@ public class Assets extends CommonFunctions {
 	public void clickAssetsButton() throws Exception {
 		WAITFORVISIBLEELEMENT(driver, assetsButton);
 		CLICK(assetsButton, "User Page menu button is clicked");
+		Extent.getTest().info("Successfully clicked on the Assets button");
 	}
 }

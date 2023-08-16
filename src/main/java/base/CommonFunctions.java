@@ -319,7 +319,7 @@ public class CommonFunctions {
 
 	public static void WAITFORELEMENTEXISTXPATH(String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(obj.getProperty(xpath))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
 	}
 
 	public static boolean ISDISPLAYED(String xpath) {
@@ -441,11 +441,6 @@ public class CommonFunctions {
 	public void SELECTDROPDOWNINDEX(String xpath, int index) throws Exception {
 		Select dropdown = new Select(driver.findElement(By.xpath(xpath)));
 		dropdown.selectByIndex(index);
-	}
-
-	public void SELECTVALUEDROPDOWN(String xpath, String value) {
-		Select dropdown = new Select(driver.findElement(By.xpath(obj.getProperty(xpath))));
-		dropdown.selectByValue(value);
 	}
 
 	public String GETSELECTEDOPTION(String xpath) {
