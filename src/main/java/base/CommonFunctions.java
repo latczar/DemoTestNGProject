@@ -325,7 +325,7 @@ public class CommonFunctions {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
 	}
-	
+		
 	public static void WAITFORELEMENTINVISIBILITYXPATH(String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
@@ -531,10 +531,11 @@ public class CommonFunctions {
 	    Files.copy(screenshotFile.toPath(), new File(screenshotPath).toPath());
 	}
 	
-	 public static int generateRandomInt() {
-		 int min = 1;
-		 int max = 99999;
-		 Random random = new Random();
-	     return random.nextInt(max - min + 1) + min;
-	    }
+	public static int generateRandomInt() {
+		int min = 1;
+		int max = 99999;
+		Random random = new Random();
+	    
+		return random.nextInt(max - min + 1) + min;
+	}
 }
