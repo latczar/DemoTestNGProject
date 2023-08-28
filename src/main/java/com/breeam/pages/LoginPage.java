@@ -42,6 +42,12 @@ public class LoginPage extends CommonFunctions{
 	@FindBy(xpath="(//input[@type='passwd']")
 	static WebElement brePasswordButton;
 	
+	@FindBy(xpath="//input[@id='i0116']")
+	static WebElement MSemailInput;
+	
+	@FindBy(xpath="//input[@id='i0118']")
+	static WebElement MSpasswordInput;
+	
 	public LoginPage() {
 		super();
 		PageFactory.initElements(driver, this);
@@ -51,9 +57,9 @@ public class LoginPage extends CommonFunctions{
 		CLICK(loginButton, "Log in button clicked");
 		WAITFORVISIBLEELEMENT(driver, enterEmail);
 		CLICK(breSignInButton,"Sign in button clicked");
-		WAITFORVISIBLEELEMENT(driver, breEmailButton);
+		WAITFORVISIBLEELEMENT(driver, MSemailInput);
 		ENTERTEXT(breEmailButton, Constant.username);
-		WAITFORVISIBLEELEMENT(driver, brePasswordButton);
+		WAITFORVISIBLEELEMENT(driver, MSpasswordInput);
 		ENTERTEXT(brePasswordButton, Constant.password);
 		Extent.getTest().info("Successfully logged in as " + Constant.username);
 	}

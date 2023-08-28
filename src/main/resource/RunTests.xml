@@ -1,122 +1,14 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="RDG SPFx Test Automation Suite">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BREEAM Platform Automation Suite">
 	<listeners>
 		<listener class-name="reporting.TestListener" />
 	</listeners>
 
-	<test name="Validate Creating New Action - RDG Engage">
+	<test name="">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_CreateNewAction_RDGEngage_Initiative_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Creating New Action - RDG Review">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_CreateNewAction_RDGReview_Initiative_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Creating New Minute - RDG Review">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_CreateNewMinute_RDGReview_Initiative_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Editing Benchmark Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_EditBenchmarkChangeCharter" />
-		</classes>
-	</test>
-	<test name="Validate Request for approval for implementation">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_RequestForApprovalForImplementation" />
-		</classes>
-	</test>
-	<test name="Validate Requesting RDG Engage Forum Date">
-		<classes>
-			<class name="tests.UnitTests.Test_RequestRDGEngage_ForumDate" />
-		</classes>
-	</test>
-	<test name="Validate Requesting RDG Review Forum Date">
-		<classes>
-			<class name="tests.UnitTests.Test_RequestRDGReview_ForumDate" />
-		</classes>
-	</test>
-	<test name="Validate Submitting a new Benchmark Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewBenchmark_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Submitting a new FSDU Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewFSDU_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Submitting a new Initiative Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewInitiative_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Submitting a new Trial Pilot Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewTrialPilot_Charter" />
-		</classes>
-	</test>
-	<test name="Validate Update Forum Details RDG Engage">
-		<classes>
-			<class name="tests.UnitTests.Test_UpdateForumDetails_RDGEngage" />
-		</classes>
-	</test>
-	<test name="Validate Update Forum Details RDG Review">
-		<classes>
-			<class name="tests.UnitTests.Test_UpdateForumDetails_RDGReview" />
-		</classes>
-	</test>
-	<test name="Validate Update Project assignment">
-		<classes>
-			<class name="tests.UnitTests.Test_UpdateProjectAssignment" />
-		</classes>
-	</test>
-
-	<test name="Validate Updating Project status">
-		<classes>
-			<class name="tests.UnitTests.Test_UpdateProjectStatus" />
-		</classes>
-	</test>
-	<test name="Validate ForumDetails buttons RDG Engage">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_Validate_ForumDetails_Buttons_RDGEngage" />
-		</classes>
-	</test>
-	<test name="Validate ForumDetails buttons RDG Review">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_Validate_ForumDetails_Buttons_RDGReview" />
-		</classes>
-	</test>
-	<test name="Validate Submitted Benchmark Charter">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateBenchmarkChangeCharter" />
-		</classes>
-	</test>
-	<test name="Validate Design Brief">
-		<classes>
-			<class name="tests.UnitTests.Test_ValidateDesignBrief" />
-		</classes>
-	</test>
-	<test name="Validate Submitted Actions">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateInitiative_CharterActions" />
-		</classes>
-	</test>
-	<test name="Validate Project Checklist">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateProjectChecklist" />
+				name="test case name goes here" />
 		</classes>
 	</test>
 </suite>

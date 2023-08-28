@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import base.CommonFunctions;
 import reporting.Extent;
@@ -24,14 +25,14 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//span[contains(text(),'Cancel')])[1]")
 	static WebElement cancelButton;
 	
-	@FindBy(xpath="(//span[contains(text(),'Save')])[1]")
+	@FindBy(xpath="(//span[contains(text(),'Save')])[2]")
 	static WebElement saveButton;
 	
 	@FindBy(xpath="//span[contains(text(),'Upload image')]")
 	static WebElement uploadImageButton;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select country')]")
-	static WebElement selectCountryInput;
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[2]")
+	static WebElement selectCountryDropdown;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
 	static WebElement addressLineOneInput;
@@ -59,13 +60,13 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	 * Asset Types
 	*/
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select asset type')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[3]")
 	static WebElement assetTypeInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select asset subtype')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[4]")
 	static WebElement assetSubTypeInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select asset subtype 2')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[5]")
 	static WebElement assetSubTypeTwoInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Gross internal area')]//following::input)[1]")
@@ -82,10 +83,10 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Description')]//following::input)[1]")
 	static WebElement descriptionInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select parent asset')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[6]")
 	static WebElement parentAssetInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select neighbouring asset')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[7]")
 	static WebElement neighbourAssetInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Year of construction')]//following::input)[1]")
@@ -94,7 +95,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="//label[contains(text(),'Year estimated')]")
 	static WebElement yearEstimatedCheckbox;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select asset lifecycle stage')]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[8]")
 	static WebElement assetLifecycleInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Asset value')]//following::input)[1]")
@@ -116,7 +117,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Are there multiple units within this building?')]//following::label)[3]")
 	static WebElement unknownUnits;
 	
-	@FindBy(xpath="(//label[contains(text(), 'Select asset owning organization')]//following::input)[1]")
+	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[9]")
 	static WebElement assetOwningOrgInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Gross Plot Area')]//following::input)[1]")
@@ -170,32 +171,46 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	 * Create Assets
 	 * Fill up Asset Address
 	*/
+	
+	public void assertAssetCreationToastMessage() throws Exception {
+		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Asset created successfully')]");
+        // Wait for the toast message element to be visible
+        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Asset created successfully')]"));
+        boolean toastMessagePresent = toastMessageElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(toastMessagePresent);
+        Extent.getTest().info("Asset created successfully toast message displayed");
+	}
 		
 	public void selectCreateAssetType(String assetType) throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, assetTypeDropdown);	    
-	    WebElement createAssetType = driver.findElement(By.xpath("//h1[contains(text(),'Create asset')]"
-	    		+ "//following-sibling::section//label[contains(text(),'" + assetType +"')]"));
+	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
+	    CLICKONELEMENTJS("(//h1[contains(text(),'Create asset')]//following-sibling::section//section)[1]");
+	    Extent.getTest().info("Clicked on Main Asset Type");
+	    WebElement createAssetType = driver.findElement(By.xpath("//following-sibling::section//label[contains(text(),'" + assetType +"')]"));
 	    CLICK(createAssetType, assetType + " - Asset type is selected");
 	    Extent.getTest().info("Asset Type is " + assetType);
 	}
 	
 	public void addSelectCountryInput(String country) throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, selectCountryInput);
-	    CLICK(selectCountryInput, "Select Country input is clicked");
-	    ENTERTEXT(selectCountryInput, country);
+	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
+	    Thread.sleep(2000);
+	    CLICK(selectCountryDropdown, "Select Country input is clicked");
+	    ENTERTEXT(selectCountryDropdown, country);
+	    Extent.getTest().info("Entered text: " + country);
 	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
+	    Extent.getTest().info("Hovered over: " + country);
+	    ROBOTDOWN(); // To select India from the list
 	    ROBOTENTER();
 	    Extent.getTest().info("Selected country " + country);
 	}
 
 	public void addAddressLineOneInput(String addressLineOne) throws Exception {
-	    CLICK(addressLineOneInput, "Address Line 1 input is clicked");
 	    ENTERTEXT(addressLineOneInput, addressLineOne);
 	    Extent.getTest().info("Address line one is " + addressLineOne);
 	}
 
 	public void addAddressLineTwoInput(String addressLineTwo) throws Exception {
-	    CLICK(addressLineTwoInput, "Address Line 2 input is clicked");
 	    ENTERTEXT(addressLineTwoInput, addressLineTwo);
 	    Extent.getTest().info("Address line two is " + addressLineTwo);
 	}
@@ -236,63 +251,80 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	*/
 	
 	public void clickAndEnterAssetTypeInput(String assetType) throws Exception {
-	    CLICK(assetTypeInput, "Asset Type input is clicked");
+	
+		SCROLLINTOVIEW("//span[contains(text(),'Upload image')]");
 	    ENTERTEXT(assetTypeInput, assetType);
-	    Extent.getTest().info("Asset Type: " + assetType);
+	    Extent.getTest().info("Entered Asset Type: " + assetType);
+	    MOUSEHOVER("//label[contains(text(), '" + assetType + "')]");
+	    Extent.getTest().info("Hovered over: " + assetType);
+	    ROBOTENTER();
+	    Extent.getTest().info("Selected Asset Type " + assetType);
 	}
 
 	public void clickAndEnterAssetSubTypeInput(String assetSubType) throws Exception {
-	    CLICK(assetSubTypeInput, "Asset Subtype input is clicked");
+		Thread.sleep(2000);
 	    ENTERTEXT(assetSubTypeInput, assetSubType);
 	    Extent.getTest().info("Asset Subtype: " + assetSubType);
+	    MOUSEHOVER("//label[contains(text(), '" + assetSubType + "')]");
+	    Extent.getTest().info("Hovered over: " + assetSubType);
+	    ROBOTENTER();
+	    Extent.getTest().info("Selected SubAsset Type " + assetSubType);
 	}
 
 	public void clickAndEnterAssetSubTypeTwoInput(String assetSubTypeTwo) throws Exception {
-	    CLICK(assetSubTypeTwoInput, "Asset Subtype 2 input is clicked");
 	    ENTERTEXT(assetSubTypeTwoInput, assetSubTypeTwo);
 	    Extent.getTest().info("Asset Subtype 2: " + assetSubTypeTwo);
+	    MOUSEHOVER("//label[contains(text(), '" + assetSubTypeTwo + "')]");
+	    Extent.getTest().info("Hovered over: " + assetSubTypeTwo);
+	    ROBOTENTER();
+	    Extent.getTest().info("Selected SubAsset Type Two " + assetSubTypeTwo);
 	}
 
 	public void clickAndEnterGrossInternalAreaInput(String grossInternalArea) throws Exception {
-	    CLICK(grossInternalAreaInput, "Gross Internal Area input is clicked");
+	    Thread.sleep(1000);
 	    ENTERTEXT(grossInternalAreaInput, grossInternalArea);
 	    Extent.getTest().info("Gross Internal Area: " + grossInternalArea);
 	}
 
-	
 	/*
 	 * Create Assets
 	 * Input Asset Information
 	*/
 	
 	public void clickAndEnterNameOfAssetInput(String assetName) throws Exception {
-	    CLICK(nameOfAssetInput, "Name of Asset input is clicked");
+		Thread.sleep(1000);
+	    ENTERTEXT(nameOfAssetInput, assetName);
+	    Extent.getTest().info("Name of Asset: " + assetName);
+	}
+	
+	public void clearAndenterNameOfCopiedAssetInput(String assetName) throws Exception {
+		CLEARTEXTBOX(nameOfAssetInput);
 	    ENTERTEXT(nameOfAssetInput, assetName);
 	    Extent.getTest().info("Name of Asset: " + assetName);
 	}
 
 	public void clickAndEnterDescriptionInput(String assetDescription) throws Exception {
-	    CLICK(descriptionInput, "Description input is clicked");
+		Thread.sleep(1000);
 	    ENTERTEXT(descriptionInput, assetDescription);
 	    Extent.getTest().info("Asset Description: " + assetDescription);
 	}
 
 	public void addParentAssetInput(String parentAssetName) throws Exception {
-	    CLICK(parentAssetInput, "Parent Asset input is clicked");
 	    ENTERTEXT(parentAssetInput, parentAssetName);
+	    Extent.getTest().info("Entered Parent Asset: " + parentAssetName);
 	    HOVERANDCLICK(parentAssetName);
-	    Extent.getTest().info("Parent Asset: " + parentAssetName);
+	    Extent.getTest().info("Hovered over and clicked Parent Asset: " + parentAssetName);
 	}
 
 	public void addNeighbourAssetInput(String neighbourAssetName) throws Exception {
-	    CLICK(neighbourAssetInput, "Neighbour Asset input is clicked");
 	    ENTERTEXT(neighbourAssetInput, neighbourAssetName);
+	    Extent.getTest().info("Entered Neighbour Asset: " + neighbourAssetName);
 	    HOVERANDCLICK(neighbourAssetName);
 	    Extent.getTest().info("Neighbour Asset: " + neighbourAssetName);
 	}
 
 	public void clickAndEnterYearOfConstructionInput(String constructionYear) throws Exception {
-	    CLICK(yearOfConstructionInput, "Year of Construction input is clicked");
+		Thread.sleep(1000);
 	    ENTERTEXT(yearOfConstructionInput, constructionYear);
 	    Extent.getTest().info("Year of Construction: " + constructionYear);
 	}
@@ -302,8 +334,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterAssetLifecycleInput(String assetLifecycle) throws Exception {
-	    CLICK(assetLifecycleInput, "Asset Lifecycle input is clicked");
 	    ENTERTEXT(assetLifecycleInput, assetLifecycle);
+	    Extent.getTest().info("Entered text for Asset Lifecycle: " + assetLifecycle);
 	    HOVERANDCLICK(assetLifecycle);
 	    Extent.getTest().info("Asset Lifecycle: " + assetLifecycle);
 	}
@@ -342,8 +374,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
-	    CLICK(assetOwningOrgInput, "Asset Owning Organization input is clicked");
-	    ENTERTEXT(assetOwningOrgInput, owningOrg);
+	    //ENTERTEXT(assetOwningOrgInput, owningOrg);
+	    //Extent.getTest().info("Entering Text for Asset Owning Organization");
 	    HOVERANDCLICK(owningOrg);
 	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
 	}
@@ -355,7 +387,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickSave() throws Exception {
-	    CLICK(saveButton, "Save button is clicked");
+		Thread.sleep(1000);
+		CLICK(saveButton, "Save button is clicked");
+		Extent.getTest().info("Clicked on the Save button");
 	}
 
 	public void clickAndEnterNetFloorAreainput(String netFloorArea) throws Exception {
@@ -406,19 +440,16 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterNumOfDomesticBuildings(String numOfDomesticBuildings) throws Exception {
-	    CLICK(numOfDomesticBuildingsInput, "Number of domestic buildings input is clicked");
 	    ENTERTEXT(numOfDomesticBuildingsInput, numOfDomesticBuildings);
 	    Extent.getTest().info("Number of Domestic Buildings: " + numOfDomesticBuildings);
 	}
 
 	public void clickAndEnterNumOfNonDomesticBuildings(String numOfNonDomesticBuildings) throws Exception {
-	    CLICK(numOfNonDomesticBuildingsInput, "Number of non-domestic buildings input is clicked");
 	    ENTERTEXT(numOfNonDomesticBuildingsInput, numOfNonDomesticBuildings);
 	    Extent.getTest().info("Number of Non-Domestic Buildings: " + numOfNonDomesticBuildings);
 	}
 
 	public void clickAndEnterTotalDevelopmentCost(String totalCost) throws Exception {
-	    CLICK(totalDevelopmentCostInput, "Total development cost is clicked");
 	    ENTERTEXT(totalDevelopmentCostInput, totalCost);
 	    Extent.getTest().info("Total Development Cost: " + totalCost);
 	}
@@ -430,13 +461,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		WAITFORVISIBLEELEMENT(driver, assets.createAssetButton);
 		CLICK(assets.createAssetButton, "Create Assets button is clicked");
 	}
-
 	
 	//Start test cases creation for Assets
 	
 	public void createAsset_Building() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -446,21 +476,15 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String longitude = "-74.0060";
 	    String assetType = "Healthcare";
 	    String assetSubType = "Hospital";
-	    String assetSubTypeTwo = "Community and mental health hospitals";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Main Office Building";
+	    String nameOfAsset = "Main Office Building" + generateRandomInt();
 	    String description = "Headquarters of the company";
-	    String parentAsset = "assetest123";
-	    String neighbourAsset = "assetest contributor123";
+	    String neighbourAsset = "Neighbour - Building";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
 	    String grossExternalArea = "1200";
 	    String siteArea = "5000";
-	    //String assetOwningOrg = "indiaTest";
-	    String plotArea = "6000";
-	    String netFloorArea = "1100";
-	    String assetRecord = "Asset Management Department";
 	    
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -484,7 +508,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterAssetTypeInput(assetType);
 	    clickAndEnterAssetSubTypeInput(assetSubType);
-	    clickAndEnterAssetSubTypeTwoInput(assetSubTypeTwo);
 	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
 	    
 		/*
@@ -493,25 +516,19 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addParentAssetInput(parentAsset);
 	    addNeighbourAssetInput(neighbourAsset);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
-	    clickYearEstimatedCheckbox();
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
-	    clickNoMultipleUnits();
-	    //clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-	    clickAndEnterPlotAreaInput(plotArea);
-	    clickAndEnterNetFloorAreainput(netFloorArea);
-	    clickAndEnterAssetRecordInput(assetRecord);
 		clickSave();
+		assertAssetCreationToastMessage();
 	}
 	
 	public void createAsset_Infrastructure() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -520,20 +537,14 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
 	    String assetType = "Water";
-	    String assetSubType = "Water distrubution";
+	    String assetSubType = "Water distribution";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Infrastructure";
+	    String nameOfAsset = "Infrastructure" + generateRandomInt();
 	    String description = "Infrastructure of the company";
-	    String parentAsset = "test asset";
-	    String neighbourAsset = "Water Asset";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
 	    String assetValue = "50000";
 	    String siteArea = "5000";
-	    //String assetOwningOrg = "indiaTest";
-	    String plotArea = "6000";
-	    String netFloorArea = "1100";
-	    String assetRecord = "Asset Management Department";
 	    
 	    /*
 	     * Exclusive variables for Infrastructure
@@ -575,27 +586,20 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addParentAssetInput(parentAsset);
-	    addNeighbourAssetInput(neighbourAsset);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
-	    clickYearEstimatedCheckbox();
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterSiteAreaInput(siteArea);
 	    clickAndEnterReflectAssets(reflectsAsset);
 	    clickAndEnterLengthOfAsset(lengthOfAsset);
 	    clickAndEnterCapacityInput(capacity);
-	    clickNoMultipleUnits();
-	    //clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-	    clickAndEnterPlotAreaInput(plotArea);
-	    clickAndEnterNetFloorAreainput(netFloorArea);
-	    clickAndEnterAssetRecordInput(assetRecord);
 		clickSave();
+		assertAssetCreationToastMessage();
 	}
 	
 	public void createAsset_Community() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -605,16 +609,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String longitude = "-74.0060";
 	    String assetType = "Community";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Community";
+	    String nameOfAsset = "Community" + generateRandomInt();
 	    String description = "Community of the company";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
 	    String assetValue = "51233";
-	    String siteArea = "623";
-	    //String assetOwningOrg = "indiaTest";
-	    String plotArea = "945";
-	    String netFloorArea = "5576";
-	    String assetRecord = "Asset Management Department";
 	    
 	    /*
 	     * Exclusive variables for Community
@@ -624,7 +623,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String sizeOfDevelopment = "1234";
 	    String noOfDomesticBuildings = "523";
 	    String noOfNonDomesticBuildings = "3244";
-	    String totalDevelopmentCost = "3244";
+	    String totalDevelopmentCost = "4212";
 
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -658,19 +657,263 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
-	    clickYearEstimatedCheckbox();
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
-	    clickAndEnterSiteAreaInput(siteArea);
 	    clickAndEnterSizeOfDevelopment(sizeOfDevelopment);
 	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
-	    clickNoMultipleUnits();
-	    //clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-	    clickAndEnterPlotAreaInput(plotArea);
-	    clickAndEnterNetFloorAreainput(netFloorArea);
-	    clickAndEnterAssetRecordInput(assetRecord);
 		clickSave();
+		assertAssetCreationToastMessage();
+	}
+	
+	/*
+	 * Test data for Parent and Neighbouring Assets
+	 * 
+	 * Building
+	 * Parent - Building
+	 * Neighbour - Building
+	 * 
+	 * Infrastructure
+	 * Parent - Infrastructure
+	 * Neighbour - Infrastructure
+	 * 
+	 * Parent - Community
+	 * Neighbour - Community
+	 * 
+	 */
+	
+	public void setParentNeighbourAsset_Building() throws Exception {
+		
+	    String country = "India";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "Mumbai";
+	    String countryOrRegion = "Mumbai";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String assetType = "Education";
+	    String grossInternalArea = "1000";
+	    String nameOfAsset = "Building" + generateRandomInt();
+	    String description = "Building of the company";
+	    String yearOfConstruction = "2010";
+	    String assetLifecycle = "Pre design";
+	    String assetValue = "51233";
+	    String grossExternalArea = "1200";
+	    String siteArea = "5000";
+	    
+	    /*
+	     * Variables for Parent and Neighbour Asset
+	     *  
+	    */
+	    
+	    String parentAsset = "Parent - Building";
+	    String neighbourAsset = "Neighbour - Building";
+	    
+	    //Start Asset Creation
+	    clickOnCreateAssetsButton();
+		selectCreateAssetType("Building");
+						
+		/*
+		 * Start input for Asset address
+		*/
+	
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    //addLatitudeInput(latitude);
+	    //addLongitudeInput(longitude);
+	    
+		/*
+		 * Start input for Asset type and subtypes
+		*/
+	    
+	    clickAndEnterAssetTypeInput(assetType);
+	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
+	    
+		/*
+		 * Start input for Asset information - Infrastructure
+		 * 
+		*/
+	    
+	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterDescriptionInput(description);
+	    addParentAssetInput(parentAsset);
+	    addNeighbourAssetInput(neighbourAsset);
+	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
+	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
+	    clickAndEnterAssetLifecycleInput(assetLifecycle);
+	    clickAndEnterAssetValueInput(assetValue);
+	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
+	    clickAndEnterSiteAreaInput(siteArea);
+		clickSave();
+		assertAssetCreationToastMessage();
+	}
+	
+	public void setParentNeighbourAsset_Infrastructure() throws Exception {
+		
+	    String country = "India";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String assetType = "Water";
+	    String assetSubType = "Water distribution";
+	    String grossInternalArea = "1000";
+	    String nameOfAsset = "Infrastructure" + generateRandomInt();
+	    String description = "Infrastructure of the company";
+	    String yearOfConstruction = "2005";
+	    String assetLifecycle = "Design";
+	    String assetValue = "50000";
+	    String siteArea = "5000";
+	    
+	    /*
+	     * Variables for Parent and Neighbour Asset
+	     *  
+	    */
+	    
+	    String parentAsset = "Parent - Infrastructure";
+	    String neighbourAsset = "Neighbour - Infrastructure";
+	    
+	    /*
+	     * Exclusive variables for Infrastructure
+	     *  
+	    */
+	    
+	    String reflectsAsset = "Linear & Non-linear";
+	    String lengthOfAsset = "523";
+	    String capacity = "3244";
+
+	    //Start Asset Creation
+	    clickOnCreateAssetsButton();
+		selectCreateAssetType("Infrastructure");
+				
+		/*
+		 * Start input for Asset address
+		*/
+	
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    //addLatitudeInput(latitude);
+	    //addLongitudeInput(longitude);
+	    
+		/*
+		 * Start input for Asset type and subtypes
+		*/
+	    
+	    clickAndEnterAssetTypeInput(assetType);
+	    clickAndEnterAssetSubTypeInput(assetSubType);
+	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
+	    
+		/*
+		 * Start input for Asset information - Infrastructure
+		*/
+	    
+	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterDescriptionInput(description);
+	    addParentAssetInput(parentAsset);
+	    addNeighbourAssetInput(neighbourAsset);
+	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
+	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
+	    clickAndEnterAssetLifecycleInput(assetLifecycle);
+	    clickAndEnterAssetValueInput(assetValue);
+	    clickAndEnterSiteAreaInput(siteArea);
+	    clickAndEnterReflectAssets(reflectsAsset);
+	    clickAndEnterLengthOfAsset(lengthOfAsset);
+	    clickAndEnterCapacityInput(capacity);
+		clickSave();
+		assertAssetCreationToastMessage();
+	}
+	
+	public void setParentNeighbourAsset_Community() throws Exception {
+		
+	    String country = "India";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String assetType = "Community";
+	    String grossInternalArea = "1000";
+	    String nameOfAsset = "Community" + generateRandomInt();
+	    String description = "Community of the company";
+	    String yearOfConstruction = "2005";
+	    String assetLifecycle = "Design";
+	    String assetValue = "51233";
+	    
+	    /*
+	     * Variables for Parent and Neighbour Asset
+	     *  
+	    */
+	    
+	    String parentAsset = "Parent - Community";
+	    String neighbourAsset = "Neighbour - Community";
+	    
+	    /*
+	     * Exclusive variables for Community
+	     *  
+	    */
+	    
+	    String sizeOfDevelopment = "1234";
+	    String noOfDomesticBuildings = "523";
+	    String noOfNonDomesticBuildings = "3244";
+	    String totalDevelopmentCost = "4212";
+
+	    //Start Asset Creation
+	    clickOnCreateAssetsButton();
+		selectCreateAssetType("Community");
+						
+		/*
+		 * Start input for Asset address
+		*/
+	
+	    addSelectCountryInput(country);
+	    addAddressLineOneInput(addressLineOne);
+	    addAddressLineTwoInput(addressLineTwo);
+	    addTownOrCityInput(townCity);
+	    addCountryOrRegionInput(countryOrRegion);
+	    addPostalCodeInput(postalCode);
+	    //addLatitudeInput(latitude);
+	    //addLongitudeInput(longitude);
+	    
+		/*
+		 * Start input for Asset type and subtypes
+		*/
+	    
+	    clickAndEnterAssetTypeInput(assetType);
+	    clickAndEnterGrossInternalAreaInput(grossInternalArea);
+	    
+		/*
+		 * Start input for Asset information - Infrastructure
+		 * 
+		*/
+	    
+	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterDescriptionInput(description);
+	    addParentAssetInput(parentAsset);
+	    addNeighbourAssetInput(neighbourAsset);
+	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
+	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
+	    clickAndEnterAssetLifecycleInput(assetLifecycle);
+	    clickAndEnterAssetValueInput(assetValue);
+	    clickAndEnterSizeOfDevelopment(sizeOfDevelopment);
+	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
+	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
+	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
+		clickSave();
+		assertAssetCreationToastMessage();
 	}
 }

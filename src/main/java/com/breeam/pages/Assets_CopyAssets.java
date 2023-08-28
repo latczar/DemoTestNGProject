@@ -27,6 +27,7 @@ public class Assets_CopyAssets extends CommonFunctions {
 	}
 	
 	public void clickOnCopyAsset() throws Exception {
+		WAITFORELEMENTINVISIBILITYXPATH("//label[contains(text(), 'Asset created successfully')]");
 	    CLICK(copyAssetButton, "Copy Asset button is clicked");
 	    Extent.getTest().info("Copy Asset clicked");
 	}
@@ -46,7 +47,7 @@ public class Assets_CopyAssets extends CommonFunctions {
 	
 	public void copyAsset_Building() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -55,14 +56,10 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
 	    String assetType = "Healthcare";
-	    String assetSubType = "Hospital";
-	    String assetSubTypeTwo = "Community and mental health hospitals";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Main Office Building";
+	    String nameOfAsset = "Main Office Building" + generateRandomInt();
 	    String nameOfCopiedAsset = " - Copied Asset";
 	    String description = "Headquarters of the company";
-	    String parentAsset = "assetest123";
-	    String neighbourAsset = "assetest contributor123";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
@@ -94,8 +91,6 @@ public class Assets_CopyAssets extends CommonFunctions {
 		*/
 	    
 	    createAssets.clickAndEnterAssetTypeInput(assetType);
-	    createAssets.clickAndEnterAssetSubTypeInput(assetSubType);
-	    createAssets.clickAndEnterAssetSubTypeTwoInput(assetSubTypeTwo);
 	    createAssets.clickAndEnterGrossInternalAreaInput(grossInternalArea);
 	    
 		/*
@@ -104,19 +99,11 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    
 	    createAssets.clickAndEnterNameOfAssetInput(nameOfAsset);
 	    createAssets.clickAndEnterDescriptionInput(description);
-	    createAssets.addParentAssetInput(parentAsset);
-	    createAssets.addNeighbourAssetInput(neighbourAsset);
 	    createAssets.clickAndEnterYearOfConstructionInput(yearOfConstruction);
-	    createAssets.clickYearEstimatedCheckbox();
 	    createAssets.clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    createAssets.clickAndEnterAssetValueInput(assetValue);
 	    createAssets.clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    createAssets.clickAndEnterSiteAreaInput(siteArea);
-	    createAssets.clickNoMultipleUnits();
-	    //createAssets.clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-	    createAssets.clickAndEnterPlotAreaInput(plotArea);
-	    createAssets.clickAndEnterNetFloorAreainput(netFloorArea);
-	    createAssets.clickAndEnterAssetRecordInput(assetRecord);
 	    createAssets.clickSave();
 	    
 		/*
@@ -126,30 +113,32 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    clickOnCopyAsset();
 	    createAssets.clickAndEnterNameOfAssetInput(nameOfCopiedAsset);
 	    assertCopyLabelOnPage();
+	    Thread.sleep(3000);
 	    createAssets.clickSave();
+	    createAssets.assertAssetCreationToastMessage();
 	}
 	
 	public void copyAsset_Infrastructure() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
-	    String countryOrRegion = "New York";
+	    String countryOrRegion = "india";
 	    String postalCode = "12345";
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
 	    String assetType = "Water";
-	    String assetSubType = "Water distrubution";
+	    String assetSubType = "Water distribution";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Infrastructure";
-	    String nameOfCopiedAsset = "Copied Asset - Infrastructure";
+	    String nameOfAsset = "Infrastructure" + generateRandomInt();
+	    String nameOfCopiedAsset = "Copied Asset - Infrastructure" + generateRandomInt();
 	    String description = "Infrastructure of the company";
-	    String parentAsset = "test asset";
-	    String neighbourAsset = "Water Asset";
+	    String parentAsset = "Parent - Infrastructure";
+	    //String neighbourAsset = "Water Corporation";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
-	    String assetValue = "50000";
+	    String assetValue = "1234";
 	    String siteArea = "5000";
 	    //String assetOwningOrg = "indiaTest";
 	    String plotArea = "6000";
@@ -197,20 +186,14 @@ public class Assets_CopyAssets extends CommonFunctions {
 		createAssets.clickAndEnterNameOfAssetInput(nameOfAsset);
 		createAssets.clickAndEnterDescriptionInput(description);
 		createAssets.addParentAssetInput(parentAsset);
-		createAssets.addNeighbourAssetInput(neighbourAsset);
 		createAssets.clickAndEnterYearOfConstructionInput(yearOfConstruction);
-		createAssets.clickYearEstimatedCheckbox();
 		createAssets.clickAndEnterAssetLifecycleInput(assetLifecycle);
 		createAssets.clickAndEnterAssetValueInput(assetValue);
 		createAssets.clickAndEnterSiteAreaInput(siteArea);
 		createAssets.clickAndEnterReflectAssets(reflectsAsset);
 		createAssets.clickAndEnterLengthOfAsset(lengthOfAsset);
 		createAssets.clickAndEnterCapacityInput(capacity);
-		createAssets.clickNoMultipleUnits();
-		//createAssets.clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-		createAssets.clickAndEnterPlotAreaInput(plotArea);
-		createAssets.clickAndEnterNetFloorAreainput(netFloorArea);
-		createAssets.clickAndEnterAssetRecordInput(assetRecord);
+		Thread.sleep(5000);
 		createAssets.clickSave();
 		
 		/*
@@ -218,14 +201,16 @@ public class Assets_CopyAssets extends CommonFunctions {
 		*/
 	    
 	    clickOnCopyAsset();
-	    createAssets.clickAndEnterNameOfAssetInput(nameOfCopiedAsset);
+	    createAssets.clearAndenterNameOfCopiedAssetInput(nameOfCopiedAsset);
 	    assertCopyLabelOnPage();
+	    Thread.sleep(3000);
 	    createAssets.clickSave();
+	    createAssets.assertAssetCreationToastMessage();
 	}
 	
 	public void copyAsset_Community() throws Exception {
 		
-	    String country = "United States";
+	    String country = "India";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -235,8 +220,8 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    String longitude = "-74.0060";
 	    String assetType = "Community";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Community";
-	    String nameOfCopiedAsset = "Copied Asset - Community";
+	    String nameOfAsset = "Community" + generateRandomInt();
+	    String nameOfCopiedAsset = "Copied Asset - Community" + generateRandomInt();
 	    String description = "Community of the company";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
@@ -289,7 +274,6 @@ public class Assets_CopyAssets extends CommonFunctions {
 		createAssets.clickAndEnterNameOfAssetInput(nameOfAsset);
 		createAssets.clickAndEnterDescriptionInput(description);
 		createAssets.clickAndEnterYearOfConstructionInput(yearOfConstruction);
-		createAssets.clickYearEstimatedCheckbox();
 		createAssets.clickAndEnterAssetLifecycleInput(assetLifecycle);
 		createAssets.clickAndEnterAssetValueInput(assetValue);
 		createAssets.clickAndEnterSiteAreaInput(siteArea);
@@ -297,11 +281,6 @@ public class Assets_CopyAssets extends CommonFunctions {
 		createAssets.clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 		createAssets.clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 		createAssets.clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
-		createAssets.clickNoMultipleUnits();
-		//createAssets.clickAndEnterAssetOwningOrgInput(assetOwningOrg);
-		createAssets.clickAndEnterPlotAreaInput(plotArea);
-		createAssets.clickAndEnterNetFloorAreainput(netFloorArea);
-		createAssets.clickAndEnterAssetRecordInput(assetRecord);
 		createAssets.clickSave();
 		
 		/*
@@ -309,8 +288,10 @@ public class Assets_CopyAssets extends CommonFunctions {
 		*/
 	    
 	    clickOnCopyAsset();
-	    createAssets.clickAndEnterNameOfAssetInput(nameOfCopiedAsset);
+	    createAssets.clearAndenterNameOfCopiedAssetInput(nameOfCopiedAsset);
 	    assertCopyLabelOnPage();
+	    Thread.sleep(3000);
 	    createAssets.clickSave();
+	    createAssets.assertAssetCreationToastMessage();
 	}
 }
