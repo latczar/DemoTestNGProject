@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class UserPage_CreateOrganizations extends CommonFunctions {
 	
@@ -36,7 +37,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Town / City')]//following::input)[1]")
 	static WebElement townOrCityInput;
 	
-	@FindBy(xpath="(//label[contains(text(), 'Country / Region / State')]//following::input)[1]")
+	@FindBy(xpath="(//label[contains(text(), 'County / Region / State')]//following::input)[1]")
 	static WebElement countryOrRegionInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Postal / Zip code')]//following::input)[1]")
@@ -92,45 +93,54 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	public void addSelectCountryInput(String country) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, selectCountryInput);
 	    CLICK(selectCountryInput, "Select Country input is clicked");
-	    ENTERTEXT(organizationNameInput, country);
+	    ENTERTEXT(selectCountryInput, country);
 	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
 	    ROBOTENTER();
+	    Extent.getTest().info("Entered Country: " + country);
 	}
 
 	public void addAddressLineOneInput(String addressLineOne) throws Exception {
 	    CLICK(addressLineOneInput, "Address Line 1 input is clicked");
-	    ENTERTEXT(organizationNameInput, addressLineOne);
+	    ENTERTEXT(addressLineOneInput, addressLineOne);
+	    Extent.getTest().info("Entered Address Line 1: " + addressLineOne);
 	}
 
 	public void addAddressLineTwoInput(String addressLineTwo) throws Exception {
 	    CLICK(addressLineTwoInput, "Address Line 2 input is clicked");
-	    ENTERTEXT(organizationNameInput, addressLineTwo);
+	    ENTERTEXT(addressLineTwoInput, addressLineTwo);
+	    Extent.getTest().info("Entered Address Line 2: " + addressLineTwo);
 	}
 
 	public void addTownOrCityInput(String townCity) throws Exception {
 	    CLICK(townOrCityInput, "Town / City input is clicked");
-	    ENTERTEXT(organizationNameInput, townCity);
+	    ENTERTEXT(townOrCityInput, townCity);
+	    Extent.getTest().info("Entered Town / City: " + townCity);
 	}
 
 	public void addCountryOrRegionInput(String countryOrRegion) throws Exception {
 	    CLICK(countryOrRegionInput, "Country / Region / State input is clicked");
-	    ENTERTEXT(organizationNameInput, countryOrRegion);
+	    ENTERTEXT(countryOrRegionInput, countryOrRegion);
+	    Extent.getTest().info("Entered Country / Region / State: " + countryOrRegion);
 	}
 
-	public void addPostalCodeInput(String countryOrRegion) throws Exception {
+	public void addPostalCodeInput(String postalCode) throws Exception {
 	    CLICK(postalCodeInput, "Postal / Zip code input is clicked");
-	    ENTERTEXT(organizationNameInput, countryOrRegion);
+	    ENTERTEXT(postalCodeInput, postalCode);
+	    Extent.getTest().info("Entered Postal / Zip code: " + postalCode);
 	}
 
 	public void addLatitudeInput(String latitude) throws Exception {
 	    CLICK(latitudeInput, "Latitude input is clicked");
-	    ENTERTEXT(organizationNameInput, latitude);
+	    ENTERTEXT(latitudeInput, latitude);
+	    Extent.getTest().info("Entered Latitude: " + latitude);
 	}
 
 	public void addLongitudeInput(String longitude) throws Exception {
 	    CLICK(longitudeInput, "Longitude input is clicked");
-	    ENTERTEXT(organizationNameInput, longitude);
+	    ENTERTEXT(longitudeInput, longitude);
+	    Extent.getTest().info("Entered Longitude: " + longitude);
 	}
+
 
 	/*
 	 * Organization Details
@@ -138,52 +148,58 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	*/
 	
 	public void addOrganizationNameInput(String orgNameInput) throws Exception {
-
 	    CLICK(organizationNameInput, "Organization Name input is clicked");
 	    ENTERTEXT(organizationNameInput, orgNameInput);
+	    Extent.getTest().info("Entered Organization Name: " + orgNameInput);
 	}
 
 	public void addSelectParentInput(String parentOrgInput) throws Exception {
 	    CLICK(selectParentInput, "Select Parent input is clicked");
 	    ENTERTEXT(selectParentInput, parentOrgInput);
+	    Extent.getTest().info("Entered Select Parent: " + parentOrgInput);
 	}
 
 	public void addPhoneNumberInput(String phoneNumber) throws Exception {
 	    CLICK(phoneNumberInput, "Phone Number input is clicked");
-	    ENTERTEXT(organizationNameInput, phoneNumber);
+	    ENTERTEXT(phoneNumberInput, phoneNumber);
+	    Extent.getTest().info("Entered Phone Number: " + phoneNumber);
 	}
 
 	public void addEmailInput(String email) throws Exception {
 	    CLICK(emailInput, "Email input is clicked");
-	    ENTERTEXT(organizationNameInput, email);
+	    ENTERTEXT(emailInput, email);
+	    Extent.getTest().info("Entered Email: " + email);
 	}
 
 	public void addWebsiteInput(String websiteName) throws Exception {
 	    CLICK(websiteInput, "Website input is clicked");
-	    ENTERTEXT(organizationNameInput, websiteName);
+	    ENTERTEXT(websiteInput, websiteName);
+	    Extent.getTest().info("Entered Website: " + websiteName);
 	}
 
 	public void addNotesInput(String notes) throws Exception {
 	    CLICK(notesInput, "Notes input is clicked");
-	    ENTERTEXT(organizationNameInput, notes);
+	    ENTERTEXT(notesInput, notes);
+	    Extent.getTest().info("Entered Notes: " + notes);
 	}
 
 	public void addSearchNSOsInput(String nso) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, searchNSOsInput);
 	    CLICK(searchNSOsInput, "Search NSOs input is clicked");
-	    ENTERTEXT(organizationNameInput, nso);
-	    MOUSEHOVER("//label[contains(text(), '" + nso + "')]");
-	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + nso + "')]"));
-	    elementToClick.click();
+	    ENTERTEXT(searchNSOsInput, nso);
+	    HOVERANDCLICK(nso);
+	    Extent.getTest().info("Entered Search NSOs: " + nso);
 	}
 
 	public void clickTermsAndConditionsCheckbox() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, termsAndConditionsCheckbox);
 	    CLICK(termsAndConditionsCheckbox, "Terms and Conditions checkbox is clicked");
+	    Extent.getTest().info("Clicked Terms and Conditions checkbox");
 	}
-	
+
 	public void clickSave() throws Exception {
-		CLICK(saveButton, "Save button is clicked");
+	    CLICK(saveButton, "Save button is clicked");
+	    Extent.getTest().info("Clicked Save button");
 	}
 	
 	public void createOrganizations() throws Exception {

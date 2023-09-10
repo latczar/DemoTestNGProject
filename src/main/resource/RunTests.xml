@@ -1,122 +1,165 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="RDG SPFx Test Automation Suite">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="BREEAM Platform Automation Suite">
 	<listeners>
 		<listener class-name="reporting.TestListener" />
 	</listeners>
 
-	<test name="Validate Creating New Action - RDG Engage">
+	<test name="Validate that user is able to add new users to an organization ">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_CreateNewAction_RDGEngage_Initiative_Charter" />
+				name="Test_addUserToOrganization.java" />
 		</classes>
 	</test>
-	<test name="Validate Creating New Action - RDG Review">
+	
+	<test name="Validate Assessment Admin is able to login ">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_CreateNewAction_RDGReview_Initiative_Charter" />
+				name="Test_AssessmentAdminLogin.java" />
 		</classes>
 	</test>
-	<test name="Validate Creating New Minute - RDG Review">
+	
+	<test name="Validate Assessment Contriutor is able to login ">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_CreateNewMinute_RDGReview_Initiative_Charter" />
+				name="Test_AssessmentContributorLogin.java" />
 		</classes>
 	</test>
-	<test name="Validate Editing Benchmark Charter">
-		<classes>
-			<class name="tests.UnitTests.Test_EditBenchmarkChangeCharter" />
-		</classes>
-	</test>
-	<test name="Validate Request for approval for implementation">
+	
+	<test name="Validate Assessment Manager is able to login ">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_RequestForApprovalForImplementation" />
+				name="Test_AssessmentManagerLogin.java" />
 		</classes>
 	</test>
-	<test name="Validate Requesting RDG Engage Forum Date">
+	
+	<test name="Validate Assessment Stakeholder is able to login ">
 		<classes>
-			<class name="tests.UnitTests.Test_RequestRDGEngage_ForumDate" />
+			<class
+				name="Test_AssessmentStakeholderLogin.java" />
 		</classes>
 	</test>
-	<test name="Validate Requesting RDG Review Forum Date">
+	
+		<test name="Validate that user can copy Assets - Building ">
 		<classes>
-			<class name="tests.UnitTests.Test_RequestRDGReview_ForumDate" />
+			<class
+				name="Test_copyAsset_Building.java" />
 		</classes>
 	</test>
-	<test name="Validate Submitting a new Benchmark Charter">
+	
+	<test name="Validate that user can copy Assets - Community ">
 		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewBenchmark_Charter" />
+			<class
+				name="Test_copyAsset_Community.java" />
 		</classes>
 	</test>
-	<test name="Validate Submitting a new FSDU Charter">
+	
+	<test name="Validate that user can copy Assets - Infrastructure ">
 		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewFSDU_Charter" />
+			<class
+				name="Test_copyAsset_Infrastructure.java" />
 		</classes>
 	</test>
-	<test name="Validate Submitting a new Initiative Charter">
+	
+	<test name="Validate that user is able to create assessments ">
 		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewInitiative_Charter" />
+			<class
+				name="Test_createAssessment.java" />
 		</classes>
 	</test>
-	<test name="Validate Submitting a new Trial Pilot Charter">
+	
+		<test name="Validate that user is able to create assessments ">
 		<classes>
-			<class name="tests.UnitTests.Test_SubmitNewTrialPilot_Charter" />
+			<class
+				name="Test_createAssessment.java" />
 		</classes>
 	</test>
-	<test name="Validate Update Forum Details RDG Engage">
+	
+		<test name="Validate that user is able to create assessments ">
 		<classes>
-			<class name="tests.UnitTests.Test_UpdateForumDetails_RDGEngage" />
+			<class
+				name="Test_createAssessment.java" />
 		</classes>
 	</test>
-	<test name="Validate Update Forum Details RDG Review">
+	
+	<test name="Validate that user is able to create assessments ">
 		<classes>
-			<class name="tests.UnitTests.Test_UpdateForumDetails_RDGReview" />
+			<class
+				name="Test_createAssessment.java" />
 		</classes>
 	</test>
-	<test name="Validate Update Project assignment">
+	
+	<test name="Validate that user is able to create assessments ">
 		<classes>
-			<class name="tests.UnitTests.Test_UpdateProjectAssignment" />
+			<class
+				name="Test_createAssessment.java" />
 		</classes>
 	</test>
+	
+   <test name="Validate that user is able to create assessments">
+       <classes>
+           <class name="Test_createAssessment.java"/>
+       </classes>
+   </test>
+   
+   <test name="Create Asset Building">
+       <classes>
+           <class name="Test_createAsset_Building.java"/>
+       </classes>
+   </test>
+   
+   <test name="Create Asset Community">
+       <classes>
+           <class name="Test_createAsset_Community.java"/>
+       </classes>
+   </test>
+   
+   <test name="Create Asset Infrastructure">
+       <classes>
+           <class name="Test_createAsset_Infrastructure.java"/>
+       </classes>
+   </test>
+   
+   <test name="Create Child Organization">
+       <classes>
+           <class name="Test_createChildOrganization.java"/>
+       </classes>
+   </test>
+   
+   <test name="Create Organization">
+       <classes>
+           <class name="Test_createOrganization.java"/>
+       </classes>
+   </test>
+   
+   <test name="Impersonate User">
+       <classes>
+           <class name="Test_impersonateUser.java"/>
+       </classes>
+   </test>
+   
+   <test name="Set Parent and Neighbor Asset">
+       <classes>
+           <class name="Test_setParentAndNeighbourAsset.java"/>
+       </classes>
+   </test>
+   
+   <test name="Sign with BRE credentials">
+       <classes>
+           <class name="Test_SignInAsBRE.java"/>
+       </classes>
+   </test>
+   
+   <test name="Test that user is able to sign up">
+       <classes>
+           <class name="Test_User_SignUp.java"/>
+       </classes>
+   </test>
+   
+   <test name="View Assessment Details">
+       <classes>
+           <class name="Test_viewAssessmentDetails.java"/>
+       </classes>
+   </test>
 
-	<test name="Validate Updating Project status">
-		<classes>
-			<class name="tests.UnitTests.Test_UpdateProjectStatus" />
-		</classes>
-	</test>
-	<test name="Validate ForumDetails buttons RDG Engage">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_Validate_ForumDetails_Buttons_RDGEngage" />
-		</classes>
-	</test>
-	<test name="Validate ForumDetails buttons RDG Review">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_Validate_ForumDetails_Buttons_RDGReview" />
-		</classes>
-	</test>
-	<test name="Validate Submitted Benchmark Charter">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateBenchmarkChangeCharter" />
-		</classes>
-	</test>
-	<test name="Validate Design Brief">
-		<classes>
-			<class name="tests.UnitTests.Test_ValidateDesignBrief" />
-		</classes>
-	</test>
-	<test name="Validate Submitted Actions">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateInitiative_CharterActions" />
-		</classes>
-	</test>
-	<test name="Validate Project Checklist">
-		<classes>
-			<class
-				name="tests.UnitTests.Test_ValidateProjectChecklist" />
-		</classes>
-	</test>
 </suite>

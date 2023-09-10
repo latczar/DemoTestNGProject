@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -19,22 +20,27 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.manager.SeleniumManager;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import com.aventstack.extentreports.Status;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.codec.binary.Base64;
 
 public class CommonFunctions {
@@ -53,11 +59,9 @@ public class CommonFunctions {
 	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";
 	public static String credsFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\creds.properties";
 	public static String testEnvURL = "https://wa-breeam-platform-uat-uk-south-001.azurewebsites.net/";
-
 	
 	public static void INVOKECHROMEBROWSER() throws IOException, InterruptedException {
 		ChromeOptions opt = new ChromeOptions();
-		WebDriverManager.chromedriver().setup();
 		Map<String, Object> prefs = new HashMap<String, Object>();
 		opt.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
 		opt.addArguments("--no-sandbox");
@@ -71,22 +75,21 @@ public class CommonFunctions {
 		opt.addArguments("--disable-web-security");
 		opt.addArguments("--no-proxy-server");
 		opt.addArguments("enable-cookies");
-		opt.addArguments("--remote-allow-origins=*");
 		opt.setExperimentalOption("prefs", prefs);
 		opt.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
 		opt.setExperimentalOption("useAutomationExtension", false);
 		
 		prefs.put("credentials_enable_service", false);
 		prefs.put("profile.password_manager_enabled", false);
-		// prefs.put("download.default_directory", defaultDirectory);
 		prefs.put("download.prompt_for_download", false);
 		prefs.put("plugins.plugins_disabled", new String[] { "Chrome PDF Viewer" });
 		prefs.put("plugins.always_open_pdf_externally", true);
+		
 		driver = new ChromeDriver(opt);
 		driver.manage().deleteAllCookies();
-
+		
 		// Define Test Environment - SIT or SAT
-		driver.get(testEnvURL);
+		driver.get(CommonFunctions.testEnvURL);
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 	}
@@ -124,6 +127,7 @@ public class CommonFunctions {
 	}
 
 	public static void ENTERTEXT(WebElement element, String value) throws Exception {
+		WAITFORVISIBLEELEMENT(driver, element);
 		element.click();
 		WAITFORVISIBLEELEMENT(driver, element);
 		// element.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
@@ -233,9 +237,9 @@ public class CommonFunctions {
 
 	public static void CLICKONELEMENTJS(String xpathKey) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(obj.getProperty(xpathKey))));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpathKey)));
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].click()", driver.findElement(By.xpath(obj.getProperty(xpathKey))));
+		executor.executeScript("arguments[0].click()", driver.findElement(By.xpath(xpathKey)));
 	}
 
 	public static void ACTIONONELEMENT(String xpathKey) {
@@ -319,7 +323,12 @@ public class CommonFunctions {
 
 	public static void WAITFORELEMENTEXISTXPATH(String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(obj.getProperty(xpath))));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+	}
+		
+	public static void WAITFORELEMENTINVISIBILITYXPATH(String xpath) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(xpath)));
 	}
 
 	public static boolean ISDISPLAYED(String xpath) {
@@ -329,17 +338,13 @@ public class CommonFunctions {
 
 	public static void SCROLLINTOVIEW(String xpath) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);",
-				driver.findElement(By.xpath(obj.getProperty(xpath))));
+		executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath((xpath))));
 	}
 
 	public void SCROLLINTOVIEWSTRING(String xpath) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath(xpath)));
 	}
-
-	// applicable for all browser, but takes screenshot only the visible portion of
-	// the browser
 
 	public static void WAITTOBECLICKEDBYXPATH(String xpath) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
@@ -363,7 +368,7 @@ public class CommonFunctions {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("window.scrollBy(0,350)", "");
 	}
-
+	
 	public String GETCURRENTDATE(String format) {
 		// Create object of SimpleDateFormat class and decide the format
 		DateFormat dateFormat = new SimpleDateFormat(format);
@@ -426,7 +431,7 @@ public class CommonFunctions {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}	
 
 	public static void SELECTINDEX(WebElement element, int index) {
 		Select selectDropDown = new Select(element);
@@ -441,11 +446,6 @@ public class CommonFunctions {
 	public void SELECTDROPDOWNINDEX(String xpath, int index) throws Exception {
 		Select dropdown = new Select(driver.findElement(By.xpath(xpath)));
 		dropdown.selectByIndex(index);
-	}
-
-	public void SELECTVALUEDROPDOWN(String xpath, String value) {
-		Select dropdown = new Select(driver.findElement(By.xpath(obj.getProperty(xpath))));
-		dropdown.selectByValue(value);
 	}
 
 	public String GETSELECTEDOPTION(String xpath) {
@@ -471,10 +471,10 @@ public class CommonFunctions {
 
 	public void HANDLESCROLLUP() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1000)");
+		js.executeScript("window.scrollBy(0,-10000)");
 	}
 
-	public void SCROLLUP() {
+	public void ACTIONSSCROLLUP() {
 		Actions actions = new Actions(driver);
 		actions.keyDown(Keys.CONTROL).sendKeys(Keys.PAGE_UP).perform();
 	}
@@ -488,7 +488,7 @@ public class CommonFunctions {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(seconds));
 	}
 
-	public void MOUSEHOVER(String xpath) {
+	public static void MOUSEHOVER(String xpath) {
 		WebElement element = driver.findElement(By.xpath(xpath));
 		Actions actions = new Actions(driver);
 		actions.moveToElement(element).perform();
@@ -499,5 +499,57 @@ public class CommonFunctions {
 		Robot robot = new Robot();
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
+	}
+	
+	public void ROBOTDOWN() throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_DOWN);
+		robot.keyRelease(KeyEvent.VK_DOWN);
+	}
+	
+	public static void HOVERANDCLICK(WebElement elementToClick, String hoverOnElement) throws Exception {
+	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
+	    elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
+	    elementToClick.click();
+	}
+	
+	public void HOVERANDCLICK(String hoverOnElement) throws Exception {
+	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
+	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
+	    elementToClick.click();
+	}
+	
+	// Method to capture a screenshot of a webpage
+	public static void captureScreenshot(WebDriver driver, String screenshotName) throws IOException {
+	    // Capture screenshot as a file
+	    File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+ 
+	    // Define the destination path to save the screenshot
+	    String screenshotPath = "./test-output/SparkReport/" + screenshotName + ".png";
+
+	    // Copy the screenshot file to the destination path
+	    Files.copy(screenshotFile.toPath(), new File(screenshotPath).toPath());
+	}
+	
+	public static int generateRandomInt() {
+		int min = 1;
+		int max = 99999;
+		Random random = new Random();
+	    
+		return random.nextInt(max - min + 1) + min;
+	}
+	
+	public void assessmentSelectDropdownInput(String input, WebElement element, WebElement elementToClick) throws Exception {
+	    WAITFORVISIBLEELEMENT(driver, element);
+	    Thread.sleep(1000);
+	    CLICK(elementToClick, elementToClick + " is clicked");
+	    CLEARTEXTBOX(elementToClick);
+	    ENTERTEXT(elementToClick, input);
+	    Extent.getTest().info("Entered text: " + input);
+	    MOUSEHOVER("//label[contains(text(), '" + input + "')]");
+	    Extent.getTest().info("Hovered over: " + input);
+	    ROBOTDOWN(); // To select desired input from the list
+	    ROBOTENTER();
+	    Extent.getTest().info("Selected input for " + elementToClick + " " + input);
 	}
 }

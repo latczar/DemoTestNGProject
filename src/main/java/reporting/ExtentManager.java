@@ -16,7 +16,7 @@ public class ExtentManager {
 			report = new ExtentReports();
 			spark.config().setTheme(Theme.DARK);
 			spark.config().setEncoding("utf-8");
-			spark.config().setDocumentTitle("ProForms Report");
+			spark.config().setDocumentTitle("BREEAM Automation Test Report");
 			
 			report.attachReporter(spark);
 		}

@@ -1,14 +1,17 @@
 package com.breeam.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class UserAdmin extends CommonFunctions {
 	
-	@FindBy(xpath="(//a[contains(text(),'User admin')]") 
+	@FindBy(xpath="//a[contains(text(),'User admin')]") 
 	WebElement userAdminButton;
 	
 	@FindBy(xpath="//a[contains(text(),'Assessor')]")
@@ -46,7 +49,7 @@ public class UserAdmin extends CommonFunctions {
 	@FindBy(xpath="//input[contains(@placeholder,'Select roles')]")
 	static WebElement selectRolesInput;
 	
-	@FindBy(xpath="(//section[@data-testid='bre-inputcontainer'])[2]")
+	@FindBy(xpath="(//section[@data-testid='bre-inputcontainer']//input)[2]")
 	static WebElement emailAddressInput;
 	
 	@FindBy(xpath="//span[contains(text(), 'Add user')]")
@@ -63,6 +66,16 @@ public class UserAdmin extends CommonFunctions {
 	WebElement userAdminAddOrganisationButton;
 	
 	/*
+	 * User Admin - inside User details page
+	 */
+	
+	@FindBy(xpath="//span[contains(text(), 'Impersonate user')]")
+	WebElement impersonateUserButton;
+	
+	@FindBy(xpath="//span[contains(text(),'Add to organisation')]")
+	WebElement addToOrganisationButton;
+	
+	/*
 	 * Constructor of UserAdmin page
 	 * Initialize elements of the page class
 	 * Methods and test classes of the page class
@@ -76,47 +89,118 @@ public class UserAdmin extends CommonFunctions {
 	public void clickUserAdminButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, userAdminButton);
 	    CLICK(userAdminButton, "User Admin Menu button is clicked");
+	    Extent.getTest().info("User Admin Menu button is clicked");
 	}
 
 	public void clickAssessorButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, assessorButton);
 	    CLICK(assessorButton, "Assessor Menu button is clicked");
+	    Extent.getTest().info("Assessor Menu button is clicked");
 	}
 
 	public void clickLicenceConfigButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, licenceConfigButton);
 	    CLICK(licenceConfigButton, "Licence Config Menu button is clicked");
+	    Extent.getTest().info("Licence Config Menu button is clicked");
 	}
 
 	public void clickOrganizationButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, organisationButton);
 	    CLICK(organisationButton, "Organization Menu button is clicked");
+	    Extent.getTest().info("Organization Menu button is clicked");
 	}
 
 	public void clickRoleConfigButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, roleConfigButton);
 	    CLICK(roleConfigButton, "Role Config Menu button is clicked");
+	    Extent.getTest().info("Role Config Menu button is clicked");
 	}
 
 	public void clickUserOrganizationConfigButton() throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, userOrganizationConfigButton);
 	    CLICK(userOrganizationConfigButton, "User Organization Config Menu button is clicked");
+	    Extent.getTest().info("User Organization Config Menu button is clicked");
+	}
+	
+	public void assertInvitationSentToastMessage() throws Exception {
+		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Inviation sent successfully')]");
+        // Wait for the toast message element to be visible
+        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Inviation sent successfully')]"));
+        boolean toastMessagePresent = toastMessageElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(toastMessagePresent);
+        Extent.getTest().info("Invitation Sent Successfully toast message displayed");
+	}
+	
+	public void assertUserImpersonationBanner() throws Exception {
+        // Locate the element whose color you want to assert
+        WebElement element = driver.findElement(By.xpath("//*[@id=\"__next\"]/div/section/header/section[2]/div/div/div[2]/nav/ul/li[4]/div/a"));
+
+        // Get the color value of the element
+        String elementColor = element.getCssValue("color");
+
+        // Define the expected color value
+        String expectedColor = "rgba(0, 80, 43, 1)"; // RGBA value for #00502b - User Impersonation banner background color
+
+        // Perform the assertion
+        if (elementColor.equals(expectedColor)) {
+            System.out.println("Color matches the expected color.");
+        } else {
+            System.out.println("Color does not match the expected color.");
+        }
 	}
 	
 	/*
 	 * Method for Adding Users To an Organization
 	*/
 		
-	public void addUserToOrg(String orgInput) throws Exception {
+	public void addUserToOrg(String roleInput) throws Exception {
 		clickUserAdminButton();
 		WAITFORVISIBLEELEMENT(driver, inviteUserButton);
 		CLICK(inviteUserButton, "Invite User button is clicked");
+		Extent.getTest().info("Invite User button clicked");
+		
 		WAITFORVISIBLEELEMENT(driver, emailAddressInput);
 		CLICK(emailAddressInput, "Email Address Input is clicked");
+		Extent.getTest().info("Email Address clicked");
+		
+		ENTERTEXT(emailAddressInput, "111test111@email.com");
+		Extent.getTest().info("Email Address entered");
 		ENTERTEXT(selectOrganizationInput, "111test111");
-		SELECTDROPDOWNVALUE("//section[@id='bre-select-null-0']", "111test111");
+		Extent.getTest().info("Organization entered");
+		ROBOTENTER();
+		Thread.sleep(3000);
 		CLICK(selectRolesInput, "Select Roles Input is clicked");
-		SELECTVALUEDROPDOWN("//section[@class='select_bre-select__menu__kZzhM scrollbar']//label[contains(text(), '"+ orgInput +"')]')]", "");
+		ENTERTEXT(selectRolesInput, roleInput);
+		Extent.getTest().info("Role selected" + roleInput);
+		HOVERANDCLICK(roleInput);
 		CLICK(addUserButton, "Add User button is clicked");
+		Extent.getTest().info("Add User button clicked, invitation sent");
+		assertInvitationSentToastMessage();
+	}
+	
+	/*
+	 * Method for Impersonating Users 
+	*/
+		
+	public void impersonateUser(String userToImpersonate) throws Exception {
+		clickUserAdminButton();
+		WAITFORVISIBLEELEMENT(driver, searchInput);
+		CLICK(searchInput, "Search input is clicked");
+		Extent.getTest().info("Search input is clicked");
+		WAITFORELEMENTEXISTXPATH("//table[@data-testid='bre-table']");
+		ENTERTEXT(searchInput, userToImpersonate);
+		Extent.getTest().info("Entered user: " + userToImpersonate);
+		ROBOTENTER();
+		Thread.sleep(3000);
+		CLICKONELEMENTJS("//a[contains(text(),'" + userToImpersonate + "')]");
+		Extent.getTest().info("Opened user details page of " + userToImpersonate);
+		Thread.sleep(2000);
+		WAITFORVISIBLEELEMENT(driver, impersonateUserButton);
+		CLICK(impersonateUserButton, "Impersonate user button is clicked");
+		captureScreenshot(driver, "Impersonate as " + userToImpersonate);
+		Extent.getTest().info("Screenshot captured");
+		assertUserImpersonationBanner();
 	}
 }

@@ -32,6 +32,7 @@ public class Dashboard extends CommonFunctions {
 
         // Assert that the menu button exists
         Assert.assertTrue(isMenuButtonExists);
+        Extent.getTest().info("Dashboard button is visible after User Login");
     }
     
     public static boolean dashboardMenuButtonExists() {
@@ -46,6 +47,7 @@ public class Dashboard extends CommonFunctions {
 	
 	public void clickDashboardButton() throws Exception {
 		WAITFORVISIBLEELEMENT(driver, dashboardButton);
-		CLICK(dashboardButton, "User Page menu button is clicked");
+		CLICK(dashboardButton, "Dashboard menu button is clicked");
+		Extent.getTest().info("Dashboard button is clicked");
 	}
 }

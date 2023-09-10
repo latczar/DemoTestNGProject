@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class UserPage_MyOrganizations extends CommonFunctions{
 	
@@ -19,9 +20,9 @@ public class UserPage_MyOrganizations extends CommonFunctions{
 		PageFactory.initElements(driver, this);
 	}
 
-	public void clickUserPageMenuButton() throws Exception {
+	public void clickAddAnOrgButton() throws Exception {
 		WAITFORVISIBLEELEMENT(driver, addAnOrganizationButton);
-		CLICK(addAnOrganizationButton, "User Page menu button is clicked");
+		CLICK(addAnOrganizationButton, "Add an organization button is clicked");
+		Extent.getTest().info("Add an organization button clicked");
 	}
-
 }

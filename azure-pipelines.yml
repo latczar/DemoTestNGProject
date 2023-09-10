@@ -3,7 +3,7 @@ schedules:
     displayName: 'At 10:00 AM on day-of-month 1'
     branches:
       include:
-        - SIT-dev
+        - BREEAM_Platform_Regression_Suite
     always: false
 variables:
   - name: BuildParameters.mavenPOMFile
@@ -14,13 +14,13 @@ resources:
   repositories:
     - repository: self
       type: git
-      ref: refs/heads/SIT-dev
+      ref: refs/heads/BREEAM_Platform_Regression_Suite
       
 stages:
  - stage: build
    jobs:
-   - job: RDGSPFx_Regression_test_SIT_dev
-     displayName: Agent job 1_SIT_dev
+   - job: Regression_test_BREEAM_Platform_Regression_Suite
+     displayName: Agent job 1_BREEAM_Platform_Regression_Suite
      pool:
       vmImage: windows-latest
       name: Azure Pipelines
@@ -36,7 +36,7 @@ stages:
           mavenPOMFile: $(BuildParameters.mavenPOMFile)
           goals: clean test
           testResultsFiles: test-output/SparkReport/SparkAutoTest.html
-          testRunTitle: RDG SPFx SIT Regression
+          testRunTitle: BREEAM Platform Regression Suite
       - task: CopyFiles@2
         displayName: 'Copy Files jar files to: $(build.artifactstagingdirectory)'
         condition: always()

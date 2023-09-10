@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class UserPage extends CommonFunctions {
 	
@@ -29,27 +30,32 @@ public class UserPage extends CommonFunctions {
 	}
 
 	public void clickUserPageMenuButton() throws Exception {
-		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
-		CLICK(userPageMenuButton, "User Page menu button is clicked");
+	    WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
+	    CLICK(userPageMenuButton, "User Page menu button is clicked");
+	    Extent.getTest().info("Clicked User Page menu button");
 	}
-	
+
 	public void clickLogoutButton() throws Exception {
-		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
-		CLICK(logoutButton, "Logout button is clicked");
-	} 
-	
+	    WAITFORVISIBLEELEMENT(driver, logoutButton);
+	    CLICK(logoutButton, "Logout button is clicked");
+	    Extent.getTest().info("Clicked Logout button");
+	}
+
 	public void clickMyOrganizationsButton() throws Exception {
-		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
-		CLICK(myOrganizationsButton,"My organizations menu button is clicked");
-	} 
-	
+	    WAITFORVISIBLEELEMENT(driver, myOrganizationsButton);
+	    CLICK(myOrganizationsButton, "My organizations menu button is clicked");
+	    Extent.getTest().info("Clicked My organizations menu button");
+	}
+
 	public void clickUserPreferencesButton() throws Exception {
-		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
-		CLICK(preferencesButton,"Preferences menu button is clicked");
-	} 
-	
+	    WAITFORVISIBLEELEMENT(driver, preferencesButton);
+	    CLICK(preferencesButton, "Preferences menu button is clicked");
+	    Extent.getTest().info("Clicked Preferences menu button");
+	}
+
 	public void clickStopImpersonatingButton() throws Exception {
-		WAITFORVISIBLEELEMENT(driver, userPageMenuButton);
-		CLICK(stopImpersonatingButton,"Stop impersonating button is clicked");
-	} 
+	    WAITFORVISIBLEELEMENT(driver, stopImpersonatingButton);
+	    CLICK(stopImpersonatingButton, "Stop impersonating button is clicked");
+	    Extent.getTest().info("Clicked Stop impersonating button");
+	}
 }

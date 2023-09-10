@@ -9,16 +9,14 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.breeam.pages.LoginPage;
-import com.breeam.pages.UserAdmin;
 import com.breeam.pages.UserPage;
-import com.breeam.pages.UserPage_CreateOrganizations;
 
 import base.CommonFunctions;
 import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_createChildOrganization extends TestListener {
+public class Test_SignInAsBRE extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -27,13 +25,13 @@ public class Test_createChildOrganization extends TestListener {
 	ExtentSparkReporter spark;
 	ExtentReports extent;
 	LoginPage loginPage;
-	UserPage_CreateOrganizations createOrgs;
+	UserPage userPage;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
-	
+
 	//Constructor to access TestListener superclass 
-	public Test_createChildOrganization() throws IOException {
+	public Test_SignInAsBRE() throws IOException {
 		super();
 	}
 	
@@ -44,11 +42,12 @@ public class Test_createChildOrganization extends TestListener {
 
 	@BeforeMethod
 	public void before() throws IOException, Exception {
+		// class = new class();
 		CommonFunctions.INVOKECHROMEBROWSER();
 		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
-		createOrgs = new UserPage_CreateOrganizations();
+		userPage = new UserPage();
 	}
 	
 	/*
@@ -56,9 +55,10 @@ public class Test_createChildOrganization extends TestListener {
 	*/
 
 	@Test()
-	public void Test_addChildOrgs() throws Exception {
-		loginPage.Login();
-		createOrgs.addChildOrganisation(); // Start create child organization
+	public void Test_loginViaBRE() throws Exception {
+		
+		//Start test case steps
+		loginPage.BRELogin(); // Login via BRE Sign in		
 	}
 	
 	/*

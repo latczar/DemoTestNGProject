@@ -1,7 +1,199 @@
 package com.breeam.pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import base.CommonFunctions;
+import reporting.Extent;
 
 public class Assessments extends CommonFunctions {
+	
+	Assets assets = new Assets();
+	WebElement elementToClick;
+	
+	/*
+	 * Assessments page web elements
+	*/
+	
+	@FindBy(xpath="//a[normalize-space()='Assessments']")
+	static WebElement assessmentsPageButton;
+	
+	@FindBy(xpath="(//input[@placeholder='Search'])[1]")
+	WebElement searchAssessmentsInput;
+	
+	@FindBy(xpath="//tbody//tr//td[1]/a")
+	WebElement assessmentOne;
+	
+	@FindBy(xpath="//label[normalize-space()='Assessment detail - Overview']")
+	WebElement assessmentDetailOverview;
+	
+	/*
+	 * Assessments Details page web elements
+	*/
+	
+	@FindBy(xpath="(//button[@type='button'])[1]")
+	WebElement assessmentEditButton;
+		
+	/*
+	 * Assessments - Initial Details page web elements
+	*/
+	
+	@FindBy(xpath="(//h3[normalize-space()='Initial details'])[1]")
+	WebElement initialDetailsCollapse;
+	
+	@FindBy(xpath="(//span[normalize-space()='Initial details'])[1]")
+	WebElement initialDetailsPage;
+	
+	@FindBy(xpath="(//h2[contains(text(),'Initial details')])[2]")
+	WebElement headerInitialDetails;
+	
+	@FindBy(xpath="(//button[@type='button'])[2]")
+	WebElement assessmentSaveButton;
+	
+	@FindBy(xpath="(//input[@placeholder='Please select'])[1]")
+	WebElement technicalManualIssueNumber;
+	
+	@FindBy(xpath="(//input[@placeholder='Please select'])[2]")
+	WebElement projectScopeDropdown;
+	
+	@FindBy(xpath="(//input[@placeholder='Please select'])[3]")
+	WebElement buildingType;
+	
+	@FindBy(xpath="(//input[@placeholder='Please select'])[17]")
+	WebElement healthcareBuildingInpatientAreas;
 
+	@FindBy(xpath="(//input[@placeholder='Please select'])[18]")
+	WebElement prisonBuildingAccessibility;
+
+	@FindBy(xpath="(//span[normalize-space()='Assessment stage']//following::input)[1]")
+	WebElement assessmentStage;
+
+	@FindBy(xpath="(//span[contains(text(),'Building floor area (GIA)')]//following::input)[1]")
+	WebElement buildingFloorAreaGIA;
+
+	@FindBy(xpath="(//span[contains(text(),'Building floor area (NIFA)')]//following::input)[1]")
+	WebElement buildingFloorAreaNIFA;
+
+	@FindBy(xpath="(//span[contains(text(),'Is the building designed to be untreated?')]//following::section)[1]")
+	WebElement buildingDesignUntreated;
+
+	@FindBy(xpath="(//span[contains(text(),'Building services - heating system type')]//following::section)[1]")
+	WebElement heatingSystemType;
+
+	@FindBy(xpath="(//span[contains(text(),'Building services - cooling system type')]//following::section)[1]")
+	WebElement coolingSystemType;
+
+	@FindBy(xpath="(//span[contains(text(),'Does the building have external areas within the boundary of the assessed development?')]//following::input)[1]")
+	WebElement buildingExternalAreas;
+
+	@FindBy(xpath="(//span[contains(text(),'Are commercial or industrial-sized refrigeration and storage systems specified?')]//following::input)[1]")
+	WebElement refrigerationSystemsSpecified;
+
+	@FindBy(xpath="(//span[contains(text(),'Are building user lifts present?')]//following::section)[1]")
+	WebElement buildingUserLifts;
+
+	@FindBy(xpath="(//span[contains(text(),'Are building user escalators or moving walks present?')]//following::section)[1]")
+	WebElement buildingUserEscalators;
+
+	@FindBy(xpath="(//span[contains(text(),'Are there any water demands present other than those assessed in Wat 01?')]//following::section)[1]")
+	WebElement waterDemandsPresent;
+
+	@FindBy(xpath="(//span[contains(text(),'Are there statutory requirements, or other issues outside of the control of the project, that impact the ability to provide outdoor space')]//following::section)[1]")
+	WebElement statutoryRequirementsImpact;
+
+	@FindBy(xpath="(//span[contains(text(),'Are there any systems specified that contribute to the unregulated energy load?')]//following::section)[1]")
+	WebElement unregulatedEnergyLoad;
+
+	@FindBy(xpath="(//span[contains(text(),'Are the Post-occupancy evaluation credits targeted in Ene 01 issue?')]//following::section)[1]")
+	WebElement postOccupancyEvaluationCredits;
+
+	//Laboratories section
+	
+	@FindBy(xpath="(//span[contains(text(),'Are laboratories present?')]//following::section)[1]")
+	WebElement laboratoriesPresent;
+	
+	@FindBy(xpath="(//span[contains(text(),'What % of total building area do laboratories represent?')]//following::section)[1]")
+	WebElement totalAreaOfLabs;
+	
+	@FindBy(xpath="(//span[contains(text(),'Are there fume cupboard(s) and/or other containment devices present?')]//following::section)[1]")
+	WebElement containmentDevices;
+	
+	@FindBy(xpath="(//button[@type='button'])[1]")
+	WebElement assessmentSecondSaveButton; 
+			
+	public Assessments() {
+		super();
+		PageFactory.initElements(driver, this);
+	}
+	
+	public void clickAssessmentsPage() throws Exception {
+		WAITFORVISIBLEELEMENT(driver, assessmentsPageButton);
+		CLICK(assessmentsPageButton, "Clicked on Assessments page");
+	    Extent.getTest().info("Assessments page clicked");	    
+	}
+	
+	public void enterAssessmentName(String assessmentName) throws Exception {
+	    ENTERTEXT(searchAssessmentsInput, assessmentName);
+	    ROBOTENTER();
+	    Extent.getTest().info("Assessment name: " + assessmentName);
+	    WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
+	    CLICK(assessmentOne, "Clicked on the first assessment from the table");
+	    Extent.getTest().info("Clicked on the first assessment from the table");
+	}
+	
+	public void assertAssessmentOverviewLabel() throws Exception {
+		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
+        // Wait for the element to be visible
+        WebElement labelElement = driver.findElement(By.xpath("//label[normalize-space()='Assessment detail - Overview']"));
+        boolean labelElementPresent = labelElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(labelElementPresent);
+        Extent.getTest().info("Successfully viewed assessments detail page");
+	}
+	
+	/*
+	 * Start saving issue questions for Initial Details
+	*/
+	
+	public void savingIssueQuestionsInput() throws Exception {
+		
+		clickAssessmentsPage();
+		WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
+	    CLICK(assessmentOne, "Clicked on the first assessment from the table");
+	    Extent.getTest().info("Clicked on the first assessment from the table");
+		assertAssessmentOverviewLabel();
+	    CLICK(initialDetailsCollapse, "Collapse initial details section");
+	    Extent.getTest().info("Collapse initial details section");
+	    CLICK(initialDetailsPage, "Clicked on the Initial Details page");
+	    Extent.getTest().info("Clicked on the Initial Details page");
+	    WAITFORELEMENTEXISTXPATH("(//h2[contains(text(),'Initial details')])[2]");
+		
+		//Scenario - populate six fields to grant credits and show the assessment can be scored
+		assessmentSelectDropdownInput("Issue 0.0", technicalManualIssueNumber, technicalManualIssueNumber);
+		assessmentSelectDropdownInput("Fully fitted - simple building", projectScopeDropdown, projectScopeDropdown);
+		assessmentSelectDropdownInput("Education", buildingType, buildingType);
+		SCROLLINTOVIEW("(//span[normalize-space()='Does this healthcare building have inpatient areas?']//following::input)[1]");
+		assessmentSelectDropdownInput("Design (interim)", assessmentStage, assessmentStage);
+		ENTERTEXT(buildingFloorAreaGIA, "100");
+		ENTERTEXT(buildingFloorAreaNIFA, "150");
+		HANDLESCROLLUP();
+		Extent.getTest().info("Show granted credits are saved");
+		captureScreenshot(driver, "Show granted credits" + GETCURRENTDATE("yyyyMMddHHmmss"));
+		Extent.getTest().info("Screenshot captured to show granted credits are saved");
+	}
+	
+	/*
+	 * Start viewing Assessment details
+	*/
+	
+	public void viewAssessmentDetails(String assessmentName) throws Exception {
+		clickAssessmentsPage();
+		enterAssessmentName(assessmentName);
+		assertAssessmentOverviewLabel();
+		captureScreenshot(driver, "View Assessment detail page of" + assessmentName + GETCURRENTDATE("yyyyMMddHHmmss"));
+	}
 }

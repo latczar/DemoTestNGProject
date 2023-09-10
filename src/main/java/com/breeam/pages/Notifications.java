@@ -18,5 +18,4 @@ public class Notifications extends CommonFunctions {
 		super();
 		PageFactory.initElements(driver, this);
 	}
-
 }
