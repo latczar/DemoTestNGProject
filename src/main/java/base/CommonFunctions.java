@@ -368,7 +368,7 @@ public class CommonFunctions {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("window.scrollBy(0,350)", "");
 	}
-
+	
 	public String GETCURRENTDATE(String format) {
 		// Create object of SimpleDateFormat class and decide the format
 		DateFormat dateFormat = new SimpleDateFormat(format);
@@ -471,7 +471,7 @@ public class CommonFunctions {
 
 	public void HANDLESCROLLUP() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("window.scrollBy(0,1000)");
+		js.executeScript("window.scrollBy(0,-10000)");
 	}
 
 	public void ACTIONSSCROLLUP() {
@@ -537,5 +537,19 @@ public class CommonFunctions {
 		Random random = new Random();
 	    
 		return random.nextInt(max - min + 1) + min;
+	}
+	
+	public void assessmentSelectDropdownInput(String input, WebElement element, WebElement elementToClick) throws Exception {
+	    WAITFORVISIBLEELEMENT(driver, element);
+	    Thread.sleep(1000);
+	    CLICK(elementToClick, elementToClick + " is clicked");
+	    CLEARTEXTBOX(elementToClick);
+	    ENTERTEXT(elementToClick, input);
+	    Extent.getTest().info("Entered text: " + input);
+	    MOUSEHOVER("//label[contains(text(), '" + input + "')]");
+	    Extent.getTest().info("Hovered over: " + input);
+	    ROBOTDOWN(); // To select desired input from the list
+	    ROBOTENTER();
+	    Extent.getTest().info("Selected input for " + elementToClick + " " + input);
 	}
 }
