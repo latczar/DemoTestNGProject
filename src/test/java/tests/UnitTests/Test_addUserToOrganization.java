@@ -53,7 +53,7 @@ public class Test_addUserToOrganization extends TestListener {
 	
 	/*
 	 * Start Test case execution
-	*//tes6t
+	*/
 
 	@Test()
 	public void Test_addUserToOrg() throws Exception {
