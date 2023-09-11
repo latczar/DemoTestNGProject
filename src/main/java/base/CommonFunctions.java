@@ -363,11 +363,6 @@ public class CommonFunctions {
 		Extent.getTest().info("Default Selected option is " + actualSelectedOption);
 		return actualSelectedOption;
 	}
-
-	public void HANDLESCROLLDOWN() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("window.scrollBy(0,350)", "");
-	}
 	
 	public String GETCURRENTDATE(String format) {
 		// Create object of SimpleDateFormat class and decide the format
@@ -472,6 +467,11 @@ public class CommonFunctions {
 	public void HANDLESCROLLUP() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,-10000)");
+	}
+	
+	public void HANDLESCROLLDOWN() {
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("window.scrollBy(0,1000)", "");
 	}
 
 	public void ACTIONSSCROLLUP() {
