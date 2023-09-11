@@ -21,7 +21,7 @@ import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_viewAssessmentDetails extends TestListener {
+public class Test_Assessment_viewDetails extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -36,7 +36,7 @@ public class Test_viewAssessmentDetails extends TestListener {
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_viewAssessmentDetails() throws IOException {
+	public Test_Assessment_viewDetails() throws IOException {
 		super();
 	}
 	

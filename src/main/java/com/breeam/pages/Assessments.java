@@ -1,6 +1,7 @@
 package com.breeam.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -122,8 +123,71 @@ public class Assessments extends CommonFunctions {
 	WebElement containmentDevices;
 	
 	@FindBy(xpath="(//button[@type='button'])[1]")
-	WebElement assessmentSecondSaveButton; 
-			
+	WebElement assessmentSecondSaveButton;
+	
+	/*
+	 * Assessments - Initial Details page web elements
+	*/
+	
+	@FindBy(xpath="(//a[@title='Register assessment'])[1]")
+	WebElement registerAssessmentMenuButton;
+	
+	@FindBy(xpath="//label[normalize-space()='Register assessment']")
+	WebElement registerAssessmentLabel;
+	
+	//BREEAM Registration section
+	
+	@FindBy(xpath="(//input[@placeholder='Please select'])[1]")
+	WebElement assessmentStageRegistration;
+	
+	@FindBy(xpath="(//input[@type='number'])[1]")
+	WebElement numberOfDwellings;
+	
+	@FindBy(xpath="(//input[@autocomplete='off'])[3]")
+	WebElement netFloorArea;
+	
+	@FindBy(xpath="(//textarea[@placeholder='Register Comment'])[1]")
+	WebElement registerComment;
+	
+	@FindBy(xpath="(//button[@type='button'])[2]")
+	WebElement registerSaveButton;
+	
+	@FindBy(xpath="(//input[@placeholder='Select Company name'])[1]")
+	WebElement companyNameRegistration;
+	
+	@FindBy(xpath="(//span[normalize-space()='Invoice'])[1]")
+	WebElement invoicePayment;
+	
+	@FindBy(xpath="(//span[normalize-space()='Credit Card'])[1]")
+	WebElement creditCardPayment;
+	
+	@FindBy(xpath="(//input[@placeholder='Enter purchase order number'])[1]")
+	WebElement purchaseOrderNumber;
+	
+	@FindBy(xpath="(//span[contains(text(),'Register assessment')])[2]")
+	WebElement registerAssessmentButton;
+	
+	@FindBy(xpath="(//label[normalize-space()='Submit assessment for assessor verification'])[1]")
+	WebElement submitAssessmentLabel;
+	
+	@FindBy(xpath="//input[@placeholder='Submit assessment for assessor verification Comments']")
+	WebElement commentsSubmitAssessment;
+	
+	@FindBy(xpath="(//span[contains(text(),'Submit assessment')])[2]")
+	WebElement submitAssessmentButton;
+	
+	@FindBy(xpath="//label[normalize-space()='Fast track']")
+	WebElement fastTrackLabel;
+	
+	@FindBy(xpath="//span[normalize-space()='No']")
+	WebElement noFastTrack;
+		
+	@FindBy(xpath="//span[normalize-space()='Yes-Fast track']")
+	WebElement yesFastTrack;
+	
+	@FindBy(xpath="//span[normalize-space()='Yes-Fast track 24']")
+	WebElement yes24FastTrack;
+	
 	public Assessments() {
 		super();
 		PageFactory.initElements(driver, this);
@@ -136,10 +200,11 @@ public class Assessments extends CommonFunctions {
 	}
 	
 	public void enterAssessmentName(String assessmentName) throws Exception {
+		WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
 	    ENTERTEXT(searchAssessmentsInput, assessmentName);
 	    ROBOTENTER();
 	    Extent.getTest().info("Assessment name: " + assessmentName);
-	    WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
+	    WAITFORELEMENTEXISTXPATH("//span[contains(text(), '" + assessmentName + "')]");
 	    CLICK(assessmentOne, "Clicked on the first assessment from the table");
 	    Extent.getTest().info("Clicked on the first assessment from the table");
 	}
@@ -156,15 +221,24 @@ public class Assessments extends CommonFunctions {
 	}
 	
 	/*
+	 * Start viewing Assessment details
+	*/
+	
+	public void viewAssessmentDetails(String assessmentName) throws Exception {
+		clickAssessmentsPage();
+		enterAssessmentName(assessmentName);
+		assertAssessmentOverviewLabel();
+		captureScreenshot(driver, "View Assessment detail page of" + assessmentName + GETCURRENTDATE("yyyyMMddHHmmss"));
+	}
+	
+	/*
 	 * Start saving issue questions for Initial Details
 	*/
 	
-	public void savingIssueQuestionsInput() throws Exception {
+	public void savingIssueQuestionsInput(String assessmentName) throws Exception {
 		
 		clickAssessmentsPage();
-		WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
-	    CLICK(assessmentOne, "Clicked on the first assessment from the table");
-	    Extent.getTest().info("Clicked on the first assessment from the table");
+		enterAssessmentName(assessmentName);
 		assertAssessmentOverviewLabel();
 	    CLICK(initialDetailsCollapse, "Collapse initial details section");
 	    Extent.getTest().info("Collapse initial details section");
@@ -186,14 +260,34 @@ public class Assessments extends CommonFunctions {
 		Extent.getTest().info("Screenshot captured to show granted credits are saved");
 	}
 	
-	/*
-	 * Start viewing Assessment details
-	*/
-	
-	public void viewAssessmentDetails(String assessmentName) throws Exception {
+	public void submitAssessmentFastTrack(String assessmentName) throws Exception {
+		
 		clickAssessmentsPage();
 		enterAssessmentName(assessmentName);
 		assertAssessmentOverviewLabel();
-		captureScreenshot(driver, "View Assessment detail page of" + assessmentName + GETCURRENTDATE("yyyyMMddHHmmss"));
+		
+		//Scenario - Fast track submitted asssessments
+		CLICK(registerAssessmentMenuButton, "Clicked on the Register Assessment menu button");
+		Extent.getTest().info("Navigate to Register Assessment page");
+		assessmentSelectDropdownInput("Post Construction Assessment", assessmentStageRegistration, assessmentStageRegistration);
+		ENTERTEXT(numberOfDwellings, "50");
+		ENTERTEXT(netFloorArea, "150");
+		HANDLESCROLLDOWN();
+		ENTERTEXT(registerComment, "automated test");
+		assessmentSelectDropdownInput("111test111", companyNameRegistration, companyNameRegistration);
+		CLICK(invoicePayment, "Selected invoice as payment method");
+		WAITFORVISIBLEELEMENT(driver, purchaseOrderNumber);
+		ENTERTEXT(purchaseOrderNumber, "auto123test");
+		CLICK(registerAssessmentButton, "Clicked on register assessment");
+		Extent.getTest().info("Assessment is now registered");
+		WAITFORELEMENTEXISTXPATH("(//label[normalize-space()='Submit assessment for assessor verification'])[1]");
+		Extent.getTest().info("In the Submit assessment page");
+		HANDLESCROLLDOWN();
+		CLICK(submitAssessmentButton, "Clicked on submit assessment button");
+		Extent.getTest().info("Submitted the assessment for assessor verification");
+		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Fast track']");
+		CLICK(yesFastTrack, "Clicked on the yes fast track option");
+		Extent.getTest().info("Submitted the assessment for assessor verification");
+		captureScreenshot(driver, "Show selected option on fast track assessment page" + GETCURRENTDATE("yyyyMMddHHmmss"));
 	}
 }

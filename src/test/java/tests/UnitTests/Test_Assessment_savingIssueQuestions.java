@@ -21,7 +21,7 @@ import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_savingIssueQuestions extends TestListener {
+public class Test_Assessment_savingIssueQuestions extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -36,7 +36,7 @@ public class Test_savingIssueQuestions extends TestListener {
 	TestListener testReport;
 	
 	//Constructor to access TestListener superclass 
-	public Test_savingIssueQuestions() throws IOException {
+	public Test_Assessment_savingIssueQuestions() throws IOException {
 		super();
 	}
 	
@@ -61,7 +61,7 @@ public class Test_savingIssueQuestions extends TestListener {
 	@Test()
 	public void Test_savingIssueQuestionsGrantCredits() throws Exception {
 		loginPage.Login();
-		assessments.savingIssueQuestionsInput();
+		assessments.savingIssueQuestionsInput("autest123");
 	}
 	
 	/*
