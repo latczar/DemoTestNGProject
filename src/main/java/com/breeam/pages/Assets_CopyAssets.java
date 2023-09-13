@@ -104,6 +104,7 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    createAssets.clickAndEnterAssetValueInput(assetValue);
 	    createAssets.clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    createAssets.clickAndEnterSiteAreaInput(siteArea);
+	    createAssets.clickAndEnterAssetOwningOrganization();
 	    createAssets.clickSave();
 	    
 		/*
@@ -115,9 +116,19 @@ public class Assets_CopyAssets extends CommonFunctions {
 	    assertCopyLabelOnPage();
 	    Thread.sleep(3000);
 	    createAssets.clickSave();
-	    createAssets.assertAssetCreationToastMessage();
+	    assertAssetCopiedToastMessage();
 	}
 	
+	public void assertAssetCopiedToastMessage() throws Exception {
+		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Asset copied successfully')]");
+        // Wait for the toast message element to be visible
+        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Asset copied successfully')]"));
+        boolean toastMessagePresent = toastMessageElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(toastMessagePresent);
+        Extent.getTest().info("Asset copied successfully toast message displayed");
+	}
 	public void copyAsset_Infrastructure() throws Exception {
 		
 	    String country = "India";

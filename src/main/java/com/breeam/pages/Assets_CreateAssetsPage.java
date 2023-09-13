@@ -526,6 +526,13 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		assertAssetCreationToastMessage();
 	}
 	
+	void clickAndEnterAssetOwningOrganization() throws Exception {
+		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
+		CLICK(organizationOwner, "Asset Owning Organization clicked");
+	    Extent.getTest().info("Asset Owning Organization: ");
+		
+	}
+
 	public void createAsset_Infrastructure() throws Exception {
 		
 	    String country = "India";
