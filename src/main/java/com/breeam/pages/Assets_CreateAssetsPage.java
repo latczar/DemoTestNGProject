@@ -69,8 +69,15 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[3]")
 	static WebElement assetTypeInput;
 	
+	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section")
+	static WebElement assetTypeInputList;
+	
 	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[4]")
 	static WebElement assetSubTypeInput;
+	
+	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section")
+	static WebElement assetSubTypeInputList;
+	
 	
 	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[5]")
 	static WebElement assetSubTypeTwoInput;
@@ -276,21 +283,23 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 		SCROLLINTOVIEW("//span[contains(text(),'Upload image')]");
 	    ENTERTEXT(assetTypeInput, assetType);
+	    CLICK(assetTypeInputList, "Asset type list item");
 	    Extent.getTest().info("Entered Asset Type: " + assetType);
-	    MOUSEHOVER("//label[contains(text(), '" + assetType + "')]");
-	    Extent.getTest().info("Hovered over: " + assetType);
-	    ROBOTENTER();
-	    Extent.getTest().info("Selected Asset Type " + assetType);
+	    //MOUSEHOVER("//label[contains(text(), '" + assetType + "')]");
+	    //Extent.getTest().info("Hovered over: " + assetType);
+	    //ROBOTENTER();
+	   //Extent.getTest().info("Selected Asset Type " + assetType);
 	}
 
 	public void clickAndEnterAssetSubTypeInput(String assetSubType) throws Exception {
 		Thread.sleep(2000);
 	    ENTERTEXT(assetSubTypeInput, assetSubType);
+	    CLICK(assetSubTypeInputList, "Asset subtype list item");
 	    Extent.getTest().info("Asset Subtype: " + assetSubType);
-	    MOUSEHOVER("//label[contains(text(), '" + assetSubType + "')]");
-	    Extent.getTest().info("Hovered over: " + assetSubType);
-	    ROBOTENTER();
-	    Extent.getTest().info("Selected SubAsset Type " + assetSubType);
+	    //MOUSEHOVER("//label[contains(text(), '" + assetSubType + "')]");
+	    //Extent.getTest().info("Hovered over: " + assetSubType);
+	    //ROBOTENTER();
+	    //Extent.getTest().info("Selected SubAsset Type " + assetSubType);
 	}
 
 	public void clickAndEnterAssetSubTypeTwoInput(String assetSubTypeTwo) throws Exception {
