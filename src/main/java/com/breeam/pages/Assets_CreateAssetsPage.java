@@ -628,6 +628,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterReflectAssets(reflectsAsset);
 	    clickAndEnterLengthOfAsset(lengthOfAsset);
 	    clickAndEnterCapacityInput(capacity);
+	    clickAndEnterAssetOwningOrganization();
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
