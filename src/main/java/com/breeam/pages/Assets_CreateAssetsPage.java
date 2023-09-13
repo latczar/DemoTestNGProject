@@ -1,5 +1,7 @@
 package com.breeam.pages;
 
+
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,6 +35,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[2]")
 	static WebElement selectCountryDropdown;
+	
+	@FindBy (xpath="//section[normalize-space()='India']")
+	static WebElement countryIndia;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
 	static WebElement addressLineOneInput;
@@ -86,8 +91,19 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[6]")
 	static WebElement parentAssetInput;
 	
-	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[7]")
+	@FindBy(xpath="(//input[@placeholder='Select asset owning organization'])[1]")
+	static WebElement AssetOwningOrganization;
+	
+	@FindBy(xpath="//label[normalize-space()='111test111']")
+	static WebElement organizationOwner;
+	
+	@FindBy(xpath="//input[@placeholder='Select neighbouring asset']")
+	//(//input[@data-testid='bre-select-input'])[7]")
 	static WebElement neighbourAssetInput;
+	
+	@FindBy(xpath="(//label)[17]")
+	//(//input[@data-testid='bre-select-input'])[7]")
+	static WebElement randomNeighbourAsset;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Year of construction')]//following::input)[1]")
 	static WebElement yearOfConstructionInput;
@@ -200,8 +216,10 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Entered text: " + country);
 	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
 	    Extent.getTest().info("Hovered over: " + country);
-	    ROBOTDOWN(); // To select India from the list
-	    ROBOTENTER();
+	    CLICK(countryIndia, "Country India clicked");
+	    
+	    // ROBOTDOWN(); // To select India from the list
+	   // ROBOTENTER();
 	    Extent.getTest().info("Selected country " + country);
 	}
 
@@ -321,6 +339,13 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Entered Neighbour Asset: " + neighbourAssetName);
 	    HOVERANDCLICK(neighbourAssetName);
 	    Extent.getTest().info("Neighbour Asset: " + neighbourAssetName);
+	}
+	
+	public void addRandomNeighbourAssetInput() throws Exception {
+	    CLICK(neighbourAssetInput, "Click neighbor asset dropdown");
+	    CLICK(randomNeighbourAsset, "Selected random neighbor asset");
+	    Extent.getTest().info("Neighbour Asset " + randomNeighbourAsset.getText() + " selected");
+	    
 	}
 
 	public void clickAndEnterYearOfConstructionInput(String constructionYear) throws Exception {
@@ -479,13 +504,14 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Main Office Building" + generateRandomInt();
 	    String description = "Headquarters of the company";
-	    String neighbourAsset = "Neighbour - Building";
+	    String neighbourAsset = "Main Office Building18912";
+	    		//"Neighbour - Building";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
 	    String grossExternalArea = "1200";
 	    String siteArea = "5000";
-	    
+	    String nameOfAssetOwningOrg ="111test111";
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
 				
@@ -516,16 +542,25 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addNeighbourAssetInput(neighbourAsset);
+	    addRandomNeighbourAssetInput();
+	    //addNeighbourAssetInput(neighbourAsset);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
+	    clickAndEnterAssetOwningOrganization();
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
+	private void clickAndEnterAssetOwningOrganization() throws Exception {
+		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
+		CLICK(organizationOwner, "Asset Owning Organization clicked");
+	    Extent.getTest().info("Asset Owning Organization: ");
+		
+	}
+
 	public void createAsset_Infrastructure() throws Exception {
 		
 	    String country = "India";
