@@ -18,7 +18,7 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	 * Create Assessments page web elements
 	*/
 	
-	@FindBy(xpath="//button[@data-testid='bre-createassesstment-creastassessment']")
+	@FindBy(xpath="(//span[normalize-space()='Create assessment'])[1]")
 	static WebElement createAssessmentButton;
 	
 	@FindBy(xpath="//label[contains(text(), 'Scheme version')]//following::input")
@@ -37,7 +37,7 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	
 	public void clickCreateAssessmentButton() throws Exception {
 		Thread.sleep(5000);
-		HANDLESCROLLDOWN();
+		//HANDLESCROLLDOWN();
 		CLICK(createAssessmentButton,"Initiated assessment creation");
 	    Extent.getTest().info("Initiated assessment creation");	    
 	}
