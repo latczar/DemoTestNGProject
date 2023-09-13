@@ -33,6 +33,7 @@ public class Test_copyAsset_Infrastructure extends TestListener {
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
+	Assets_CreateAssetsPage createAsset;
 	
 	//Constructor to access TestListener superclass 
 	public Test_copyAsset_Infrastructure() throws IOException {
@@ -51,6 +52,7 @@ public class Test_copyAsset_Infrastructure extends TestListener {
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		copyAsset = new Assets_CopyAssets();
+		createAsset = new Assets_CreateAssetsPage();
 	}
 	
 	/*
@@ -60,6 +62,7 @@ public class Test_copyAsset_Infrastructure extends TestListener {
 	@Test()
 	public void Test_copyAssetInfrastructure() throws Exception {
 		loginPage.Login();
+		createAsset.createAsset_Infrastructure();
 		copyAsset.copyAsset_Infrastructure(); // Start Asset creation - Infrastructure
 	}
 	
