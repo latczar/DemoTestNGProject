@@ -30,6 +30,7 @@ public class Test_copyAsset_Community extends TestListener {
 	ExtentReports extent;
 	LoginPage loginPage;
 	Assets_CopyAssets copyAsset;
+	Assets_CreateAssetsPage createAsset;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
@@ -51,6 +52,7 @@ public class Test_copyAsset_Community extends TestListener {
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		copyAsset = new Assets_CopyAssets();
+		createAsset = new Assets_CreateAssetsPage();
 	}
 	
 	/*
@@ -60,6 +62,7 @@ public class Test_copyAsset_Community extends TestListener {
 	@Test()
 	public void Test_copyAssetCommunity() throws Exception {
 		loginPage.Login();
+		createAsset.createAsset_Building(); // Start Asset creation - Building
 		copyAsset.copyAsset_Community(); // Start Asset creation - Community
 	}
 	
