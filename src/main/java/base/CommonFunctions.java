@@ -41,6 +41,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import com.aventstack.extentreports.Status;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 import org.apache.commons.codec.binary.Base64;
 
 public class CommonFunctions {
@@ -58,9 +61,10 @@ public class CommonFunctions {
 	// "\\src\\test\\resources\\ActualReportFiles";
 	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";
 	public static String credsFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\creds.properties";
-	public static String testEnvURL = "https://wa-breeam-platform-uat-uk-south-001.azurewebsites.net/";
+	public static String testEnvURL = " https://wa-breeam-platform-test-uk-south-001.azurewebsites.net/";
 	
 	public static void INVOKECHROMEBROWSER() throws IOException, InterruptedException {
+		//WebDriverManager.chromedriver().create();
 		ChromeOptions opt = new ChromeOptions();
 		Map<String, Object> prefs = new HashMap<String, Object>();
 		opt.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
@@ -132,6 +136,7 @@ public class CommonFunctions {
 		WAITFORVISIBLEELEMENT(driver, element);
 		// element.sendKeys(Keys.chord(Keys.CONTROL, "a", Keys.DELETE));
 		element.sendKeys(value);
+
 	}
 
 	public static void SENDKEYSTAB(WebElement element) throws Exception {

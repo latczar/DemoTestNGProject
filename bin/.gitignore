@@ -1,12 +1,6 @@
-/azure-pipelines.yml
 /test-output/
 /target/test-classes
 /target/classes
-<<<<<<< HEAD
-=======
-/src/main/java/util/Constant.java
->>>>>>> bd579de (commit rebased stash)
-/testng.xml
 */target/
 */maven-status
 */surefire-reports
@@ -15,4 +9,3 @@
 *.project
 *.metadata
 /target/
-/src/
