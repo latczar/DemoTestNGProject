@@ -86,7 +86,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Name of asset')]//following::input)[1]")
 	static WebElement nameOfAssetInput;
 	
-	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section[2]")
+	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section[1]")
 	static WebElement randomParentAsset;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Description')]//following::input)[1]")
@@ -795,15 +795,16 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addParentAssetInput(parentAsset);
-	    addNeighbourAssetInput(neighbourAsset);
+	    addRandomParentInput();
+	    addRandomNeighbourAssetInput();
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
-		clickSave();
+	    clickAndEnterAssetOwningOrganization();
+	    clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
@@ -875,8 +876,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addParentAssetInput(parentAsset);
-	    addNeighbourAssetInput(neighbourAsset);
+	    addRandomParentInput();
+	    addRandomNeighbourAssetInput();
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
@@ -885,7 +886,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterReflectAssets(reflectsAsset);
 	    clickAndEnterLengthOfAsset(lengthOfAsset);
 	    clickAndEnterCapacityInput(capacity);
-		clickSave();
+	    clickAndEnterAssetOwningOrganization();
+	    clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
@@ -956,8 +958,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addParentAssetInput(parentAsset);
-	    addNeighbourAssetInput(neighbourAsset);
+	    addRandomParentInput();
+	    addRandomNeighbourAssetInput();
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
@@ -966,7 +968,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
-		clickSave();
+	    clickAndEnterAssetOwningOrganization();
+	    clickSave();
 		assertAssetCreationToastMessage();
 	}
 }
