@@ -21,28 +21,28 @@ import reporting.TestListener;
 import util.Constant;
 
 public class Test_copyAsset_Building extends TestListener {
-	
+
 	/*
-	 * Variables declaration 
-	*/
-	
+	 * Variables declaration
+	 */
+
 	ExtentSparkReporter spark;
 	ExtentReports extent;
 	LoginPage loginPage;
 	Assets_CopyAssets copyAsset;
+	Assets_CreateAssetsPage createAsset;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
-	
-	//Constructor to access TestListener superclass 
+
+	// Constructor to access TestListener superclass
 	public Test_copyAsset_Building() throws IOException {
 		super();
 	}
-	
+
 	/*
-	 * Set up test environment
-	 * Invocation/Initialization of objects for ff classes
-	*/
+	 * Set up test environment Invocation/Initialization of objects for ff classes
+	 */
 
 	@BeforeMethod
 	public void before() throws IOException, Exception {
@@ -51,23 +51,23 @@ public class Test_copyAsset_Building extends TestListener {
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		copyAsset = new Assets_CopyAssets();
+		createAsset = new Assets_CreateAssetsPage();
 	}
-	
+
 	/*
 	 * Start Test case execution
-	*/
+	 */
 
 	@Test()
 	public void Test_copyAssetBuilding() throws Exception {
 		loginPage.Login();
+		createAsset.createAsset_Building(); // Start Asset creation - Building
 		copyAsset.copyAsset_Building(); // Start Asset creation - Building
 	}
-	
+
 	/*
-	 * Stop execution for test case 
-	 * Browser teardown
-	 * Quit driver instance 
-	*/
+	 * Stop execution for test case Browser teardown Quit driver instance
+	 */
 
 	@AfterTest
 	public void closeBrowser() {
