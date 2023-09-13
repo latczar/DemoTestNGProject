@@ -554,7 +554,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		assertAssetCreationToastMessage();
 	}
 	
-	private void clickAndEnterAssetOwningOrganization() throws Exception {
+	void clickAndEnterAssetOwningOrganization() throws Exception {
 		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
 		CLICK(organizationOwner, "Asset Owning Organization clicked");
 	    Extent.getTest().info("Asset Owning Organization: ");
