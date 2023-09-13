@@ -670,6 +670,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
+	    clickAndEnterAssetOwningOrganization();
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
