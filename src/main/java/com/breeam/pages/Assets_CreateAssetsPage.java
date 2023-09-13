@@ -10,6 +10,7 @@ import org.testng.Assert;
 
 import base.CommonFunctions;
 import reporting.Extent;
+import util.Constant;
 
 public class Assets_CreateAssetsPage extends CommonFunctions {
 	
@@ -85,6 +86,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Name of asset')]//following::input)[1]")
 	static WebElement nameOfAssetInput;
 	
+	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section[2]")
+	static WebElement randomParentAsset;
+	
 	@FindBy(xpath="(//label[contains(text(), 'Description')]//following::input)[1]")
 	static WebElement descriptionInput;
 	
@@ -98,11 +102,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	static WebElement organizationOwner;
 	
 	@FindBy(xpath="//input[@placeholder='Select neighbouring asset']")
-	//(//input[@data-testid='bre-select-input'])[7]")
+	
 	static WebElement neighbourAssetInput;
 	
 	@FindBy(xpath="(//label)[17]")
-	//(//input[@data-testid='bre-select-input'])[7]")
+	
 	static WebElement randomNeighbourAsset;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Year of construction')]//following::input)[1]")
@@ -334,6 +338,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Hovered over and clicked Parent Asset: " + parentAssetName);
 	}
 
+	public void addRandomParentInput() throws Exception {
+		CLICK(parentAssetInput, "Parent asset dropdown");
+		CLICK(randomParentAsset, "Random parent asset");
+		Extent.getTest().info("Randon parent asset is selected");
+	}
 	public void addNeighbourAssetInput(String neighbourAssetName) throws Exception {
 	    ENTERTEXT(neighbourAssetInput, neighbourAssetName);
 	    Extent.getTest().info("Entered Neighbour Asset: " + neighbourAssetName);
@@ -503,6 +512,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetSubType = "Hospital";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Main Office Building" + generateRandomInt();
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Headquarters of the company";
 	    String neighbourAsset = "Main Office Building18912";
 	    		//"Neighbour - Building";
@@ -575,6 +585,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetSubType = "Water distribution";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Infrastructure" + generateRandomInt();
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Infrastructure of the company";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
@@ -589,6 +600,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String reflectsAsset = "Linear & Non-linear";
 	    String lengthOfAsset = "523";
 	    String capacity = "3244";
+	    String parentAsset ="";
+	   
 
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -621,6 +634,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
+	    addRandomParentInput();
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
@@ -646,6 +660,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetType = "Community";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Community" + generateRandomInt();
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Community of the company";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
@@ -733,6 +748,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetType = "Education";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Building" + generateRandomInt();
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Building of the company";
 	    String yearOfConstruction = "2010";
 	    String assetLifecycle = "Pre design";

@@ -8,6 +8,7 @@ import org.testng.Assert;
 
 import base.CommonFunctions;
 import reporting.Extent;
+import util.Constant;
 
 public class Assets_CopyAssets extends CommonFunctions {
 	
@@ -129,94 +130,19 @@ public class Assets_CopyAssets extends CommonFunctions {
         Assert.assertTrue(toastMessagePresent);
         Extent.getTest().info("Asset copied successfully toast message displayed");
 	}
-	public void copyAsset_Infrastructure() throws Exception {
-		
-	    String country = "India";
-	    String addressLineOne = "123 Main Street";
-	    String addressLineTwo = "Apt 45";
-	    String townCity = "New York";
-	    String countryOrRegion = "india";
-	    String postalCode = "12345";
-	    String latitude = "40.7128";
-	    String longitude = "-74.0060";
-	    String assetType = "Water";
-	    String assetSubType = "Water distribution";
-	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Infrastructure" + generateRandomInt();
-	    String nameOfCopiedAsset = "Copied Asset - Infrastructure" + generateRandomInt();
-	    String description = "Infrastructure of the company";
-	    String parentAsset = "Parent - Infrastructure";
-	    //String neighbourAsset = "Water Corporation";
-	    String yearOfConstruction = "2005";
-	    String assetLifecycle = "Design";
-	    String assetValue = "1234";
-	    String siteArea = "5000";
-	    //String assetOwningOrg = "indiaTest";
-	    String plotArea = "6000";
-	    String netFloorArea = "1100";
-	    String assetRecord = "Asset Management Department";
-	    
-	    /*
-	     * Exclusive variables for Infrastructure
-	     *  
-	    */
-	    
-	    String reflectsAsset = "Linear & Non-linear";
-	    String lengthOfAsset = "523";
-	    String capacity = "3244";
 
-	    //Start Asset Creation
-	    createAssets.clickOnCreateAssetsButton();
-		createAssets.selectCreateAssetType("Infrastructure");
-				
-		/*
-		 * Start input for Asset address
-		*/
 	
-		createAssets.addSelectCountryInput(country);
-		createAssets.addAddressLineOneInput(addressLineOne);
-		createAssets.addAddressLineTwoInput(addressLineTwo);
-		createAssets.addTownOrCityInput(townCity);
-		createAssets.addCountryOrRegionInput(countryOrRegion);
-		createAssets.addPostalCodeInput(postalCode);
-		createAssets.addLatitudeInput(latitude);
-		createAssets.addLongitudeInput(longitude);	
-	    
-		/*
-		 * Start input for Asset type and subtypes
-		*/
-	    
-		createAssets.clickAndEnterAssetTypeInput(assetType);
-		createAssets.clickAndEnterAssetSubTypeInput(assetSubType);
-		createAssets.clickAndEnterGrossInternalAreaInput(grossInternalArea);
-	    
-		/*
-		 * Start input for Asset information - Infrastructure
-		*/
-	    
-		createAssets.clickAndEnterNameOfAssetInput(nameOfAsset);
-		createAssets.clickAndEnterDescriptionInput(description);
-		createAssets.addParentAssetInput(parentAsset);
-		createAssets.clickAndEnterYearOfConstructionInput(yearOfConstruction);
-		createAssets.clickAndEnterAssetLifecycleInput(assetLifecycle);
-		createAssets.clickAndEnterAssetValueInput(assetValue);
-		createAssets.clickAndEnterSiteAreaInput(siteArea);
-		createAssets.clickAndEnterReflectAssets(reflectsAsset);
-		createAssets.clickAndEnterLengthOfAsset(lengthOfAsset);
-		createAssets.clickAndEnterCapacityInput(capacity);
-		Thread.sleep(5000);
-		createAssets.clickSave();
-		
+	public void copyAsset_Infrastructure() throws Exception {
 		/*
 		 * Start Copy Asset Operation
 		*/
 	    
 	    clickOnCopyAsset();
-	    createAssets.clearAndenterNameOfCopiedAssetInput(nameOfCopiedAsset);
+	    createAssets.clearAndenterNameOfCopiedAssetInput(Constant.nameOfCopiedAssetV2);
 	    assertCopyLabelOnPage();
 	    Thread.sleep(3000);
 	    createAssets.clickSave();
-	    createAssets.assertAssetCreationToastMessage();
+	    assertAssetCopiedToastMessage();
 	}
 	
 	public void copyAsset_Community() throws Exception {
