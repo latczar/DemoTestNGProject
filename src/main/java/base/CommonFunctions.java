@@ -56,7 +56,6 @@ public class CommonFunctions {
 	public static String addValue;
 	public static int caption;
 
-	public static String outlookUrl = "https://outlook.office.com/mail/";
 	// static String defaultDirectory = System.getProperty("user.dir") +
 	// "\\src\\test\\resources\\ActualReportFiles";
 	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";

@@ -57,7 +57,7 @@ public class Test_impersonateUser extends TestListener {
 	@Test()
 	public void Test_impersonateAsUser() throws Exception {
 		loginPage.Login();
-		userAdmin.impersonateUser("user adminL"); // Enter username of any user you want to impersonate e.g. Lattrell Caesar
+		userAdmin.impersonateUserButtonShouldNotExist("user adminL"); // Enter username of any user you want to impersonate e.g. Lattrell Caesar
 	}
 	
 	/*
