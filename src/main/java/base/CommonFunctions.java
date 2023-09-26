@@ -60,7 +60,7 @@ public class CommonFunctions {
 	// "\\src\\test\\resources\\ActualReportFiles";
 	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";
 	public static String credsFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\creds.properties";
-	public static String testEnvURL = " https://wa-breeam-platform-test-uk-south-001.azurewebsites.net/";
+	public static String testEnvURL = "https://wa-breeam-platform-uat-uk-south-001.azurewebsites.net/";
 	
 	public static void INVOKECHROMEBROWSER() throws IOException, InterruptedException {
 		//WebDriverManager.chromedriver().create();
