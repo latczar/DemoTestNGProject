@@ -561,21 +561,16 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-<<<<<<< HEAD
 	    addRandomNeighbourAssetInput();
-=======
->>>>>>> 1b2124b (resolve errors, push i9 tcs)
 	    //addNeighbourAssetInput(neighbourAsset);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
-<<<<<<< HEAD
 	    clickAndEnterAssetOwningOrganization();
-=======
-	    clickAndEnterAssetOwningOrgInput(owningOrg);
->>>>>>> 1b2124b (resolve errors, push i9 tcs)
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
+
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
