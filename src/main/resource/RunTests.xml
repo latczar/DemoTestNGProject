@@ -5,6 +5,7 @@
 		<listener class-name="reporting.TestListener" />
 	</listeners>
 
+<?Release 0.1?>
 	<test name="Validate that user is able to add new users to an organization ">
 		<classes>
 			<class
@@ -40,6 +41,8 @@
 		</classes>
 	</test>
 	
+<?Release 0.2?>
+	
 		<test name="Validate that user can copy Assets - Building ">
 		<classes>
 			<class
@@ -60,47 +63,6 @@
 				name="Test_copyAsset_Infrastructure.java" />
 		</classes>
 	</test>
-	
-	<test name="Validate that user is able to create assessments ">
-		<classes>
-			<class
-				name="Test_createAssessment.java" />
-		</classes>
-	</test>
-	
-		<test name="Validate that user is able to create assessments ">
-		<classes>
-			<class
-				name="Test_createAssessment.java" />
-		</classes>
-	</test>
-	
-		<test name="Validate that user is able to create assessments ">
-		<classes>
-			<class
-				name="Test_createAssessment.java" />
-		</classes>
-	</test>
-	
-	<test name="Validate that user is able to create assessments ">
-		<classes>
-			<class
-				name="Test_createAssessment.java" />
-		</classes>
-	</test>
-	
-	<test name="Validate that user is able to create assessments ">
-		<classes>
-			<class
-				name="Test_createAssessment.java" />
-		</classes>
-	</test>
-	
-   <test name="Validate that user is able to create assessments">
-       <classes>
-           <class name="Test_createAssessment.java"/>
-       </classes>
-   </test>
    
    <test name="Create Asset Building">
        <classes>
@@ -156,10 +118,51 @@
        </classes>
    </test>
    
-   <test name="View Assessment Details">
+   <test name="Validate that user is able to create assessments">
        <classes>
-           <class name="Test_viewAssessmentDetails.java"/>
+           <class name="Test_createAssessment.java"/>
        </classes>
    </test>
+   
+   <test name="View Assessment Details">
+       <classes>
+           <class name="Test_Assessment_viewDetails"/>
+       </classes>
+   </test>
+   
+   <test name="Assessments - Fast Track Submission">
+       <classes>
+           <class name="Test_Assessment_submitFastTrack"/>
+       </classes>
+   </test>
+   
+   <test name="Saving issue Questions">
+       <classes>
+           <class name="Test_Assessment_savingIssueQuestions"/>
+       </classes>
+   </test> 
 
+   <test name="Answering questions to meet minimum standards">
+       <classes>
+           <class name="Test_Assessment_answeringQuestionsMinimumStandard"/>
+       </classes>
+   </test>
+   
+   <test name="Viewing exemplary credits awarded">
+       <classes>
+           <class name="Test_Assessment_assertExemplaryCreditsAwarded"/>
+       </classes>
+   </test>
+   
+   <test name="Assert Validation statement - Enabled">
+       <classes>
+           <class name="Test_Assessment_assertValidationStatementEnabled"/>
+       </classes>
+   </test>
+   
+   <test name="Assert Validation statement - Disabled">
+       <classes>
+           <class name="Test_Assessment_assertValidationStatementDisabled"/>
+       </classes>
+   </test>
 </suite>

@@ -56,7 +56,6 @@ public class CommonFunctions {
 	public static String addValue;
 	public static int caption;
 
-	public static String outlookUrl = "https://outlook.office.com/mail/";
 	// static String defaultDirectory = System.getProperty("user.dir") +
 	// "\\src\\test\\resources\\ActualReportFiles";
 	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";
@@ -556,5 +555,16 @@ public class CommonFunctions {
 	    ROBOTDOWN(); // To select desired input from the list
 	    ROBOTENTER();
 	    Extent.getTest().info("Selected input for " + elementToClick + " " + input);
+	}
+	
+	public void assertLabelOrElementDisplayed(String xpath, String labelElementToBeChecked) throws Exception {
+		WAITFORELEMENTEXISTXPATH(xpath);
+        // Wait for the element to be visible
+        WebElement labelElement = driver.findElement(By.xpath(labelElementToBeChecked));
+        boolean labelElementPresent = labelElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(labelElementPresent);
+        Extent.getTest().info("Successfully asserted: " + labelElement);
 	}
 }

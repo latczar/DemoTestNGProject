@@ -417,8 +417,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
-	    //ENTERTEXT(assetOwningOrgInput, owningOrg);
-	    //Extent.getTest().info("Entering Text for Asset Owning Organization");
+	    ENTERTEXT(assetOwningOrgInput, owningOrg);
+	    Extent.getTest().info("Entering Text for Asset Owning Organization");
 	    HOVERANDCLICK(owningOrg);
 	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
 	}
@@ -531,6 +531,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String grossExternalArea = "1200";
 	    String siteArea = "5000";
 	    String nameOfAssetOwningOrg ="111test111";
+
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
 				
@@ -569,10 +570,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
 	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
-	
+
 	private void clickAndEnterAssetOwningOrganization() throws Exception {
 		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
 		CLICK(organizationOwner, "Asset Owning Organization clicked");

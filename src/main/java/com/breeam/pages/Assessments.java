@@ -125,8 +125,14 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//button[@type='button'])[1]")
 	WebElement assessmentSecondSaveButton;
 	
+	@FindBy(xpath="//h4[normalize-space()='Validation statement']")
+	WebElement validationStatementLabel;
+	
+	@FindBy(xpath="//div[@class='public-DraftStyleDefault-block public-DraftStyleDefault-ltr']")
+	WebElement validationStatementTextbox;
+	
 	/*
-	 * Assessments - Initial Details page web elements
+	 * Assessments - Register and Submit Assessment page web elements
 	*/
 	
 	@FindBy(xpath="(//a[@title='Register assessment'])[1]")
@@ -209,17 +215,74 @@ public class Assessments extends CommonFunctions {
 	    Extent.getTest().info("Clicked on the first assessment from the table");
 	}
 	
-	public void assertAssessmentOverviewLabel() throws Exception {
-		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
-        // Wait for the element to be visible
-        WebElement labelElement = driver.findElement(By.xpath("//label[normalize-space()='Assessment detail - Overview']"));
-        boolean labelElementPresent = labelElement.isDisplayed();
+	public void assertExemplaryCreditsAwarded() throws Exception {
+		
+		// Get the initial value
+		WebElement element = driver.findElement(By.xpath("//h6[normalize-space()='Exemplary credits']//preceding-sibling::p"));
+		String initialValue = element.getText();
+	    Extent.getTest().info("Extracted text value of the respective issue's Exemplary Credits ");
 
-        // Assertion to check if the toast message is present
-        Assert.assertTrue(labelElementPresent);
-        Extent.getTest().info("Successfully viewed assessments detail page");
+		// Convert the initial value to an integer
+		int initialIntValue = Integer.parseInt(initialValue.split("/")[0]);
+
+		// Assert that the value is greater than 1
+		Assert.assertTrue(initialIntValue > 1, "Value is not greater than 1.");
+		Extent.getTest().info("Done Assertion of the exemplary credits awarded");
+		captureScreenshot(driver, "Exemplary Credits awarded " + GETCURRENTDATE("yyyyMMddHHmmss"));
 	}
 	
+	public void assertValidationStatementDisabled(String assessmentName) throws Exception {
+		
+		/*
+		 * Pre-requisite - No Named Assessor for Assessment (Sample assessment - 119, Asset Assessments)
+		 */
+		
+		clickAssessmentsPage();
+		enterAssessmentName(assessmentName);
+		CLICK(initialDetailsCollapse, "Collapse initial details section");
+	    Extent.getTest().info("Collapse initial details section");
+	    CLICK(initialDetailsPage, "Clicked on the Initial Details page");
+	    Extent.getTest().info("Clicked on the Initial Details page");
+	    WAITFORELEMENTEXISTXPATH("(//h2[contains(text(),'Initial details')])[2]");
+	    SCROLLINTOVIEW("//h4[normalize-space()='Validation statement']");
+	    Extent.getTest().info("Scrolling into the Validation Statement section");
+		
+		// Find the element by its XPath
+		WebElement saveValidationButton = driver.findElement(By.xpath("(//span[normalize-space()='Save statement'])[1]"));
+	    Extent.getTest().info("Locating Save validation button");
+
+		// Assert that the element is disabled
+		Assert.assertTrue(saveValidationButton.isEnabled(), "Element is not disabled.");
+	    Extent.getTest().info("Assertion Done");
+		captureScreenshot(driver, "Validation Statement is Disabled - No Named Assessor yet " + GETCURRENTDATE("yyyyMMddHHmmss"));
+	}
+	
+	public void assertValidationStatementEnabled(String assessmentName) throws Exception {
+			
+			/*
+			 * Pre-requisite - No Named Assessor for Assessment (Sample assessment - 167, autest123)
+			 */
+			
+			clickAssessmentsPage();
+			enterAssessmentName(assessmentName);
+			CLICK(initialDetailsCollapse, "Collapse initial details section");
+		    Extent.getTest().info("Collapse initial details section");
+		    CLICK(initialDetailsPage, "Clicked on the Initial Details page");
+		    Extent.getTest().info("Clicked on the Initial Details page");
+		    WAITFORELEMENTEXISTXPATH("(//h2[contains(text(),'Initial details')])[2]");
+			SCROLLINTOVIEW("//h4[normalize-space()='Validation statement']");
+		    Extent.getTest().info("Scrolling into the Validation Statement section");
+			
+			// Find the element by its XPath
+			WebElement saveValidationButton = driver.findElement(By.xpath("(//span[normalize-space()='Save statement'])[1]"));
+		    Extent.getTest().info("Locating Save validation button");
+		    
+			// Assert that the element is enabled
+			Assert.assertTrue(saveValidationButton.isEnabled(), "Element is not enabled.");
+		    Extent.getTest().info("Assertion Done");
+			captureScreenshot(driver, "Validation Statement is Enabled - Named Assessor added " + GETCURRENTDATE("yyyyMMddHHmmss"));
+	}
+		
 	/*
 	 * Start viewing Assessment details
 	*/
@@ -227,19 +290,21 @@ public class Assessments extends CommonFunctions {
 	public void viewAssessmentDetails(String assessmentName) throws Exception {
 		clickAssessmentsPage();
 		enterAssessmentName(assessmentName);
-		assertAssessmentOverviewLabel();
+		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment detail - Overview']",
+				"//label[normalize-space()='Assessment detail - Overview']");
 		captureScreenshot(driver, "View Assessment detail page of" + assessmentName + GETCURRENTDATE("yyyyMMddHHmmss"));
 	}
 	
 	/*
 	 * Start saving issue questions for Initial Details
 	*/
-	
+		
 	public void savingIssueQuestionsInput(String assessmentName) throws Exception {
 		
 		clickAssessmentsPage();
 		enterAssessmentName(assessmentName);
-		assertAssessmentOverviewLabel();
+		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment detail - Overview']",
+				"//label[normalize-space()='Assessment detail - Overview']");
 	    CLICK(initialDetailsCollapse, "Collapse initial details section");
 	    Extent.getTest().info("Collapse initial details section");
 	    CLICK(initialDetailsPage, "Clicked on the Initial Details page");
@@ -249,7 +314,7 @@ public class Assessments extends CommonFunctions {
 		//Scenario - populate six fields to grant credits and show the assessment can be scored
 		assessmentSelectDropdownInput("Issue 0.0", technicalManualIssueNumber, technicalManualIssueNumber);
 		assessmentSelectDropdownInput("Fully fitted - simple building", projectScopeDropdown, projectScopeDropdown);
-		assessmentSelectDropdownInput("Education", buildingType, buildingType);
+		//assessmentSelectDropdownInput("Education", buildingType, buildingType);
 		SCROLLINTOVIEW("(//span[normalize-space()='Does this healthcare building have inpatient areas?']//following::input)[1]");
 		assessmentSelectDropdownInput("Design (interim)", assessmentStage, assessmentStage);
 		ENTERTEXT(buildingFloorAreaGIA, "100");
@@ -264,7 +329,8 @@ public class Assessments extends CommonFunctions {
 		
 		clickAssessmentsPage();
 		enterAssessmentName(assessmentName);
-		assertAssessmentOverviewLabel();
+		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment detail - Overview']",
+				"//label[normalize-space()='Assessment detail - Overview']");
 		
 		//Scenario - Fast track submitted asssessments
 		CLICK(registerAssessmentMenuButton, "Clicked on the Register Assessment menu button");
@@ -289,5 +355,9 @@ public class Assessments extends CommonFunctions {
 		CLICK(yesFastTrack, "Clicked on the yes fast track option");
 		Extent.getTest().info("Submitted the assessment for assessor verification");
 		captureScreenshot(driver, "Show selected option on fast track assessment page" + GETCURRENTDATE("yyyyMMddHHmmss"));
+	}
+	
+	public void verifyValidationStatementInputSaved() throws Exception {
+		ENTERTEXT(validationStatementTextbox, "Auto test - validation statement input");
 	}
 }

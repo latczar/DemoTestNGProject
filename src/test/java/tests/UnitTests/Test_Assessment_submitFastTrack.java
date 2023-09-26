@@ -61,7 +61,7 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 	@Test()
 	public void Test_submitFastTrackOption() throws Exception {
 		loginPage.Login();
-		assessments.submitAssessmentFastTrack("autest123");
+		assessments.submitAssessmentFastTrack("testIndiaauto");
 	}
 	
 	/*

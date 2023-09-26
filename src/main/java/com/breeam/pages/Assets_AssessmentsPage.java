@@ -55,16 +55,6 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	    Extent.getTest().info("Successfully created an assessment");	    
 	}
 	
-	public void assertAssetCreationToastMessage() throws Exception {
-		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Assessment created successfully')]");
-        // Wait for the toast message element to be visible
-        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Assessment created successfully')]"));
-        boolean toastMessagePresent = toastMessageElement.isDisplayed();
-
-        // Assertion to check if the toast message is present
-        Assert.assertTrue(toastMessagePresent);
-        Extent.getTest().info("Assessment created successfully toast message displayed");
-	}
 	
 	/*
 	 * Start Assessment creation after Asset creation
@@ -77,6 +67,7 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 		selectSchemeVersionInput(schemeVersion);
 		clickCreateAnAssessmentButton();
 		captureScreenshot(driver, "Assessment Creation" + GETCURRENTDATE("yyyyMMddHHmmss"));
-		assertAssetCreationToastMessage();
+		assertLabelOrElementDisplayed("//label[contains(text(), 'Assessment created successfully')]",
+				"//label[contains(text(), 'Assessment created successfully')]");
 	}
 }

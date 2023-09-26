@@ -1,9 +1,12 @@
 package com.breeam.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import base.CommonFunctions;
@@ -133,23 +136,27 @@ public class UserAdmin extends CommonFunctions {
         Extent.getTest().info("Invitation Sent Successfully toast message displayed");
 	}
 	
-	public void assertUserImpersonationBanner() throws Exception {
-        // Locate the element whose color you want to assert
-        WebElement element = driver.findElement(By.xpath("//*[@id=\"__next\"]/div/section/header/section[2]/div/div/div[2]/nav/ul/li[4]/div/a"));
+//	public void assertImpersonateUserButton() throws Exception {
+//	    // Wait for the toast message element to be present in the DOM
+//		WebElement impUserButton = driver.findElement(By.xpath("//span[contains(text(), 'Impersonate user')]"));
+//
+//	    // Assertion to check if the button is not displayed
+//	    boolean impUserNotPresent = !impUserButton.isDisplayed();
+//	    Assert.assertTrue(impUserNotPresent);
+//	    Extent.getTest().info("Impersonate User button is not displayed in the UI");
+//	}
+	
+	public void assertImpersonateUserButtonNotVisible() throws Exception {
+		 // Find all elements that match the XPath expression
+	    List<WebElement> impUserButtons = driver.findElements(By.xpath("//span[contains(text(), 'Impersonate user')]"));
 
-        // Get the color value of the element
-        String elementColor = element.getCssValue("color");
-
-        // Define the expected color value
-        String expectedColor = "rgba(0, 80, 43, 1)"; // RGBA value for #00502b - User Impersonation banner background color
-
-        // Perform the assertion
-        if (elementColor.equals(expectedColor)) {
-            System.out.println("Color matches the expected color.");
-        } else {
-            System.out.println("Color does not match the expected color.");
-        }
+	    // Check if the list is empty, indicating that the button is not found or not visible
+	    boolean impUserNotPresent = impUserButtons.isEmpty();
+	    
+	    Assert.assertTrue(impUserNotPresent);
+	    Extent.getTest().info("Passed - Impersonate User button is not displayed in the UI");
 	}
+
 	
 	/*
 	 * Method for Adding Users To an Organization
@@ -184,7 +191,7 @@ public class UserAdmin extends CommonFunctions {
 	 * Method for Impersonating Users 
 	*/
 		
-	public void impersonateUser(String userToImpersonate) throws Exception {
+	public void impersonateUserButtonShouldNotExist(String userToImpersonate) throws Exception {
 		clickUserAdminButton();
 		WAITFORVISIBLEELEMENT(driver, searchInput);
 		CLICK(searchInput, "Search input is clicked");
@@ -196,11 +203,9 @@ public class UserAdmin extends CommonFunctions {
 		Thread.sleep(3000);
 		CLICKONELEMENTJS("//a[contains(text(),'" + userToImpersonate + "')]");
 		Extent.getTest().info("Opened user details page of " + userToImpersonate);
-		Thread.sleep(2000);
-		WAITFORVISIBLEELEMENT(driver, impersonateUserButton);
-		CLICK(impersonateUserButton, "Impersonate user button is clicked");
-		captureScreenshot(driver, "Impersonate as " + userToImpersonate);
+		WAITFORVISIBLEELEMENT(driver, addToOrganisationButton);
+		captureScreenshot(driver, "Try to impersonate as " + userToImpersonate + " " + GETCURRENTDATE("yyyyMMddHHmmss"));
 		Extent.getTest().info("Screenshot captured");
-		assertUserImpersonationBanner();
+		assertImpersonateUserButtonNotVisible();
 	}
 }
