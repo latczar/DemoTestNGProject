@@ -556,4 +556,15 @@ public class CommonFunctions {
 	    ROBOTENTER();
 	    Extent.getTest().info("Selected input for " + elementToClick + " " + input);
 	}
+	
+	public void assertLabelOrElementDisplayed(String xpath, String labelElementToBeChecked) throws Exception {
+		WAITFORELEMENTEXISTXPATH(xpath);
+        // Wait for the element to be visible
+        WebElement labelElement = driver.findElement(By.xpath(labelElementToBeChecked));
+        boolean labelElementPresent = labelElement.isDisplayed();
+
+        // Assertion to check if the toast message is present
+        Assert.assertTrue(labelElementPresent);
+        Extent.getTest().info("Successfully asserted: " + labelElement);
+	}
 }

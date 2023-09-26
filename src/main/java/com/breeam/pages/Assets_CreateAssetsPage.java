@@ -417,8 +417,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
-	    //ENTERTEXT(assetOwningOrgInput, owningOrg);
-	    //Extent.getTest().info("Entering Text for Asset Owning Organization");
+	    ENTERTEXT(assetOwningOrgInput, owningOrg);
+	    Extent.getTest().info("Entering Text for Asset Owning Organization");
 	    HOVERANDCLICK(owningOrg);
 	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
 	}
@@ -524,13 +524,13 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Headquarters of the company";
 	    String neighbourAsset = "Main Office Building18912";
-	    		//"Neighbour - Building";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
 	    String grossExternalArea = "1200";
 	    String siteArea = "5000";
 	    String nameOfAssetOwningOrg ="111test111";
+
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
 				
@@ -561,14 +561,21 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
+<<<<<<< HEAD
 	    addRandomNeighbourAssetInput();
+=======
+>>>>>>> 1b2124b (resolve errors, push i9 tcs)
 	    //addNeighbourAssetInput(neighbourAsset);
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
+<<<<<<< HEAD
 	    clickAndEnterAssetOwningOrganization();
+=======
+	    clickAndEnterAssetOwningOrgInput(owningOrg);
+>>>>>>> 1b2124b (resolve errors, push i9 tcs)
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
