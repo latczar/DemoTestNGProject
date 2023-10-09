@@ -56,7 +56,7 @@ public class Test_createOrganization extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userCreateOrgs() throws Exception {
+	public void Test_createOrganisation() throws Exception {
 		loginPage.Login();
 		createOrgs.createOrganizations(); // Start create organization
 	}

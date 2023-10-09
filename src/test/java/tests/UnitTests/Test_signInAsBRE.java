@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.breeam.pages.LoginPage;
-import com.breeam.pages.LoginPage_SelfSignUp;
 import com.breeam.pages.UserPage;
 
 import base.CommonFunctions;
@@ -17,7 +16,7 @@ import base.UserDefinedFunctions;
 import reporting.TestListener;
 import util.Constant;
 
-public class Test_User_SignUp extends TestListener {
+public class Test_signInAsBRE extends TestListener {
 	
 	/*
 	 * Variables declaration 
@@ -26,14 +25,13 @@ public class Test_User_SignUp extends TestListener {
 	ExtentSparkReporter spark;
 	ExtentReports extent;
 	LoginPage loginPage;
-	LoginPage_SelfSignUp selfSignUp;
 	UserPage userPage;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
-	
+
 	//Constructor to access TestListener superclass 
-	public Test_User_SignUp() throws IOException {
+	public Test_signInAsBRE() throws IOException {
 		super();
 	}
 	
@@ -48,7 +46,6 @@ public class Test_User_SignUp extends TestListener {
 		CommonFunctions.INVOKECHROMEBROWSER();
 		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
 		loginPage = new LoginPage();
-		selfSignUp = new LoginPage_SelfSignUp();
 		baseTest = new UserDefinedFunctions();
 		userPage = new UserPage();
 	}
@@ -58,8 +55,10 @@ public class Test_User_SignUp extends TestListener {
 	*/
 
 	@Test()
-	public void Test_userSelfSignUp() throws Exception {
-		selfSignUp.UserSelfSignUp(); // User self sign up
+	public void Test_loginViaBRE() throws Exception {
+		
+		//Start test case steps
+		loginPage.BRELogin(); // Login via BRE Sign in		
 	}
 	
 	/*

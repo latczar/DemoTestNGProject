@@ -212,7 +212,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		
 	public void selectCreateAssetType(String assetType) throws Exception {
 	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
-	    CLICKONELEMENTJS("(//h1[contains(text(),'Create asset')]//following-sibling::section//section)[1]");
+	    CLICKONELEMENTJS("(//input[@placeholder='Select asset'])[1]");
 	    Extent.getTest().info("Clicked on Main Asset Type");
 	    WebElement createAssetType = driver.findElement(By.xpath("//following-sibling::section//label[contains(text(),'" + assetType +"')]"));
 	    CLICK(createAssetType, assetType + " - Asset type is selected");
@@ -417,6 +417,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 
 	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
+		CLEARTEXTBOX(assetOwningOrgInput);
 	    ENTERTEXT(assetOwningOrgInput, owningOrg);
 	    Extent.getTest().info("Entering Text for Asset Owning Organization");
 	    HOVERANDCLICK(owningOrg);
@@ -754,12 +755,10 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String townCity = "Mumbai";
 	    String countryOrRegion = "Mumbai";
 	    String postalCode = "12345";
-	    String latitude = "40.7128";
-	    String longitude = "-74.0060";
 	    String assetType = "Education";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Building" + generateRandomInt();
-	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - " +nameOfAsset;
 	    String description = "Building of the company";
 	    String yearOfConstruction = "2010";
 	    String assetLifecycle = "Pre design";
@@ -789,8 +788,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    addTownOrCityInput(townCity);
 	    addCountryOrRegionInput(countryOrRegion);
 	    addPostalCodeInput(postalCode);
-	    //addLatitudeInput(latitude);
-	    //addLongitudeInput(longitude);
 	    
 		/*
 		 * Start input for Asset type and subtypes
@@ -827,8 +824,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String townCity = "New York";
 	    String countryOrRegion = "New York";
 	    String postalCode = "12345";
-	    String latitude = "40.7128";
-	    String longitude = "-74.0060";
 	    String assetType = "Water";
 	    String assetSubType = "Water distribution";
 	    String grossInternalArea = "1000";
@@ -870,8 +865,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    addTownOrCityInput(townCity);
 	    addCountryOrRegionInput(countryOrRegion);
 	    addPostalCodeInput(postalCode);
-	    //addLatitudeInput(latitude);
-	    //addLongitudeInput(longitude);
 	    
 		/*
 		 * Start input for Asset type and subtypes
@@ -910,8 +903,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String townCity = "New York";
 	    String countryOrRegion = "New York";
 	    String postalCode = "12345";
-	    String latitude = "40.7128";
-	    String longitude = "-74.0060";
 	    String assetType = "Community";
 	    String grossInternalArea = "1000";
 	    String nameOfAsset = "Community" + generateRandomInt();
@@ -952,8 +943,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    addTownOrCityInput(townCity);
 	    addCountryOrRegionInput(countryOrRegion);
 	    addPostalCodeInput(postalCode);
-	    //addLatitudeInput(latitude);
-	    //addLongitudeInput(longitude);
 	    
 		/*
 		 * Start input for Asset type and subtypes
