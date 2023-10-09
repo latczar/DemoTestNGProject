@@ -9,7 +9,7 @@
 	<test name="Validate that user is able to add new users to an organization ">
 		<classes>
 			<class
-				name="tests.UnitTests.Test_addUserToOrganization0" />
+				name="tests.UnitTests.Test_addUserToOrganization" />
 		</classes>
 	</test>
 	
