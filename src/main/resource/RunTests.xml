@@ -9,35 +9,35 @@
 	<test name="Validate that user is able to add new users to an organization ">
 		<classes>
 			<class
-				name="Test_addUserToOrganization.java" />
+				name="tests.UnitTests.Test_addUserToOrganization.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate Assessment Admin is able to login ">
 		<classes>
 			<class
-				name="Test_AssessmentAdminLogin.java" />
+				name="tests.UnitTests.Test_AssessmentAdminLogin.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate Assessment Contriutor is able to login ">
 		<classes>
 			<class
-				name="Test_AssessmentContributorLogin.java" />
+				name="tests.UnitTests.Test_AssessmentContributorLogin.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate Assessment Manager is able to login ">
 		<classes>
 			<class
-				name="Test_AssessmentManagerLogin.java" />
+				name="tests.UnitTests.Test_AssessmentManagerLogin.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate Assessment Stakeholder is able to login ">
 		<classes>
 			<class
-				name="Test_AssessmentStakeholderLogin.java" />
+				name="tests.UnitTests.Test_AssessmentStakeholderLogin.java" />
 		</classes>
 	</test>
 	
@@ -46,123 +46,123 @@
 		<test name="Validate that user can copy Assets - Building ">
 		<classes>
 			<class
-				name="Test_copyAsset_Building.java" />
+				name="tests.UnitTests.Test_copyAsset_Building.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate that user can copy Assets - Community ">
 		<classes>
 			<class
-				name="Test_copyAsset_Community.java" />
+				name="tests.UnitTests.Test_copyAsset_Community.java" />
 		</classes>
 	</test>
 	
 	<test name="Validate that user can copy Assets - Infrastructure ">
 		<classes>
 			<class
-				name="Test_copyAsset_Infrastructure.java" />
+				name="tests.UnitTests.Test_copyAsset_Infrastructure.java" />
 		</classes>
 	</test>
    
    <test name="Create Asset Building">
        <classes>
-           <class name="Test_createAsset_Building.java"/>
+           <class name="tests.UnitTests.Test_createAsset_Building.java"/>
        </classes>
    </test>
    
    <test name="Create Asset Community">
        <classes>
-           <class name="Test_createAsset_Community.java"/>
+           <class name="tests.UnitTests.Test_createAsset_Community.java"/>
        </classes>
    </test>
    
    <test name="Create Asset Infrastructure">
        <classes>
-           <class name="Test_createAsset_Infrastructure.java"/>
+           <class name="tests.UnitTests.Test_createAsset_Infrastructure.java"/>
        </classes>
    </test>
    
    <test name="Create Child Organization">
        <classes>
-           <class name="Test_createChildOrganization.java"/>
+           <class name="tests.UnitTests.Test_createChildOrganization.java"/>
        </classes>
    </test>
    
    <test name="Create Organization">
        <classes>
-           <class name="Test_createOrganization.java"/>
+           <class name="tests.UnitTests.Test_createOrganization.java"/>
        </classes>
    </test>
    
    <test name="Impersonate User">
        <classes>
-           <class name="Test_impersonateUser.java"/>
+           <class name="tests.UnitTests.Test_impersonateUser.java"/>
        </classes>
    </test>
    
    <test name="Set Parent and Neighbor Asset">
        <classes>
-           <class name="Test_setParentAndNeighbourAsset.java"/>
+           <class name="tests.UnitTests.Test_setParentAndNeighbourAsset.java"/>
        </classes>
    </test>
    
    <test name="Sign with BRE credentials">
        <classes>
-           <class name="Test_SignInAsBRE.java"/>
+           <class name="tests.UnitTests.Test_SignInAsBRE.java"/>
        </classes>
    </test>
    
    <test name="Test that user is able to sign up">
        <classes>
-           <class name="Test_User_SignUp.java"/>
+           <class name="tests.UnitTests.Test_User_SignUp.java"/>
        </classes>
    </test>
    
    <test name="Validate that user is able to create assessments">
        <classes>
-           <class name="Test_createAssessment.java"/>
+           <class name="tests.UnitTests.Test_createAssessment.java"/>
        </classes>
    </test>
    
    <test name="View Assessment Details">
        <classes>
-           <class name="Test_Assessment_viewDetails"/>
+           <class name="tests.UnitTests.Test_Assessment_viewDetails"/>
        </classes>
    </test>
    
    <test name="Assessments - Fast Track Submission">
        <classes>
-           <class name="Test_Assessment_submitFastTrack"/>
+           <class name="tests.UnitTests.Test_Assessment_submitFastTrack"/>
        </classes>
    </test>
    
    <test name="Saving issue Questions">
        <classes>
-           <class name="Test_Assessment_savingIssueQuestions"/>
+           <class name="tests.UnitTests.Test_Assessment_savingIssueQuestions"/>
        </classes>
    </test> 
 
    <test name="Answering questions to meet minimum standards">
        <classes>
-           <class name="Test_Assessment_answeringQuestionsMinimumStandard"/>
+           <class name="tests.UnitTests.Test_Assessment_answeringQuestionsMinimumStandard"/>
        </classes>
    </test>
    
    <test name="Viewing exemplary credits awarded">
        <classes>
-           <class name="Test_Assessment_assertExemplaryCreditsAwarded"/>
+           <class name="tests.UnitTests.Test_Assessment_assertExemplaryCreditsAwarded"/>
        </classes>
    </test>
    
    <test name="Assert Validation statement - Enabled">
        <classes>
-           <class name="Test_Assessment_assertValidationStatementEnabled"/>
+           <class name="tests.UnitTests.Test_Assessment_assertValidationStatementEnabled"/>
        </classes>
    </test>
    
    <test name="Assert Validation statement - Disabled">
        <classes>
-           <class name="Test_Assessment_assertValidationStatementDisabled"/>
+           <class name="tests.UnitTests.Test_Assessment_assertValidationStatementDisabled"/>
        </classes>
    </test>
 </suite>
