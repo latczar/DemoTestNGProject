@@ -53,19 +53,19 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	 * Organization Details web elements
 	*/
 	
-	@FindBy(xpath="(//label[contains(text(), 'Organisation name')]//following::input)[1]")
+	@FindBy(xpath="(//input[@autocomplete='off'])[9]")
 	static WebElement organizationNameInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select parent')]")
+	@FindBy(xpath="(//input[@placeholder='Select parent'])[1]")
 	static WebElement selectParentInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Phone number')]//following::input)[1]")
 	static WebElement phoneNumberInput;
 	
-	@FindBy(xpath="(//label[contains(text(), 'Email')]//following::input)[1]")
+	@FindBy(xpath="(//input[@autocomplete='off'])[12]")
 	static WebElement emailInput;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'mysite.com')]")
+	@FindBy(xpath="(//input[@type='url'])[1]")
 	static WebElement websiteInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Notes')]//following::input)[1]")
@@ -156,6 +156,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	public void addSelectParentInput(String parentOrgInput) throws Exception {
 	    CLICK(selectParentInput, "Select Parent input is clicked");
 	    ENTERTEXT(selectParentInput, parentOrgInput);
+	    HOVERANDCLICK(parentOrgInput);
 	    Extent.getTest().info("Entered Select Parent: " + parentOrgInput);
 	}
 
@@ -212,11 +213,11 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    String postalCode = "12345";
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
-	    String orgNameInput = "Your Organization";
-	    String parentOrgInput = "Parent Organization";
-	    String phoneNumber = "123-456-7890";
+	    String orgNameInput = "Your Organization" + generateRandomInt();
+	    String parentOrgInput = "111test111";
+	    String phoneNumber = "12345678910";
 	    String email = "info@example.com";
-	    String websiteName = "https://www.example.com";
+	    String websiteName = "www.example.com";
 	    String notes = "This is a test organization.";
 	    String nso = "ITG";
 	    
@@ -243,26 +244,27 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    addNotesInput(notes);
 	    addSearchNSOsInput(nso);
 		clickTermsAndConditionsCheckbox();
+		HANDLESCROLLUP();
 		clickSave();
+		assertLabelOrElementDisplayed("//label[contains(text(), 'Organisation created successfully')]", "//label[contains(text(), 'Organisation created successfully')]");
 	}
 	
 	public void addChildOrganisation() throws Exception {
 		
-	    String country = "Albania";
-	    String addressLineOne = "123 Main Test123";
-	    String addressLineTwo = "Apt test123";
-	    String townCity = "Albania test";
-	    String countryOrRegion = "AlbaniaTest";
-	    String postalCode = "123456344";
-	    String latitude = "40.124428";
-	    String longitude = "-23.32422";
-	    String orgNameInput = "Child Organization";
-	    String parentOrgInput = "Parent Organization";
-	    String phoneNumber = "123-456-7890";
+	    String country = "United States";
+	    String addressLineOne = "123 Main Street";
+	    String addressLineTwo = "Apt 45";
+	    String townCity = "New York";
+	    String countryOrRegion = "New York";
+	    String postalCode = "12345";
+	    String latitude = "40.7128";
+	    String longitude = "-74.0060";
+	    String orgNameInput = "Child Organization" + generateRandomInt();
+	    String phoneNumber = "12345678910";
 	    String email = "info@example.com";
-	    String websiteName = "https://www.example.com";
-	    String notes = "This is a child test organization.";
-	    String nso = "DGBC";
+	    String websiteName = "www.example.com";
+	    String notes = "This is a child organization.";
+	    String nso = "ITG";
 	    
 		createOrganizations();
 		CLICK(userAdminAddChildOrganisationButton, "Add Child Organisation button is clicked");
@@ -277,13 +279,14 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    addLatitudeInput(latitude);
 	    addLongitudeInput(longitude);
 	    addOrganizationNameInput(orgNameInput);
-	    addSelectParentInput(parentOrgInput);
 	    addPhoneNumberInput(phoneNumber);
 	    addEmailInput(email);
 	    addWebsiteInput(websiteName);
 	    addNotesInput(notes);
 	    addSearchNSOsInput(nso);
 		clickTermsAndConditionsCheckbox();
+		HANDLESCROLLUP();
 		clickSave();
+		assertLabelOrElementDisplayed("//label[contains(text(), 'Organisation created successfully')]", "//label[contains(text(), 'Organisation created successfully')]");
 	}
 }

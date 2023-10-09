@@ -126,9 +126,9 @@ public class UserAdmin extends CommonFunctions {
 	}
 	
 	public void assertInvitationSentToastMessage() throws Exception {
-		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Inviation sent successfully')]");
+		WAITFORELEMENTEXISTXPATH("//label[contains(text(), 'Invitation sent successfully')]");
         // Wait for the toast message element to be visible
-        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Inviation sent successfully')]"));
+        WebElement toastMessageElement = driver.findElement(By.xpath("//label[contains(text(), 'Invitation sent successfully')]"));
         boolean toastMessagePresent = toastMessageElement.isDisplayed();
 
         // Assertion to check if the toast message is present
@@ -180,7 +180,7 @@ public class UserAdmin extends CommonFunctions {
 		Thread.sleep(3000);
 		CLICK(selectRolesInput, "Select Roles Input is clicked");
 		ENTERTEXT(selectRolesInput, roleInput);
-		Extent.getTest().info("Role selected" + roleInput);
+		Extent.getTest().info("Role selected " + roleInput);
 		HOVERANDCLICK(roleInput);
 		CLICK(addUserButton, "Add User button is clicked");
 		Extent.getTest().info("Add User button clicked, invitation sent");
