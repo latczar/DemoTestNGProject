@@ -59,7 +59,7 @@ public class Test_AssessmentManagerLogin extends TestListener {
 
 	@Test()
 	public void Test_userLogin() throws Exception {
-		loginPage.Login(Constant.assessmentManager, Constant.userPassword); // User sign in as the ff role
+		loginPage.Login(Constant.UATassessmentManager, Constant.userPassword); // User sign in as the ff role
 		dashboard.testDashboardMenuButtonExistsAfterLogin();
 	}
 	

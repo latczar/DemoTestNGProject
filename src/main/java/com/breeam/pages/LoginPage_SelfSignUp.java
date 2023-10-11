@@ -64,7 +64,9 @@ public class LoginPage_SelfSignUp extends CommonFunctions{
 	CLICK(LoginPage.loginButton, "Log in button clicked");
 	WAITFORVISIBLEELEMENT(driver, LoginPage.enterEmail);
 	
+	CLICK(signUpNowButton, "Sign up button is clicked");
 	WAITFORVISIBLEELEMENT(driver, selfSignUpEmailAddressInput);
+	
 	CLICK(selfSignUpEmailAddressInput, "Self Sign Up Email Address Input is clicked");
 	Extent.getTest().info("Self Sign Up Email Address Input clicked");
 	

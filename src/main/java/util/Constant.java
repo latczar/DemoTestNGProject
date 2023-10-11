@@ -33,10 +33,10 @@ public class Constant extends CommonFunctions {
 	public static String assetAdministrator = ""; //missing role in my org
 	public static String assetManager = ""; //missing role in my org
 	public static String assetContributor = ""; //missing role in my org
-	public static String assessmentAdministrator = "tonacav798@ridteam.com";
-	public static String assessmentManager = "wofarid794@quipas.com";
-	public static String assessmentContributor = "yorepow934@paldept.com";
-	public static String assessmentStakeholder = "pitow73067@inkiny.com";
+	public static String UATassessmentAdministrator = "fegav96005@nmaller.com";
+	public static String UATassessmentManager = "vojare3434@wiemei.com";
+	public static String UATassessmentContributor = "hejobi9069@kkoup.com";
+	public static String UATassessmentStakeholder = "yicakaw414@sportrid.com";
 	public static String userPassword = "@Test123";
 	public static String nameOfCopiedAssetV2;
 	

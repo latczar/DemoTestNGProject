@@ -312,11 +312,12 @@ public class Assessments extends CommonFunctions {
 	    WAITFORELEMENTEXISTXPATH("(//h2[contains(text(),'Initial details')])[2]");
 		
 		//Scenario - populate six fields to grant credits and show the assessment can be scored
+	    CLEARTEXTBOX(technicalManualIssueNumber);
 		assessmentSelectDropdownInput("Issue 0.0", technicalManualIssueNumber, technicalManualIssueNumber);
-		assessmentSelectDropdownInput("Fully fitted - simple building", projectScopeDropdown, projectScopeDropdown);
+		//assessmentSelectDropdownInput("Fully fitted - simple building", projectScopeDropdown, projectScopeDropdown);
 		//assessmentSelectDropdownInput("Education", buildingType, buildingType);
-		SCROLLINTOVIEW("(//span[normalize-space()='Does this healthcare building have inpatient areas?']//following::input)[1]");
 		assessmentSelectDropdownInput("Design (interim)", assessmentStage, assessmentStage);
+		SCROLLINTOVIEW("(//span[normalize-space()='Does this healthcare building have inpatient areas?']//following::input)[1]");
 		ENTERTEXT(buildingFloorAreaGIA, "100");
 		ENTERTEXT(buildingFloorAreaNIFA, "150");
 		HANDLESCROLLUP();

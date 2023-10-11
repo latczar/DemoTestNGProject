@@ -144,7 +144,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Are there multiple units within this building?')]//following::label)[3]")
 	static WebElement unknownUnits;
 	
-	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[9]")
+	@FindBy(xpath="(//input[@placeholder='Select asset owning organization'])[1]")
 	static WebElement assetOwningOrgInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Gross Plot Area')]//following::input)[1]")
@@ -517,7 +517,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void createAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -582,7 +582,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 
 	public void createAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -658,7 +658,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void createAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -746,7 +746,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "Mumbai";
@@ -815,7 +815,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -894,7 +894,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "India";
+	    String country = "UK";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
