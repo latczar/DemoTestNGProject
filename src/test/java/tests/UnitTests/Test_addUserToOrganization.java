@@ -58,7 +58,7 @@ public class Test_addUserToOrganization extends TestListener {
 	@Test()
 	public void Test_addUserToOrg() throws Exception {
 		loginPage.Login();
-		userAdmin.addUserToOrg("Assessment Manager"); // Add user to organization
+		userAdmin.addUserToOrg("Assessment Manager", "test123###"); // Add user to organization
 	}
 	
 	/*

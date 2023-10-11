@@ -162,7 +162,7 @@ public class UserAdmin extends CommonFunctions {
 	 * Method for Adding Users To an Organization
 	*/
 		
-	public void addUserToOrg(String roleInput) throws Exception {
+	public void addUserToOrg(String roleInput, String organizationInput) throws Exception {
 		clickUserAdminButton();
 		WAITFORVISIBLEELEMENT(driver, inviteUserButton);
 		CLICK(inviteUserButton, "Invite User button is clicked");
@@ -174,7 +174,7 @@ public class UserAdmin extends CommonFunctions {
 		
 		ENTERTEXT(emailAddressInput, "111test111@email.com");
 		Extent.getTest().info("Email Address entered");
-		ENTERTEXT(selectOrganizationInput, "111test111");
+		ENTERTEXT(selectOrganizationInput, organizationInput);
 		Extent.getTest().info("Organization entered");
 		ROBOTENTER();
 		Thread.sleep(3000);
