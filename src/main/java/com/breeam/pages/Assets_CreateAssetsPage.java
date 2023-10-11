@@ -40,6 +40,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy (xpath="//section[normalize-space()='India']")
 	static WebElement countryIndia;
 	
+	@FindBy (xpath="//section[normalize-space()='UK']")
+	static WebElement countryUK;
+	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
 	static WebElement addressLineOneInput;
 	
@@ -227,10 +230,10 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Entered text: " + country);
 	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
 	    Extent.getTest().info("Hovered over: " + country);
-	    CLICK(countryIndia, "Country India clicked");
+	    CLICK(countryUK, "Country UK clicked");
 	    
-	    // ROBOTDOWN(); // To select India from the list
-	   // ROBOTENTER();
+	    // ROBOTDOWN(); // To select India/UK from the list
+	    // ROBOTENTER();
 	    Extent.getTest().info("Selected country " + country);
 	}
 
