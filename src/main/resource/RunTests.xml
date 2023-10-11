@@ -108,13 +108,13 @@
    
    <test name="Sign with BRE credentials">
        <classes>
-           <class name="tests.UnitTests.Test_SignInAsBRE"/>
+           <class name="tests.UnitTests.Test_signInAsBRE"/>
        </classes>
    </test>
    
    <test name="Test that user is able to sign up">
        <classes>
-           <class name="tests.UnitTests.Test_User_SignUp"/>
+           <class name="tests.UnitTests.Test_userSignUp"/>
        </classes>
    </test>
    
