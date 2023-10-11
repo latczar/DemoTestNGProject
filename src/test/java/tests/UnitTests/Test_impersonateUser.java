@@ -44,7 +44,7 @@ public class Test_impersonateUser extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		userAdmin = new UserAdmin();
@@ -57,7 +57,7 @@ public class Test_impersonateUser extends TestListener {
 	@Test()
 	public void Test_impersonateAsUser() throws Exception {
 		loginPage.Login();
-		userAdmin.impersonateUserButtonShouldNotExist("user adminL"); // Enter username of any user you want to impersonate e.g. Lattrell Caesar
+		userAdmin.impersonateUserButtonShouldNotExist("assessment contributorL"); // Enter username of any user you want to impersonate e.g. Lattrell Caesar
 	}
 	
 	/*

@@ -45,7 +45,7 @@ public class Test_createChildOrganization extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		createOrgs = new UserPage_CreateOrganizations();

@@ -48,7 +48,7 @@ public class Test_Assessment_assertValidationStatementEnabled extends TestListen
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		assessments = new Assessments();
@@ -62,7 +62,7 @@ public class Test_Assessment_assertValidationStatementEnabled extends TestListen
 	public void Test_validationStatementIsEnabled() throws Exception {
 		loginPage.Login();
 		//input Assessment Name
-		assessments.assertValidationStatementEnabled("autest123");
+		assessments.assertValidationStatementEnabled("RegressionAssetTest");
 	}
 	
 	/*

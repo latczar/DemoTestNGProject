@@ -48,7 +48,7 @@ public class Test_createAssessment extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		createAsset = new Assets_CreateAssetsPage();
@@ -62,7 +62,7 @@ public class Test_createAssessment extends TestListener {
 	@Test()
 	public void Test_createAnAssessment() throws Exception {
 		loginPage.Login();
-		createAsset.createAsset_Building(); // Start Asset creation - Building
+		createAsset.createAsset_Building("test123###"); // Start Asset creation - Building
 		assessments.createAssessmentsFromAssetDetailPage(); // Start Assessment Creation
 	}
 	

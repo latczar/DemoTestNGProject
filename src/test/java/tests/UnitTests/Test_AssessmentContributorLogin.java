@@ -47,7 +47,7 @@ public class Test_AssessmentContributorLogin extends TestListener {
 	public void before() throws IOException, Exception {
 		// class = new class();
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		dashboard = new Dashboard();
 		baseTest = new UserDefinedFunctions();

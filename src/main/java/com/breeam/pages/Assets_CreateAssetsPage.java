@@ -506,9 +506,16 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		CLICK(assets.createAssetButton, "Create Assets button is clicked");
 	}
 	
+	private void clickAndEnterAssetOwningOrganization() throws Exception {
+		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
+		CLICK(organizationOwner, "Asset Owning Organization clicked");
+	    Extent.getTest().info("Asset Owning Organization: ");
+		
+	}
+	
 	//Start test cases creation for Assets
 	
-	public void createAsset_Building() throws Exception {
+	public void createAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -524,14 +531,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String nameOfAsset = "Main Office Building" + generateRandomInt();
 	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
 	    String description = "Headquarters of the company";
-	    String neighbourAsset = "Main Office Building18912";
-	    		//"Neighbour - Building";
+	    String neighbourAsset = "Main Office Building18912"; //"Neighbour - Building";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
 	    String grossExternalArea = "1200";
-	    String siteArea = "5000";
-	    String nameOfAssetOwningOrg ="111test111";
+	    String siteArea = "5000";	    
 
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -570,20 +575,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
-	    clickAndEnterAssetOwningOrganization();
 	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
 
-	private void clickAndEnterAssetOwningOrganization() throws Exception {
-		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
-		CLICK(organizationOwner, "Asset Owning Organization clicked");
-	    Extent.getTest().info("Asset Owning Organization: ");
-		
-	}
-
-	public void createAsset_Infrastructure() throws Exception {
+	public void createAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -654,12 +651,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterReflectAssets(reflectsAsset);
 	    clickAndEnterLengthOfAsset(lengthOfAsset);
 	    clickAndEnterCapacityInput(capacity);
-	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
-	public void createAsset_Community() throws Exception {
+	public void createAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -726,7 +723,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
-	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 		clickSave();
 		assertAssetCreationToastMessage();
 	}
@@ -747,7 +744,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	 * 
 	 */
 	
-	public void setParentNeighbourAsset_Building() throws Exception {
+	public void setParentNeighbourAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -811,12 +808,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterAssetValueInput(assetValue);
 	    clickAndEnterGrossExternalAreaInput(grossExternalArea);
 	    clickAndEnterSiteAreaInput(siteArea);
-	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 	    clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
-	public void setParentNeighbourAsset_Infrastructure() throws Exception {
+	public void setParentNeighbourAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -890,12 +887,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterReflectAssets(reflectsAsset);
 	    clickAndEnterLengthOfAsset(lengthOfAsset);
 	    clickAndEnterCapacityInput(capacity);
-	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 	    clickSave();
 		assertAssetCreationToastMessage();
 	}
 	
-	public void setParentNeighbourAsset_Community() throws Exception {
+	public void setParentNeighbourAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "India";
 	    String addressLineOne = "123 Main Street";
@@ -968,7 +965,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterNumOfDomesticBuildings(noOfDomesticBuildings);
 	    clickAndEnterNumOfNonDomesticBuildings(noOfNonDomesticBuildings);
 	    clickAndEnterTotalDevelopmentCost(totalDevelopmentCost);
-	    clickAndEnterAssetOwningOrganization();
+	    clickAndEnterAssetOwningOrgInput(nameOfAssetOwningOrg);
 	    clickSave();
 		assertAssetCreationToastMessage();
 	}

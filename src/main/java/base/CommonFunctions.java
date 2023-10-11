@@ -58,7 +58,6 @@ public class CommonFunctions {
 
 	// static String defaultDirectory = System.getProperty("user.dir") +
 	// "\\src\\test\\resources\\ActualReportFiles";
-	public static String propertyFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\projectConfig.properties";
 	public static String credsFilePath = System.getProperty("user.dir") + "\\src\\test\\resources\\ObjectRepository\\creds.properties";
 	public static String testEnvURL = "https://wa-breeam-platform-uat-uk-south-001.azurewebsites.net/";
 	

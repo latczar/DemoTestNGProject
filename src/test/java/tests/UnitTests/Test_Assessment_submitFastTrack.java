@@ -48,7 +48,7 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		assessments = new Assessments();
@@ -61,7 +61,7 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 	@Test()
 	public void Test_submitFastTrackOption() throws Exception {
 		loginPage.Login();
-		assessments.submitAssessmentFastTrack("testIndiaauto");
+		assessments.submitAssessmentFastTrack("RegressionAssetTest");
 	}
 	
 	/*

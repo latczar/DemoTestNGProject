@@ -48,7 +48,7 @@ public class Test_Assessment_answeringQuestionsMinimumStandard extends TestListe
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		assessments = new Assessments();
@@ -62,7 +62,7 @@ public class Test_Assessment_answeringQuestionsMinimumStandard extends TestListe
 	public void Test_answeringQuestionsMinimumStandards() throws Exception {
 		loginPage.Login();
 		//input Assessment Name
-		assessments.savingIssueQuestionsInput("autest123");
+		assessments.savingIssueQuestionsInput("RegressionAssetTest");
 	}
 	
 	/*

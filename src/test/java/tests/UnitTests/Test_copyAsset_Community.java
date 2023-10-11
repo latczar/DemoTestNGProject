@@ -48,7 +48,7 @@ public class Test_copyAsset_Community extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		copyAsset = new Assets_CopyAssets();
@@ -62,7 +62,7 @@ public class Test_copyAsset_Community extends TestListener {
 	@Test()
 	public void Test_copyAssetCommunity() throws Exception {
 		loginPage.Login();
-		createAsset.createAsset_Building(); // Start Asset creation - Building
+		createAsset.createAsset_Building("test123###"); // Start Asset creation - Building
 		copyAsset.copyAsset_Community(); // Start Asset creation - Community
 	}
 	

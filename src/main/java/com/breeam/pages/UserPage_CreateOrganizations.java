@@ -11,6 +11,7 @@ import reporting.Extent;
 public class UserPage_CreateOrganizations extends CommonFunctions {
 	
 	UserAdmin userAdmin = new UserAdmin();
+	String nameOfAssetOwningOrg;
 	
 	@FindBy(xpath="(//span[contains(text(),'Cancel')])[1]")
 	static WebElement cancelButton;
@@ -203,7 +204,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    Extent.getTest().info("Clicked Save button");
 	}
 	
-	public void createOrganizations() throws Exception {
+	public void createOrganizations(String nameOfAssetOwningOrg) throws Exception {
 		
 	    String country = "United States";
 	    String addressLineOne = "123 Main Street";
@@ -237,7 +238,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    addLatitudeInput(latitude);
 	    addLongitudeInput(longitude);
 	    addOrganizationNameInput(orgNameInput);
-	    addSelectParentInput(parentOrgInput);
+	    addSelectParentInput(nameOfAssetOwningOrg);
 	    addPhoneNumberInput(phoneNumber);
 	    addEmailInput(email);
 	    addWebsiteInput(websiteName);
@@ -265,8 +266,9 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    String websiteName = "www.example.com";
 	    String notes = "This is a child organization.";
 	    String nso = "ITG";
+	    nameOfAssetOwningOrg = "test123###";
 	    
-		createOrganizations();
+		createOrganizations(nameOfAssetOwningOrg);
 		CLICK(userAdminAddChildOrganisationButton, "Add Child Organisation button is clicked");
 		
 	    // Add your string values for each argument here:

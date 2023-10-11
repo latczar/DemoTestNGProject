@@ -46,7 +46,7 @@ public class Test_createAsset_Infrastructure extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		createAsset = new Assets_CreateAssetsPage();
@@ -59,7 +59,7 @@ public class Test_createAsset_Infrastructure extends TestListener {
 	@Test()
 	public void Test_createAssetInfrastructure() throws Exception {
 		loginPage.Login();
-		createAsset.createAsset_Infrastructure(); // Start Asset creation - Infrastructure
+		createAsset.createAsset_Infrastructure("test123###"); // Start Asset creation - Infrastructure
 	}
 	
 	/*

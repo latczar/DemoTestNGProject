@@ -46,7 +46,7 @@ public class Test_userSignUp extends TestListener {
 	public void before() throws IOException, Exception {
 		// class = new class();
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		selfSignUp = new LoginPage_SelfSignUp();
 		baseTest = new UserDefinedFunctions();

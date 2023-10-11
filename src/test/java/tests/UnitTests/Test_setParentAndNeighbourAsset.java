@@ -46,7 +46,7 @@ public class Test_setParentAndNeighbourAsset extends TestListener {
 	@BeforeMethod
 	public void before() throws IOException, Exception {
 		CommonFunctions.INVOKECHROMEBROWSER();
-		CommonFunctions.CONFIGFILEREADER(CommonFunctions.propertyFilePath); // Read Config File reader
+		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
 		createAsset = new Assets_CreateAssetsPage();
@@ -59,19 +59,19 @@ public class Test_setParentAndNeighbourAsset extends TestListener {
 	@Test()
 	public void Test_selectParentAndNeighbourAsset_Building() throws Exception {
 		loginPage.Login();
-		createAsset.setParentNeighbourAsset_Building(); // Start test for selection of Parent and Neighbour Assets - Building
+		createAsset.setParentNeighbourAsset_Building("test123###"); // Start test for selection of Parent and Neighbour Assets - Building
 	}
 	
 	@Test()
 	public void Test_selectParentAndNeighbourAsset_Infrastructure() throws Exception {
 		loginPage.Login();
-		createAsset.setParentNeighbourAsset_Infrastructure(); // Start test for selection of Parent and Neighbour Assets - Infrastructure
+		createAsset.setParentNeighbourAsset_Infrastructure("test123###"); // Start test for selection of Parent and Neighbour Assets - Infrastructure
 	}
 	
 	@Test()
 	public void Test_selectParentAndNeighbourAsset_Community() throws Exception {
 		loginPage.Login();
-		createAsset.setParentNeighbourAsset_Community(); // Start test for selection of Parent and Neighbour Assets - Community
+		createAsset.setParentNeighbourAsset_Community("test123###"); // Start test for selection of Parent and Neighbour Assets - Community
 	}
 	
 	/*
