@@ -149,6 +149,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	*/
 	
 	public void addOrganizationNameInput(String orgNameInput) throws Exception {
+		HANDLESCROLLUP();
 	    CLICK(organizationNameInput, "Organization Name input is clicked");
 	    ENTERTEXT(organizationNameInput, orgNameInput);
 	    Extent.getTest().info("Entered Organization Name: " + orgNameInput);
