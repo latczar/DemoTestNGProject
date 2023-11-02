@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import base.CommonFunctions;
@@ -18,16 +19,16 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	 * Create Assessments page web elements
 	*/
 	
-	@FindBy(xpath="(//span[normalize-space()='Create assessment'])[1]")
+	@FindBy(xpath="(.//*[text()[contains(.,'Scheme version')]]//following::*[@type='button'])[1]")
 	static WebElement createAssessmentButton;
 	
 	@FindBy(xpath="//label[contains(text(), 'Scheme version')]//following::input")
 	static WebElement schemeVersionSelectionButton;
 	
-	@FindBy(xpath="//button[@data-testid='bre-createassesstment-cancel']")
+	@FindBy(xpath="(.//*[text()[contains(.,'Scheme version')]]//following::*[@type='button'])[2]")
 	static WebElement cancelButton;
 	
-	@FindBy(xpath="(//span[@data-testid='bre-button-txt'])[6]")
+	@FindBy(xpath="(.//*[text()[contains(.,'Headquarters of the company')]]//following::*[@type='button'])[2]")
 	static WebElement createAnAssessmentButton;
 	
 	public Assets_AssessmentsPage() {
@@ -35,10 +36,11 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 		PageFactory.initElements(driver, this);
 	}
 	
-	public void clickCreateAssessmentButton() throws Exception {
-		Thread.sleep(5000);
-		//HANDLESCROLLDOWN();
-		CLICK(createAssessmentButton,"Initiated assessment creation");
+	public void clickCreateAnAssessmentButton() throws Exception {
+		//SCROLLINTOELEMENT(createAssessmentButton);
+		WAITTOBECLICKEDBYWEBELEMENT(createAnAssessmentButton);
+		//ACTIONELEMENT(createAssessmentButton);
+		CLICK(createAnAssessmentButton,"Initiated assessment creation");
 	    Extent.getTest().info("Initiated assessment creation");	    
 	}
 	
@@ -50,8 +52,9 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	    Extent.getTest().info("Selected scheme version - " + schemeVersion);
 	}
 	
-	public void clickCreateAnAssessmentButton() throws Exception {
-		CLICK(createAnAssessmentButton, "Clicked on Create assessment button");
+	public void clickCreateAssessmentButton() throws Exception {
+		WAITTOBECLICKEDBYWEBELEMENT(createAssessmentButton);
+		CLICK(createAssessmentButton, "Clicked on Create assessment button");
 	    Extent.getTest().info("Successfully created an assessment");	    
 	}
 	
@@ -63,9 +66,9 @@ public class Assets_AssessmentsPage extends CommonFunctions {
 	public void createAssessmentsFromAssetDetailPage() throws Exception {
 		String schemeVersion = "BREEAM New Construction International V6"; //for Building main asset type
 		
-		clickCreateAssessmentButton();
-		selectSchemeVersionInput(schemeVersion);
 		clickCreateAnAssessmentButton();
+		selectSchemeVersionInput(schemeVersion);
+		clickCreateAssessmentButton();
 		captureScreenshot(driver, "Assessment Creation" + GETCURRENTDATE("yyyyMMddHHmmss"));
 		assertLabelOrElementDisplayed("//label[contains(text(), 'Assessment created successfully')]",
 				"//label[contains(text(), 'Assessment created successfully')]");

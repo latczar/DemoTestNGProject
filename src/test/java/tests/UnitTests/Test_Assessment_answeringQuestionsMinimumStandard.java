@@ -62,7 +62,8 @@ public class Test_Assessment_answeringQuestionsMinimumStandard extends TestListe
 	public void Test_answeringQuestionsMinimumStandards() throws Exception {
 		loginPage.Login();
 		//input Assessment Name
-		assessments.savingIssueQuestionsInput("RegressionAssetTest");
+		assessments.savingIssueQuestionsInput("RegressionAssetTest"); //this assessment needs to be manually created if not existing in the environment
+		 
 	}
 	
 	/*

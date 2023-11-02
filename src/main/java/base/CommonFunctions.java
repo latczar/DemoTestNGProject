@@ -249,6 +249,12 @@ public class CommonFunctions {
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(By.xpath(obj.getProperty(xpathKey)))).click().build().perform();
 	}
+	
+	public static void ACTIONELEMENT(WebElement element) {
+	    Actions act = new Actions(driver);
+	    act.moveToElement(element).click().build().perform();
+	}
+
 
 	public static void SCROLLDOWN(String xpathKey) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -343,6 +349,12 @@ public class CommonFunctions {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.xpath((xpath))));
 	}
+	
+	public static void SCROLLINTOELEMENT(WebElement element) {
+	    JavascriptExecutor executor = (JavascriptExecutor) driver;
+	    executor.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
 
 	public void SCROLLINTOVIEWSTRING(String xpath) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -354,9 +366,9 @@ public class CommonFunctions {
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(obj.getProperty(xpath))));
 	}
 
-	public static void WAITTOBECLICKEDBYWEBELEMENT(String xpath) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(xpath))));
+	public static void WAITTOBECLICKEDBYWEBELEMENT(WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
 	public String GETDEFAULTVALUEDROPDOWN(String xpath) {
@@ -472,9 +484,9 @@ public class CommonFunctions {
 		js.executeScript("window.scrollBy(0,-10000)");
 	}
 	
-	public void HANDLESCROLLDOWN() {
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("window.scrollBy(0,1000)", "");
+	public void HANDLESCROLLDOWN(int start, int end) {
+	    JavascriptExecutor executor = (JavascriptExecutor) driver;
+	    executor.executeScript("window.scrollBy(" + start + "," + end + ")", "");
 	}
 
 	public void ACTIONSSCROLLUP() {

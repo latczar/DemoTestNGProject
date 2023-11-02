@@ -152,7 +152,7 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//input[@autocomplete='off'])[3]")
 	WebElement netFloorArea;
 	
-	@FindBy(xpath="(//textarea[@placeholder='Register Comment'])[1]")
+	@FindBy(xpath="(//textarea[@placeholder='Please enter any comments or notes'])[1]")
 	WebElement registerComment;
 	
 	@FindBy(xpath="(//button[@type='button'])[2]")
@@ -316,6 +316,8 @@ public class Assessments extends CommonFunctions {
 		assessmentSelectDropdownInput("Issue 0.0", technicalManualIssueNumber, technicalManualIssueNumber);
 		//assessmentSelectDropdownInput("Fully fitted - simple building", projectScopeDropdown, projectScopeDropdown);
 		//assessmentSelectDropdownInput("Education", buildingType, buildingType);
+		HANDLESCROLLDOWN(0, 600);
+		WAITTOBECLICKEDBYWEBELEMENT(assessmentStage);
 		assessmentSelectDropdownInput("Design (interim)", assessmentStage, assessmentStage);
 		SCROLLINTOVIEW("(//span[normalize-space()='Does this healthcare building have inpatient areas?']//following::input)[1]");
 		ENTERTEXT(buildingFloorAreaGIA, "100");
@@ -339,9 +341,10 @@ public class Assessments extends CommonFunctions {
 		assessmentSelectDropdownInput("Post Construction Assessment", assessmentStageRegistration, assessmentStageRegistration);
 		ENTERTEXT(numberOfDwellings, "50");
 		ENTERTEXT(netFloorArea, "150");
-		HANDLESCROLLDOWN();
+		//HANDLESCROLLDOWN(0, 1000);
+		//SCROLLINTOELEMENT(registerComment);
 		ENTERTEXT(registerComment, "automated test");
-		assessmentSelectDropdownInput("111test111", companyNameRegistration, companyNameRegistration);
+		assessmentSelectDropdownInput("childtest123###", companyNameRegistration, companyNameRegistration);
 		CLICK(invoicePayment, "Selected invoice as payment method");
 		WAITFORVISIBLEELEMENT(driver, purchaseOrderNumber);
 		ENTERTEXT(purchaseOrderNumber, "auto123test");
@@ -349,7 +352,7 @@ public class Assessments extends CommonFunctions {
 		Extent.getTest().info("Assessment is now registered");
 		WAITFORELEMENTEXISTXPATH("(//label[normalize-space()='Submit assessment for assessor verification'])[1]");
 		Extent.getTest().info("In the Submit assessment page");
-		HANDLESCROLLDOWN();
+		HANDLESCROLLDOWN(0, 1000);
 		CLICK(submitAssessmentButton, "Clicked on submit assessment button");
 		Extent.getTest().info("Submitted the assessment for assessor verification");
 		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Fast track']");

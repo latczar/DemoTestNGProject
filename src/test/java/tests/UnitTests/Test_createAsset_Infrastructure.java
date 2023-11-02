@@ -70,6 +70,6 @@ public class Test_createAsset_Infrastructure extends TestListener {
 
 	@AfterTest
 	public void closeBrowser() {
-		CommonFunctions.driver.quit();
+		//CommonFunctions.driver.quit();
 	}
 }
