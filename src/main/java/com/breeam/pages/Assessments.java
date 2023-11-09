@@ -334,7 +334,7 @@ public class Assessments extends CommonFunctions {
 		Extent.getTest().info("Screenshot captured to show granted credits are saved");
 	}
 	
-	public void submitAssessmentFastTrack(String assessmentName) throws Exception {
+	public void submitAssessmentFastTrack(String assessmentName, String companyName) throws Exception {
 		
 		clickAssessmentsPage();
 		enterAssessmentName(assessmentName);
@@ -351,7 +351,7 @@ public class Assessments extends CommonFunctions {
 		//HANDLESCROLLDOWN(0, 1000);
 		//SCROLLINTOELEMENT(registerComment);
 		ENTERTEXT(registerComment, "automated test");
-		assessmentSelectDropdownInput("childtest123###", companyNameRegistration, companyNameRegistration);
+		assessmentSelectDropdownInput(companyName, companyNameRegistration, companyNameRegistration); //Add companyName respective to your organization
 		CLICK(invoicePayment, "Selected invoice as payment method");
 		WAITFORVISIBLEELEMENT(driver, purchaseOrderNumber);
 		ENTERTEXT(purchaseOrderNumber, "auto123test");
