@@ -60,8 +60,8 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 
 	@Test()
 	public void Test_submitFastTrackOption() throws Exception {
-		loginPage.Login(); //Assessment should be edited to add Named assessor, then login here as this named assessor
-		assessments.submitAssessmentFastTrack("RegressionAssetTest");
+		loginPage.Login("debtestqa3@gmail.com", "Test@1234"); //Assessment should be edited to add Named assessor, then login here as this named assessor
+		assessments.submitAssessmentFastTrack("Test UAT ASSET");
 	}
 	
 	/*

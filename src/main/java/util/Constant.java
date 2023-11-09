@@ -24,8 +24,8 @@ public class Constant extends CommonFunctions {
 	public static String selfSignUpVerificationCode;
 	public static final String ProjectPath = System.getProperty("user.dir");
 	
-	public static String organisationAdministrator = "fevog73281@sparkroi.com";    
-	public static String userAdministrator = "fiten53394@sparkroi.com";
+	public static String organisationAdministrator = "wofarid794@quipas.com";    
+	public static String userAdministrator = "sayiwa8839@naymedia.com";
 	public static String seniorTechnicalSupport = ""; //missing role in my org
 	public static String schemeDesigner = ""; //missing role in my org
 	public static String schemeManager = ""; //missing role in my org

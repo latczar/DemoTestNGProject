@@ -37,6 +37,12 @@ public class Assessments extends CommonFunctions {
 	
 	@FindBy(xpath="(//button[@type='button'])[1]")
 	WebElement assessmentEditButton;
+	
+	@FindBy(xpath="(//input[@placeholder='Select Named assessor'])[1]")
+	WebElement namedAssessor;
+	
+	@FindBy(xpath="(//input[@placeholder='Select BREEAM region'])[1]")
+	WebElement selectBreeamRegion;
 		
 	/*
 	 * Assessments - Initial Details page web elements
@@ -334,6 +340,7 @@ public class Assessments extends CommonFunctions {
 		enterAssessmentName(assessmentName);
 		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment detail - Overview']",
 				"//label[normalize-space()='Assessment detail - Overview']");
+		addNamedAssessorToAssessment();
 		
 		//Scenario - Fast track submitted asssessments
 		CLICK(registerAssessmentMenuButton, "Clicked on the Register Assessment menu button");
@@ -363,5 +370,15 @@ public class Assessments extends CommonFunctions {
 	
 	public void verifyValidationStatementInputSaved() throws Exception {
 		ENTERTEXT(validationStatementTextbox, "Auto test - validation statement input");
+	}
+	
+	public void addNamedAssessorToAssessment() throws Exception {
+		CLICK(assessmentEditButton, "Clicked on edit Assessment button");
+		WAITFORELEMENTEXISTXPATH("(//input[@placeholder='Select Named assessor'])[1]");
+		assessmentSelectDropdownInput("Charlotte Blackwood", namedAssessor, namedAssessor);
+		assessmentSelectDropdownInput("United Kingdom", selectBreeamRegion, selectBreeamRegion);
+		HANDLESCROLLUP();
+		CLICK(assessmentSaveButton, "Save changes in assessment details");
+		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
 	}
 }
