@@ -522,16 +522,22 @@ public class CommonFunctions {
 		robot.keyRelease(KeyEvent.VK_DOWN);
 	}
 	
-	public static void HOVERANDCLICK(WebElement elementToClick, String hoverOnElement) throws Exception {
+	public static void HOVERANDCLICKUSINGLABEL(WebElement elementToClick, String hoverOnElement) throws Exception {
 	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
 	    elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
 	    elementToClick.click();
 	}
 	
-	public void HOVERANDCLICK(String hoverOnElement) throws Exception {
+	public void HOVERANDCLICKUSINGLABEL(String hoverOnElement) throws Exception {
 	    MOUSEHOVER("//label[contains(text(), '" + hoverOnElement + "')]");
 	    WebElement elementToClick = driver.findElement(By.xpath("//label[contains(text(), '" + hoverOnElement + "')]"));
 	    elementToClick.click();
+	}
+	
+	public void HOVERANDCLICK(String hoverOnElement) throws Exception {
+		MOUSEHOVER("(//span[normalize-space()='" + hoverOnElement + "'])[1]");
+		WebElement elementToClick = driver.findElement(By.xpath("(//span[normalize-space()='" + hoverOnElement + "'])[1]"));
+		elementToClick.click();
 	}
 	
 	// Method to capture a screenshot of a webpage

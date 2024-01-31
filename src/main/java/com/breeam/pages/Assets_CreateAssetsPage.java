@@ -40,7 +40,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy (xpath="//section[normalize-space()='India']")
 	static WebElement countryIndia;
 	
-	@FindBy (xpath="//section[normalize-space()='UK']")
+	@FindBy (xpath="(//span[normalize-space()='UK'])[1]")
 	static WebElement countryUK;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
@@ -214,10 +214,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 		
 	public void selectCreateAssetType(String assetType) throws Exception {
+		WAITFORELEMENTINVISIBILITYXPATH("(//div[@class='overlay'])[1]");
 	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
 	    CLICKONELEMENTJS("(//input[@placeholder='Select asset'])[1]");
 	    Extent.getTest().info("Clicked on Main Asset Type");
-	    WebElement createAssetType = driver.findElement(By.xpath("//following-sibling::section//label[contains(text(),'" + assetType +"')]"));
+	    WebElement createAssetType = driver.findElement(By.xpath("(//span[normalize-space()='"+ assetType +"'])[1]"));
 	    CLICK(createAssetType, assetType + " - Asset type is selected");
 	    Extent.getTest().info("Asset Type is " + assetType);
 	}
@@ -228,7 +229,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    CLICK(selectCountryDropdown, "Select Country input is clicked");
 	    ENTERTEXT(selectCountryDropdown, country);
 	    Extent.getTest().info("Entered text: " + country);
-	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
+	    MOUSEHOVER("(//span[normalize-space()='" + country + "'])[1]");
 	    Extent.getTest().info("Hovered over: " + country);
 	    CLICK(countryUK, "Country UK clicked");
 	    
@@ -283,7 +284,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	*/
 	
 	public void clickAndEnterAssetTypeInput(String assetType) throws Exception {
-	
+		
 		SCROLLINTOVIEW("//span[contains(text(),'Upload image')]");
 	    ENTERTEXT(assetTypeInput, assetType);
 	    CLICK(assetTypeInputList, "Asset type list item");
@@ -346,7 +347,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void addParentAssetInput(String parentAssetName) throws Exception {
 	    ENTERTEXT(parentAssetInput, parentAssetName);
 	    Extent.getTest().info("Entered Parent Asset: " + parentAssetName);
-	    HOVERANDCLICK(parentAssetName);
+	    HOVERANDCLICKUSINGLABEL(parentAssetName);
 	    Extent.getTest().info("Hovered over and clicked Parent Asset: " + parentAssetName);
 	}
 
@@ -358,7 +359,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void addNeighbourAssetInput(String neighbourAssetName) throws Exception {
 	    ENTERTEXT(neighbourAssetInput, neighbourAssetName);
 	    Extent.getTest().info("Entered Neighbour Asset: " + neighbourAssetName);
-	    HOVERANDCLICK(neighbourAssetName);
+	    HOVERANDCLICKUSINGLABEL(neighbourAssetName);
 	    Extent.getTest().info("Neighbour Asset: " + neighbourAssetName);
 	}
 	
@@ -382,7 +383,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void clickAndEnterAssetLifecycleInput(String assetLifecycle) throws Exception {
 	    ENTERTEXT(assetLifecycleInput, assetLifecycle);
 	    Extent.getTest().info("Entered text for Asset Lifecycle: " + assetLifecycle);
-	    HOVERANDCLICK(assetLifecycle);
+	    MOUSEHOVER("(//span[normalize-space()='" + assetLifecycle + "'])[1]");
+	    Extent.getTest().info("Hovered over: " + assetLifecycle);
+	    CLICK(assetLifecycleInput, assetLifecycle + " is clicked");
 	    Extent.getTest().info("Asset Lifecycle: " + assetLifecycle);
 	}
 
@@ -421,9 +424,10 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 
 	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
 		CLEARTEXTBOX(assetOwningOrgInput);
-	    ENTERTEXT(assetOwningOrgInput, owningOrg);
 	    Extent.getTest().info("Entering Text for Asset Owning Organization");
+	    ENTERTEXT(assetOwningOrgInput, owningOrg);
 	    HOVERANDCLICK(owningOrg);
+	    Extent.getTest().info("Hovered over: " + owningOrg);
 	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
 	}
 
@@ -459,7 +463,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void clickAndEnterReflectAssets(String reflectsAsset) throws Exception {
 	    CLICK(reflectsAssetInput, "Reflect assets input is clicked");
 	    ENTERTEXT(reflectsAssetInput, reflectsAsset);
-	    HOVERANDCLICK(reflectsAsset);
+	    HOVERANDCLICKUSINGLABEL(reflectsAsset);
 	    Extent.getTest().info("Reflect Assets: " + reflectsAsset);
 	}
 
@@ -480,7 +484,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	 * Click methods for exclusive Community elements 
 	*/
 	
-	public void clickAndEnterSizeOfDevelopment(String size) throws Exception { 
+	public void clickAndEnterSizeOfDevelopment(String size) throws Exception {
+		HANDLESCROLLUP();
 	    CLICK(sizeOfDevelopmentInput, "Size of development input is clicked");
 	    ENTERTEXT(sizeOfDevelopmentInput, size);
 	    Extent.getTest().info("Size of Development: " + size);
@@ -507,13 +512,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		CLICK(assets.assetsButton, "Assets button is clicked");
 		WAITFORVISIBLEELEMENT(driver, assets.createAssetButton);
 		CLICK(assets.createAssetButton, "Create Assets button is clicked");
-	}
-	
-	private void clickAndEnterAssetOwningOrganization() throws Exception {
-		CLICK(AssetOwningOrganization, "Asset Owning Organization dropdown clicked");
-		CLICK(organizationOwner, "Asset Owning Organization clicked");
-	    Extent.getTest().info("Asset Owning Organization: ");
-		
 	}
 	
 	//Start test cases creation for Assets
