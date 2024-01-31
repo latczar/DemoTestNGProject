@@ -25,6 +25,9 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//input[@placeholder='Search'])[1]")
 	WebElement searchAssessmentsInput;
 	
+	@FindBy(xpath="(//div[@class=' css-150eb3v'])[7]")
+	WebElement searchButton;
+	
 	@FindBy(xpath="//tbody//tr//td[1]/a")
 	WebElement assessmentOne;
 	
@@ -57,7 +60,7 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//h2[contains(text(),'Initial details')])[2]")
 	WebElement headerInitialDetails;
 	
-	@FindBy(xpath="(//button[@type='button'])[1]")
+	@FindBy(xpath="(//button[@type='button'])[2]")
 	WebElement assessmentSaveButton;
 	
 	@FindBy(xpath="(//input[@placeholder='Please select'])[1]")
@@ -155,7 +158,7 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//input[@type='number'])[1]")
 	WebElement numberOfDwellings;
 	
-	@FindBy(xpath="(//input[@autocomplete='off'])[3]")
+	@FindBy(xpath="(//input[@autocomplete='off'])[2]")
 	WebElement netFloorArea;
 	
 	@FindBy(xpath="(//textarea[@placeholder='Please enter any comments or notes'])[1]")
@@ -200,6 +203,21 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="//span[normalize-space()='Yes-Fast track 24']")
 	WebElement yes24FastTrack;
 	
+	@FindBy(xpath="//label[@for='translation-100012']")
+	WebElement noTransalation;
+	
+	@FindBy(xpath="(//input[@placeholder='Purchase order number'])[1]")
+	WebElement purchaseOrderNumberInput;
+	
+	@FindBy(xpath="(//input[@placeholder='Comments or notes to the QA team'])[1]")
+	WebElement commentsInput;
+	
+	@FindBy(xpath="(//div[@class='checkbox_bre-checkbox__8_F_R'])[1]")
+	WebElement confirmCheckbox;
+	
+	@FindBy(xpath="(//button[@type='button'])[6]")
+	WebElement fastTrackSubmitAssessment;
+	
 	public Assessments() {
 		super();
 		PageFactory.initElements(driver, this);
@@ -212,14 +230,33 @@ public class Assessments extends CommonFunctions {
 	}
 	
 	public void enterAssessmentName(String assessmentName) throws Exception {
-		WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
-	    ENTERTEXT(searchAssessmentsInput, assessmentName);
-	    ROBOTENTER();
-	    Extent.getTest().info("Assessment name: " + assessmentName);
-	    WAITFORELEMENTEXISTXPATH("//span[contains(text(), '" + assessmentName + "')]");
-	    CLICK(assessmentOne, "Clicked on the first assessment from the table");
-	    Extent.getTest().info("Clicked on the first assessment from the table");
+	    final int maxAttempts = 5; // maximum number of attempts
+	    boolean isSearchSuccessful = false;
+
+	    for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+	        try {
+	            WAITFORELEMENTEXISTXPATH("//tbody//tr//td[1]/a");
+	            ENTERTEXT(searchAssessmentsInput, assessmentName);
+	            CLICK(searchButton, "Clicked on the assessment search button");
+	            Extent.getTest().info("Attempt " + attempt + ": Searching for Assessment name: " + assessmentName);
+	            
+	            WAITFORELEMENTEXISTXPATH("//span[contains(text(), '" + assessmentName + "')]");
+	            CLICK(assessmentOne, "Clicked on the first assessment from the table");
+	            Extent.getTest().info("Clicked on the first assessment from the table");
+
+	            isSearchSuccessful = true; // Search was successful, break the loop
+	            break;
+	        } catch (Exception e) {
+	            Extent.getTest().info("Attempt " + attempt + ": Search for " + assessmentName + " failed. Retrying...");
+	            // Optional: Add a wait time here if needed
+	        }
+	    }
+
+	    if (!isSearchSuccessful) {
+	        throw new Exception("Maximum attempts reached. Unable to find assessment: " + assessmentName);
+	    }
 	}
+
 	
 	public void assertExemplaryCreditsAwarded() throws Exception {
 		
@@ -341,16 +378,18 @@ public class Assessments extends CommonFunctions {
 		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment detail - Overview']",
 				"//label[normalize-space()='Assessment detail - Overview']");
 		addNamedAssessorToAssessment();
+		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
 		
 		//Scenario - Fast track submitted asssessments
 		CLICK(registerAssessmentMenuButton, "Clicked on the Register Assessment menu button");
 		Extent.getTest().info("Navigate to Register Assessment page");
+		assertLabelOrElementDisplayed("//label[normalize-space()='Charlotte Blackwood']",
+				"//label[normalize-space()='Charlotte Blackwood']");
 		ENTERTEXT(numberOfDwellings, "50");
 		ENTERTEXT(netFloorArea, "150");
-		//HANDLESCROLLDOWN(0, 1000);
-		//SCROLLINTOELEMENT(registerComment);
-		ENTERTEXT(registerComment, "automated test");
+
 		addCompanyName(companyName);
+		HANDLESCROLLUP();
 		CLICK(invoicePayment, "Selected invoice as payment method");
 		WAITFORVISIBLEELEMENT(driver, purchaseOrderNumber);
 		ENTERTEXT(purchaseOrderNumber, "auto123test");
@@ -361,10 +400,20 @@ public class Assessments extends CommonFunctions {
 		HANDLESCROLLDOWN(0, 1000);
 		CLICK(submitAssessmentButton, "Clicked on submit assessment button");
 		Extent.getTest().info("Submitted the assessment for assessor verification");
+		
+		//In the Fast Track submission page
 		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Fast track']");
 		CLICK(yesFastTrack, "Clicked on the yes fast track option");
-		Extent.getTest().info("Submitted the assessment for assessor verification");
+		Extent.getTest().info("Yes Fast track option selected");		
 		captureScreenshot(driver, "Show selected option on fast track assessment page" + GETCURRENTDATE("yyyyMMddHHmmss"));
+		CLICK(noTransalation, "No translation option selected");
+		Extent.getTest().info("No translation option selected");
+		HANDLESCROLLDOWN(0, 1000);
+		CLICK(confirmCheckbox, "Clicked on the confirm checkbox");
+		Extent.getTest().info("Confirm checkbox is selected");
+		Thread.sleep(5000);
+		CLICK(fastTrackSubmitAssessment, "Clicked on the fast track submit assessment button");
+		Extent.getTest().info("Assessment is submitted for verification");
 	}
 	
 	public void verifyValidationStatementInputSaved() throws Exception {
@@ -387,7 +436,8 @@ public class Assessments extends CommonFunctions {
 		Extent.getTest().info("Selected the associated BREAAM Region");
 		HANDLESCROLLUP();
 		CLICK(assessmentSaveButton, "Save changes in assessment details");
+		assertLabelOrElementDisplayed("//label[normalize-space()='Assessment updated successfully']",
+				"//label[normalize-space()='Assessment updated successfully']");
 		Extent.getTest().info("Assessment changes are saved");
-		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
 	}
 }

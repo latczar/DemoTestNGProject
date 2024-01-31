@@ -557,7 +557,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetType = "Healthcare";
 	    String assetSubType = "Hospital";
 	    String grossInternalArea = "1000";
-	    Constant.nameOfAsset = "Main Office Building" + generateRandomInt();
+	    Constant.nameOfAsset = generateRandomInt() + "Main Office Building" ;
 	    Constant.nameOfCopiedAssetV2 = "Copied Asset - " + Constant.nameOfAsset;
 	    String description = "Headquarters of the company";
 	    String neighbourAsset = "Main Office Building18912"; //"Neighbour - Building";
