@@ -31,6 +31,8 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 	ExtentReports extent;
 	LoginPage loginPage;
 	Assessments assessments;
+	Assets_CreateAssetsPage createAsset;
+	Assets_AssessmentsPage assessmentsPage;
 	UserDefinedFunctions baseTest;
 	WebDriver driver;
 	TestListener testReport;
@@ -51,6 +53,8 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 		CommonFunctions.CONFIGFILEREADER(CommonFunctions.credsFilePath); // Read Config File reader
 		loginPage = new LoginPage();
 		baseTest = new UserDefinedFunctions();
+		createAsset = new Assets_CreateAssetsPage();
+		assessmentsPage = new Assets_AssessmentsPage();
 		assessments = new Assessments();
 	}
 	
@@ -61,7 +65,9 @@ public class Test_Assessment_submitFastTrack extends TestListener {
 	@Test()
 	public void Test_submitFastTrackOption() throws Exception {
 		loginPage.Login("debtestqa3@gmail.com", "Test@1234"); //Assessment should be edited to add Named assessor, then login here as this named assessor
-		assessments.submitAssessmentFastTrack("2ndTest UAT ASSET", "Assessor Org"); //Need to change first argument for assessment data every after run
+		createAsset.createAsset_Building("test123###"); // Start Asset creation - Building
+		assessmentsPage.createAssessmentsFromAssetDetailPage("BREEAM UK New Construction V6.1"); // Input desired scheme version the start Assessment Creation
+		assessments.submitAssessmentFastTrack(Constant.nameOfAsset, "Assessor Org"); //Need to change first argument for assessment data every after run
 	}
 	
 	/*

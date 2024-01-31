@@ -570,10 +570,8 @@ public class CommonFunctions {
 	    CLEARTEXTBOX(elementToClick);
 	    ENTERTEXT(elementToClick, input);
 	    Extent.getTest().info("Entered text: " + input);
-	    MOUSEHOVER("//label[contains(text(), '" + input + "')]");
+	    HOVERANDCLICK("span", input);
 	    Extent.getTest().info("Hovered over: " + input);
-	    ROBOTDOWN(); // To select desired input from the list
-	    ROBOTENTER();
 	    Extent.getTest().info("Selected input for " + elementToClick + " " + input);
 	}
 	

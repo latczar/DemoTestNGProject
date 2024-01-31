@@ -57,7 +57,7 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//h2[contains(text(),'Initial details')])[2]")
 	WebElement headerInitialDetails;
 	
-	@FindBy(xpath="(//button[@type='button'])[2]")
+	@FindBy(xpath="(//button[@type='button'])[1]")
 	WebElement assessmentSaveButton;
 	
 	@FindBy(xpath="(//input[@placeholder='Please select'])[1]")
@@ -144,7 +144,7 @@ public class Assessments extends CommonFunctions {
 	@FindBy(xpath="(//a[@title='Register assessment'])[1]")
 	WebElement registerAssessmentMenuButton;
 	
-	@FindBy(xpath="//label[normalize-space()='Register assessment']")
+	@FindBy(xpath="(//span[normalize-space()='Register assessment'])[1]")
 	WebElement registerAssessmentLabel;
 	
 	//BREEAM Registration section
@@ -345,13 +345,12 @@ public class Assessments extends CommonFunctions {
 		//Scenario - Fast track submitted asssessments
 		CLICK(registerAssessmentMenuButton, "Clicked on the Register Assessment menu button");
 		Extent.getTest().info("Navigate to Register Assessment page");
-		assessmentSelectDropdownInput("Post Construction Assessment", assessmentStageRegistration, assessmentStageRegistration);
 		ENTERTEXT(numberOfDwellings, "50");
 		ENTERTEXT(netFloorArea, "150");
 		//HANDLESCROLLDOWN(0, 1000);
 		//SCROLLINTOELEMENT(registerComment);
 		ENTERTEXT(registerComment, "automated test");
-		assessmentSelectDropdownInput(companyName, companyNameRegistration, companyNameRegistration); //Add companyName respective to your organization
+		addCompanyName(companyName);
 		CLICK(invoicePayment, "Selected invoice as payment method");
 		WAITFORVISIBLEELEMENT(driver, purchaseOrderNumber);
 		ENTERTEXT(purchaseOrderNumber, "auto123test");
@@ -372,13 +371,23 @@ public class Assessments extends CommonFunctions {
 		ENTERTEXT(validationStatementTextbox, "Auto test - validation statement input");
 	}
 	
+	public void addCompanyName(String companyName) throws Exception {
+		ENTERTEXT(companyNameRegistration, companyName);
+		HOVERANDCLICK("span", companyName); //Add companyName respective to your organization
+		Extent.getTest().info("Entered company respective to the org - " + companyName);
+	}
+	
 	public void addNamedAssessorToAssessment() throws Exception {
 		CLICK(assessmentEditButton, "Clicked on edit Assessment button");
+		Extent.getTest().info("Editing assessment..");
 		WAITFORELEMENTEXISTXPATH("(//input[@placeholder='Select Named assessor'])[1]");
 		assessmentSelectDropdownInput("Charlotte Blackwood", namedAssessor, namedAssessor);
+		Extent.getTest().info("Selected the named Assessor");
 		assessmentSelectDropdownInput("United Kingdom", selectBreeamRegion, selectBreeamRegion);
+		Extent.getTest().info("Selected the associated BREAAM Region");
 		HANDLESCROLLUP();
 		CLICK(assessmentSaveButton, "Save changes in assessment details");
+		Extent.getTest().info("Assessment changes are saved");
 		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Assessment detail - Overview']");
 	}
 }

@@ -2,10 +2,15 @@ package com.breeam.pages;
 
 
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import base.CommonFunctions;
@@ -423,9 +428,31 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Unknown units selected");
 	}
 
-	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
-		CLEARTEXTBOX(assetOwningOrgInput);
+	/*public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
 	    Extent.getTest().info("Entering Text for Asset Owning Organization");
+	    HANDLESCROLLUP();
+	    ENTERTEXT(assetOwningOrgInput, owningOrg);
+	    HOVERANDCLICK("span", owningOrg);
+	    Extent.getTest().info("Hovered over: " + owningOrg);
+	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
+	}*/
+	
+	public void clickAndEnterAssetOwningOrgInput(String owningOrg) throws Exception {
+	    // Wait for the element to be visible
+		HANDLESCROLLUP();
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	    wait.until(ExpectedConditions.visibilityOf(assetOwningOrgInput));
+
+	    String currentValue = assetOwningOrgInput.getAttribute("value");
+
+	    // Skip the rest of the method if the field already has a value
+	    if (!currentValue.isEmpty()) {
+	        Extent.getTest().info("Asset Owning Organization field already has a value: " + currentValue + ". Skipping.");
+	        return;
+	    }
+
+	    Extent.getTest().info("Entering Text for Asset Owning Organization");
+	    HANDLESCROLLUP();
 	    ENTERTEXT(assetOwningOrgInput, owningOrg);
 	    HOVERANDCLICK("span", owningOrg);
 	    Extent.getTest().info("Hovered over: " + owningOrg);
