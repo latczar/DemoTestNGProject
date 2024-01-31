@@ -180,8 +180,8 @@ public class UserAdmin extends CommonFunctions {
 		Thread.sleep(3000);
 		CLICK(selectRolesInput, "Select Roles Input is clicked");
 		ENTERTEXT(selectRolesInput, roleInput);
-		Extent.getTest().info("Role selected " + roleInput);
-		HOVERANDCLICK(roleInput);
+		Extent.getTest().info("Role selected - " + roleInput);
+		HOVERANDCLICK("label", roleInput);
 		CLICK(addUserButton, "Add User button is clicked");
 		Extent.getTest().info("Add User button clicked, invitation sent");
 		assertInvitationSentToastMessage();

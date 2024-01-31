@@ -63,7 +63,7 @@ public class Test_createAssessment extends TestListener {
 	public void Test_createAnAssessment() throws Exception {
 		loginPage.Login();
 		createAsset.createAsset_Building("test123###"); // Start Asset creation - Building
-		assessments.createAssessmentsFromAssetDetailPage(); // Start Assessment Creation
+		assessments.createAssessmentsFromAssetDetailPage("BREEAM UK New Construction V6.1"); // Input desired scheme version the start Assessment Creation
 	}
 	
 	/*

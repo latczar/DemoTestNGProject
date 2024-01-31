@@ -26,7 +26,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	 * Organization Address web elements
 	*/
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Select country')]")
+	@FindBy(xpath="(//input[@placeholder='Select a country'])[1]")
 	static WebElement selectCountryInput;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
@@ -92,11 +92,11 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	*/
 	
 	public void addSelectCountryInput(String country) throws Exception {
+		WAITFORELEMENTINVISIBILITYXPATH("(//span[@data-testid='bre-spinner'])[1]");
 	    WAITFORVISIBLEELEMENT(driver, selectCountryInput);
 	    CLICK(selectCountryInput, "Select Country input is clicked");
 	    ENTERTEXT(selectCountryInput, country);
-	    MOUSEHOVER("//label[contains(text(), '" + country + "')]");
-	    ROBOTENTER();
+	    HOVERANDCLICK("span", country);
 	    Extent.getTest().info("Entered Country: " + country);
 	}
 
@@ -158,7 +158,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	public void addSelectParentInput(String parentOrgInput) throws Exception {
 	    CLICK(selectParentInput, "Select Parent input is clicked");
 	    ENTERTEXT(selectParentInput, parentOrgInput);
-	    HOVERANDCLICK(parentOrgInput);
+	    HOVERANDCLICK("span", parentOrgInput);
 	    Extent.getTest().info("Entered Select Parent: " + parentOrgInput);
 	}
 
@@ -190,7 +190,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    WAITFORVISIBLEELEMENT(driver, searchNSOsInput);
 	    CLICK(searchNSOsInput, "Search NSOs input is clicked");
 	    ENTERTEXT(searchNSOsInput, nso);
-	    HOVERANDCLICK(nso);
+	    HOVERANDCLICK("label", nso);
 	    Extent.getTest().info("Entered Search NSOs: " + nso);
 	}
 
@@ -207,7 +207,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	
 	public void createOrganizations(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "United States";
+	    String country = "United Arab Emirates";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -216,7 +216,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	    String latitude = "40.7128";
 	    String longitude = "-74.0060";
 	    String orgNameInput = "Your Organization" + generateRandomInt();
-	    String parentOrgInput = "111test111";
+	    String parentOrgInput = "test123###";
 	    String phoneNumber = "12345678910";
 	    String email = "info@example.com";
 	    String websiteName = "www.example.com";
@@ -253,7 +253,7 @@ public class UserPage_CreateOrganizations extends CommonFunctions {
 	
 	public void addChildOrganisation() throws Exception {
 		
-	    String country = "United States";
+	    String country = "United Arab Emirates";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";

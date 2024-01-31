@@ -214,6 +214,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 		
 	public void selectCreateAssetType(String assetType) throws Exception {
+		Thread.sleep(3000);
 		WAITFORELEMENTINVISIBILITYXPATH("(//div[@class='overlay'])[1]");
 	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
 	    CLICKONELEMENTJS("(//input[@placeholder='Select asset'])[1]");
@@ -354,7 +355,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void addRandomParentInput() throws Exception {
 		CLICK(parentAssetInput, "Parent asset dropdown");
 		CLICK(randomParentAsset, "Random parent asset");
-		Extent.getTest().info("Randon parent asset is selected");
+		Extent.getTest().info("Random parent asset is selected");
 	}
 	public void addNeighbourAssetInput(String neighbourAssetName) throws Exception {
 	    ENTERTEXT(neighbourAssetInput, neighbourAssetName);
@@ -426,7 +427,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		CLEARTEXTBOX(assetOwningOrgInput);
 	    Extent.getTest().info("Entering Text for Asset Owning Organization");
 	    ENTERTEXT(assetOwningOrgInput, owningOrg);
-	    HOVERANDCLICK(owningOrg);
+	    HOVERANDCLICK("span", owningOrg);
 	    Extent.getTest().info("Hovered over: " + owningOrg);
 	    Extent.getTest().info("Asset Owning Organization: " + owningOrg);
 	}
@@ -463,7 +464,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void clickAndEnterReflectAssets(String reflectsAsset) throws Exception {
 	    CLICK(reflectsAssetInput, "Reflect assets input is clicked");
 	    ENTERTEXT(reflectsAssetInput, reflectsAsset);
-	    HOVERANDCLICKUSINGLABEL(reflectsAsset);
+	    HOVERANDCLICK("span", reflectsAsset);
 	    Extent.getTest().info("Reflect Assets: " + reflectsAsset);
 	}
 
@@ -529,8 +530,8 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetType = "Healthcare";
 	    String assetSubType = "Hospital";
 	    String grossInternalArea = "1000";
-	    String nameOfAsset = "Main Office Building" + generateRandomInt();
-	    Constant.nameOfCopiedAssetV2 = "Copied Asset - "+nameOfAsset;
+	    Constant.nameOfAsset = "Main Office Building" + generateRandomInt();
+	    Constant.nameOfCopiedAssetV2 = "Copied Asset - " + Constant.nameOfAsset;
 	    String description = "Headquarters of the company";
 	    String neighbourAsset = "Main Office Building18912"; //"Neighbour - Building";
 	    String yearOfConstruction = "2005";
@@ -567,7 +568,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		 * Start input for Asset information
 		*/
 	    
-	    clickAndEnterNameOfAssetInput(nameOfAsset);
+	    clickAndEnterNameOfAssetInput(Constant.nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
 	    addRandomNeighbourAssetInput();
 	    //addNeighbourAssetInput(neighbourAsset);

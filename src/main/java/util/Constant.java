@@ -38,6 +38,7 @@ public class Constant extends CommonFunctions {
 	public static String UATassessmentContributor = "hejobi9069@kkoup.com";
 	public static String UATassessmentStakeholder = "yicakaw414@sportrid.com";
 	public static String userPassword = "@Test123";
+	public static String nameOfAsset;
 	public static String nameOfCopiedAssetV2;
 	
 	/*Roles UAT - test123###

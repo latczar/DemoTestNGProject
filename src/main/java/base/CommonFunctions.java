@@ -534,11 +534,14 @@ public class CommonFunctions {
 	    elementToClick.click();
 	}
 	
-	public void HOVERANDCLICK(String hoverOnElement) throws Exception {
-		MOUSEHOVER("(//span[normalize-space()='" + hoverOnElement + "'])[1]");
-		WebElement elementToClick = driver.findElement(By.xpath("(//span[normalize-space()='" + hoverOnElement + "'])[1]"));
-		elementToClick.click();
+	public void HOVERANDCLICK(String elementType, String elementText) throws Exception {
+	    String xpath = String.format("(//%s[normalize-space()='%s'])[1]", elementType, elementText);
+	    MOUSEHOVER(xpath);
+	    WebElement elementToClick = driver.findElement(By.xpath(xpath));
+	    elementToClick.click();
 	}
+	
+	
 	
 	// Method to capture a screenshot of a webpage
 	public static void captureScreenshot(WebDriver driver, String screenshotName) throws IOException {
