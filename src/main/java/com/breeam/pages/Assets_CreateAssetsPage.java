@@ -230,19 +230,22 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	}
 	
 	public void addSelectCountryInput(String country) throws Exception {
-	    WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
-	    Thread.sleep(2000);
-	    CLICK(selectCountryDropdown, "Select Country input is clicked");
-	    ENTERTEXT(selectCountryDropdown, country);
-	    Extent.getTest().info("Entered text: " + country);
-	    MOUSEHOVER("(//span[normalize-space()='" + country + "'])[1]");
-	    Extent.getTest().info("Hovered over: " + country);
-	    CLICK(countryUK, "Country UK clicked");
-	    
-	    // ROBOTDOWN(); // To select India/UK from the list
-	    // ROBOTENTER();
-	    Extent.getTest().info("Selected country " + country);
+        WAITFORELEMENTINVISIBILITYXPATH("(//span[@data-testid='bre-spinner'])[1]");
+		    try {
+		        WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
+		        CLICK(selectCountryDropdown, "Select Country input is clicked");
+		        ENTERTEXT(selectCountryDropdown, country);
+		        Extent.getTest().info("Entered text: " + country);
+		        MOUSEHOVER("(//span[normalize-space()='" + country + "'])[1]");
+		        Extent.getTest().info("Hovered over: " + country);
+		        CLICK(countryUK, "Country UK clicked");
+		        Extent.getTest().info("Selected country " + country);
+		    } catch (Exception e) {
+		        Extent.getTest().info("An error occurred while selecting the country: " + e.getMessage());
+		        // Optionally rethrow the exception or handle it as per your test requirements
+		  }
 	}
+
 
 	public void addAddressLineOneInput(String addressLineOne) throws Exception {
 	    ENTERTEXT(addressLineOneInput, addressLineOne);

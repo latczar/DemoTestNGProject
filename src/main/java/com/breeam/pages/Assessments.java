@@ -402,19 +402,57 @@ public class Assessments extends CommonFunctions {
 		Extent.getTest().info("Submitted the assessment for assessor verification");
 		
 		//In the Fast Track submission page
-		WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Fast track']");
-		CLICK(yesFastTrack, "Clicked on the yes fast track option");
-		Extent.getTest().info("Yes Fast track option selected");		
-		captureScreenshot(driver, "Show selected option on fast track assessment page" + GETCURRENTDATE("yyyyMMddHHmmss"));
-		CLICK(noTransalation, "No translation option selected");
-		Extent.getTest().info("No translation option selected");
-		HANDLESCROLLDOWN(0, 1000);
-		CLICK(confirmCheckbox, "Clicked on the confirm checkbox");
-		Extent.getTest().info("Confirm checkbox is selected");
-		Thread.sleep(5000);
-		CLICK(fastTrackSubmitAssessment, "Clicked on the fast track submit assessment button");
-		Extent.getTest().info("Assessment is submitted for verification");
+		processFastTrack();
 	}
+	
+	public void processFastTrack() throws Exception {
+	    final int maxAttempts = 5; // maximum number of attempts
+	    int attempt = 0;
+	    boolean isSuccess = false;
+
+	    while (attempt < maxAttempts && !isSuccess) {
+	        try {
+	            attempt++;
+	            WAITFORELEMENTEXISTXPATH("//label[normalize-space()='Fast track']");
+
+	            // Check if yesFastTrack already has a value
+	            if (yesFastTrack.isSelected()) {
+	                CLICK(yesFastTrack, "Clicked on the yes fast track option");
+	                CLICK(noTransalation, "No translation option selected");
+	                Extent.getTest().info("Yes Fast track option selected");
+	                Extent.getTest().info("No translation option selected");
+	            } else {
+	                Extent.getTest().info("Yes Fast track option already selected");
+	                Extent.getTest().info("Translation option is already selected");
+	            }
+
+	            captureScreenshot(driver, "Show selected option on fast track assessment page" + GETCURRENTDATE("yyyyMMddHHmmss"));
+	            HANDLESCROLLDOWN(0, 1000);
+
+	            // Check if confirmCheckbox is already checked
+	            if (!confirmCheckbox.isSelected()) {
+	                CLICK(confirmCheckbox, "Clicked on the confirm checkbox");
+	                Extent.getTest().info("Confirm checkbox is selected");
+	            } else {
+	                Extent.getTest().info("Confirm checkbox already selected");
+	            }
+
+	            WAITFORVISIBLEELEMENT(driver, fastTrackSubmitAssessment);
+	            CLICK(fastTrackSubmitAssessment, "Clicked on the fast track submit assessment button");
+	            Extent.getTest().info("Assessment is submitted for verification");
+	            
+	            isSuccess = true; // Process was successful, exit the loop
+	        } catch (Exception e) {
+	            Extent.getTest().info("Attempt " + attempt + ": Failed to process fast track options. Retrying...");
+	            // Optional: Add a wait time here if needed
+	        }
+	    }
+
+	    if (!isSuccess) {
+	        throw new Exception("Maximum attempts reached. Unable to process fast track options.");
+	    }
+	}
+
 	
 	public void verifyValidationStatementInputSaved() throws Exception {
 		ENTERTEXT(validationStatementTextbox, "Auto test - validation statement input");

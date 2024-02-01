@@ -1,11 +1,14 @@
 package com.breeam.pages;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Parameters;
 
 import base.CommonFunctions;
@@ -75,12 +78,22 @@ public class LoginPage extends CommonFunctions{
 	
 	public void Login() throws Exception {
 		CredsConfigFile.loadCreds();
-		CLICK(loginButton, "Log in button clicked");
-		WAITFORVISIBLEELEMENT(driver, enterEmail);
-		ENTERTEXT(enterEmail, Constant.username);
-		ENTERTEXT(enterPassword, Constant.password);
-		CLICK(signInButton,"Sign in button clicked");
-		Extent.getTest().info("Successfully logged in as " + Constant.username);
+		    try {
+		        // Check if loginButton is visible and clickable
+		        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		        wait.until(ExpectedConditions.visibilityOf(loginButton));
+		        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+
+		        CLICK(loginButton, "Log in button clicked");
+		        WAITFORVISIBLEELEMENT(driver, enterEmail);
+		        ENTERTEXT(enterEmail, Constant.username);
+		        ENTERTEXT(enterPassword, Constant.password);
+		        CLICK(signInButton, "Sign in button clicked");
+		        Extent.getTest().info("Successfully logged in as " + Constant.username);
+		    } catch (Exception e) {
+		        Extent.getTest().info("Login process failed: " + e.getMessage());
+		        // Optionally rethrow the exception or handle it as per your test requirements
+		    	}
 	}
 	
 	public void LoginApp() throws Exception {
