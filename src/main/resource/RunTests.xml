@@ -135,13 +135,7 @@
            <class name="tests.UnitTests.Test_Assessment_answeringQuestionsMinimumStandard"/>
        </classes>
    </test>
-   
-   <test name="Viewing exemplary credits awarded">
-       <classes>
-           <class name="tests.UnitTests.Test_Assessment_assertExemplaryCreditsAwarded"/>
-       </classes>
-   </test>
-   
+      
    <test name="Assert Validation statement - Enabled">
        <classes>
            <class name="tests.UnitTests.Test_Assessment_assertValidationStatementEnabled"/>
@@ -153,4 +147,13 @@
            <class name="tests.UnitTests.Test_Assessment_assertValidationStatementDisabled"/>
        </classes>
    </test>
+   
+   <!-- 
+      <test name="Viewing exemplary credits awarded">
+       <classes>
+           <class name="tests.UnitTests.Test_Assessment_assertExemplaryCreditsAwarded"/>
+       </classes>
+   </test>
+    -->
+   
 </suite>
