@@ -542,7 +542,6 @@ public class CommonFunctions {
 	}
 	
 	
-	
 	// Method to capture a screenshot of a webpage
 	public static void captureScreenshot(WebDriver driver, String screenshotName) throws IOException {
 	    // Capture screenshot as a file
@@ -585,4 +584,14 @@ public class CommonFunctions {
         Assert.assertTrue(labelElementPresent);
         Extent.getTest().info("Successfully asserted: " + labelElement);
 	}
+	
+	 public void selectParentOrNeighbourAssetDropdownValue(String value, WebElement dropdownElement, String resultXpathTemplate) throws Exception {
+	     // Find the dropdown textbox and enter the text.
+		 WAITFORVISIBLEELEMENT(driver, dropdownElement);
+		 ENTERTEXT(dropdownElement, value);
+
+		 String resultXpath = String.format(resultXpathTemplate, value);
+		 Thread.sleep(1000);
+		 CLICKONELEMENTJS(resultXpath);
+	    }
 }

@@ -45,7 +45,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy (xpath="//section[normalize-space()='India']")
 	static WebElement countryIndia;
 	
-	@FindBy (xpath="(//span[normalize-space()='UK'])[1]")
+	@FindBy (xpath="(//span[normalize-space()='United Kingdom'])[1]")
 	static WebElement countryUK;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Address line 1')]//following::input)[1]")
@@ -101,28 +101,26 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	@FindBy(xpath="(//label[contains(text(), 'Name of asset')]//following::input)[1]")
 	static WebElement nameOfAssetInput;
 	
-	@FindBy(xpath="//section[@data-testid='bre-select-selectcontainer']//section[1]")
+	@FindBy(xpath="(//section[@id='bre-select-parent_asset-0'])[1]")
 	static WebElement randomParentAsset;
+	
+	@FindBy(xpath="(//section[@class='select_bre-select__menu__item__Q_vP0'])[1]")
+	static WebElement randomNeighbourAsset;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Description')]//following::input)[1]")
 	static WebElement descriptionInput;
-	
-	@FindBy(xpath="(//input[@data-testid='bre-select-input'])[6]")
-	static WebElement parentAssetInput;
-	
+		
 	@FindBy(xpath="(//input[@placeholder='Select asset owning organization'])[1]")
 	static WebElement AssetOwningOrganization;
 	
 	@FindBy(xpath="//label[normalize-space()='111test111']")
 	static WebElement organizationOwner;
 	
-	@FindBy(xpath="//input[@placeholder='Select neighbouring asset']")
+	@FindBy(xpath="(//input[@placeholder='Select parent asset'])[1]")
+	static WebElement parentAssetInput;
 	
+	@FindBy(xpath="(//input[@placeholder='Select neighbouring asset'])[1]")
 	static WebElement neighbourAssetInput;
-	
-	@FindBy(xpath="(//label)[17]")
-	
-	static WebElement randomNeighbourAsset;
 	
 	@FindBy(xpath="(//label[contains(text(), 'Year of construction')]//following::input)[1]")
 	static WebElement yearOfConstructionInput;
@@ -232,6 +230,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	public void addSelectCountryInput(String country) throws Exception {
         WAITFORELEMENTINVISIBILITYXPATH("(//span[@data-testid='bre-spinner'])[1]");
 		    try {
+		    	
 		        WAITFORVISIBLEELEMENT(driver, selectCountryDropdown);
 		        CLICK(selectCountryDropdown, "Select Country input is clicked");
 		        ENTERTEXT(selectCountryDropdown, country);
@@ -240,6 +239,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 		        Extent.getTest().info("Hovered over: " + country);
 		        CLICK(countryUK, "Country UK clicked");
 		        Extent.getTest().info("Selected country " + country);
+		        
 		    } catch (Exception e) {
 		        Extent.getTest().info("An error occurred while selecting the country: " + e.getMessage());
 		        // Optionally rethrow the exception or handle it as per your test requirements
@@ -362,9 +362,19 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 
 	public void addRandomParentInput() throws Exception {
 		CLICK(parentAssetInput, "Parent asset dropdown");
+	    Extent.getTest().info("Clicked on the Parent asset dropdown");
 		CLICK(randomParentAsset, "Random parent asset");
-		Extent.getTest().info("Random parent asset is selected");
+		Extent.getTest().info("Random parent asset " + randomParentAsset.getText() + " selected");
 	}
+	
+	public void addRandomNeighbourAssetInput() throws Exception {
+		CLICK(neighbourAssetInput, "Click neighbor asset dropdown");
+	    Extent.getTest().info("Clicked on the Neighbour asset dropdown");
+	    CLICK(randomNeighbourAsset, "Selected random neighbor asset");
+	    Extent.getTest().info("Neighbour Asset " + randomNeighbourAsset.getText() + " selected");
+	    
+	}
+	
 	public void addNeighbourAssetInput(String neighbourAssetName) throws Exception {
 	    ENTERTEXT(neighbourAssetInput, neighbourAssetName);
 	    Extent.getTest().info("Entered Neighbour Asset: " + neighbourAssetName);
@@ -372,12 +382,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Extent.getTest().info("Neighbour Asset: " + neighbourAssetName);
 	}
 	
-	public void addRandomNeighbourAssetInput() throws Exception {
-	    CLICK(neighbourAssetInput, "Click neighbor asset dropdown");
-	    CLICK(randomNeighbourAsset, "Selected random neighbor asset");
-	    Extent.getTest().info("Neighbour Asset " + randomNeighbourAsset.getText() + " selected");
-	    
-	}
+
 
 	public void clickAndEnterYearOfConstructionInput(String constructionYear) throws Exception {
 		Thread.sleep(1000);
@@ -539,17 +544,25 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void clickOnCreateAssetsButton() throws Exception {
 		WAITFORVISIBLEELEMENT(driver, assets.assetsButton);
-		MOUSEHOVER("//a[contains(text(),'Assets')]");
-		CLICK(assets.assetsButton, "Assets button is clicked");
-		WAITFORVISIBLEELEMENT(driver, assets.createAssetButton);
-		CLICK(assets.createAssetButton, "Create Assets button is clicked");
+		CLICK(assets.assetsButton, "Menu - Assets button is clicked");
+		Extent.getTest().info("Menu - Assets button is clicked");
+		
+	    try {
+			Thread.sleep(3500);
+			CLICK(assets.createAssetButton, "Create Assets button is clicked");
+			Extent.getTest().info("Create Assets button is clicked");
+	        
+	    } catch (Exception e) {
+	        Extent.getTest().info("An error occurred while selecting the Create Asset button: " + e.getMessage());
+	        // Optionally rethrow the exception or handle it as per your test requirements
+	  }
 	}
 	
 	//Start test cases creation for Assets
 	
 	public void createAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -563,7 +576,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    Constant.nameOfAsset = generateRandomInt() + "Main Office Building" ;
 	    Constant.nameOfCopiedAssetV2 = "Copied Asset - " + Constant.nameOfAsset;
 	    String description = "Headquarters of the company";
-	    String neighbourAsset = "Main Office Building18912"; //"Neighbour - Building";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
@@ -600,8 +612,12 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(Constant.nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addRandomNeighbourAssetInput();
-	    //addNeighbourAssetInput(neighbourAsset);
+	    
+	 // For selecting a "Parent Asset"
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
+	        parentAssetInput, 
+	        "(//span[normalize-space()='%s'])[1]");
+
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
@@ -614,7 +630,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 
 	public void createAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -640,9 +656,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    String reflectsAsset = "Linear & Non-linear";
 	    String lengthOfAsset = "523";
-	    String capacity = "3244";
-	    String parentAsset ="";
-	   
+	    String capacity = "3244";	   
 
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -675,7 +689,11 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addRandomParentInput();
+
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Parent Asset", 
+	    		parentAssetInput, // Update this XPath if the textbox for the Neighbouring Asset is different
+	    	    "(//label[normalize-space()='%s'])[1]");
+	    
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
@@ -690,7 +708,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void createAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -778,7 +796,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Building(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "Mumbai";
@@ -793,15 +811,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "51233";
 	    String grossExternalArea = "1200";
-	    String siteArea = "5000";
-	    
-	    /*
-	     * Variables for Parent and Neighbour Asset
-	     *  
-	    */
-	    
-	    String parentAsset = "Parent - Building";
-	    String neighbourAsset = "Neighbour - Building";
+	    String siteArea = "5000";    
 	    
 	    //Start Asset Creation
 	    clickOnCreateAssetsButton();
@@ -832,8 +842,14 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addRandomParentInput();
-	    addRandomNeighbourAssetInput();
+	    
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Parent Asset", 
+	    		parentAssetInput, 
+		        "(//span[normalize-space()='%s'])[1]");
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
+	    		neighbourAssetInput, // Update this XPath if the textbox for the Neighbouring Asset is different
+	    	    "(//label[normalize-space()='%s'])[1]");
+	    
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
@@ -847,7 +863,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Infrastructure(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -863,13 +879,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetValue = "50000";
 	    String siteArea = "5000";
 	    
-	    /*
-	     * Variables for Parent and Neighbour Asset
-	     *  
-	    */
-	    
-	    String parentAsset = "Parent - Infrastructure";
-	    String neighbourAsset = "Neighbour - Infrastructure";
 	    
 	    /*
 	     * Exclusive variables for Infrastructure
@@ -909,9 +918,15 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addRandomParentInput();
-	    addRandomNeighbourAssetInput();
+	    
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Parent Asset", 
+	    		parentAssetInput, 
+		        "(//span[normalize-space()='%s'])[1]");
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
+	    		neighbourAssetInput, // Update this XPath if the textbox for the Neighbouring Asset is different
+	    	    "(//label[normalize-space()='%s'])[1]");
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
+	    
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
 	    clickAndEnterAssetValueInput(assetValue);
@@ -926,7 +941,7 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	
 	public void setParentNeighbourAsset_Community(String nameOfAssetOwningOrg) throws Exception {
 		
-	    String country = "UK";
+	    String country = "United Kingdom";
 	    String addressLineOne = "123 Main Street";
 	    String addressLineTwo = "Apt 45";
 	    String townCity = "New York";
@@ -939,14 +954,6 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Design";
 	    String assetValue = "51233";
-	    
-	    /*
-	     * Variables for Parent and Neighbour Asset
-	     *  
-	    */
-	    
-	    String parentAsset = "Parent - Community";
-	    String neighbourAsset = "Neighbour - Community";
 	    
 	    /*
 	     * Exclusive variables for Community
@@ -987,8 +994,14 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    
 	    clickAndEnterNameOfAssetInput(nameOfAsset);
 	    clickAndEnterDescriptionInput(description);
-	    addRandomParentInput();
-	    addRandomNeighbourAssetInput();
+	    
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Parent Asset", 
+	    		parentAssetInput, 
+		        "(//span[normalize-space()='%s'])[1]");
+	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
+	    		neighbourAssetInput, // Update this XPath if the textbox for the Neighbouring Asset is different
+	    	    "(//label[normalize-space()='%s'])[1]");
+	    
 	    captureScreenshot(driver, "ParentAndNeighbourAsset" + generateRandomInt());
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);

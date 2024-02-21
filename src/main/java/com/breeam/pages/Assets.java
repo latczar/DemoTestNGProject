@@ -23,14 +23,14 @@ public class Assets extends CommonFunctions {
 	 * Assets main page web elements
 	*/
 	
-	@FindBy(xpath="//span[contains(text(),'Create asset')]") 
+	@FindBy(xpath="(//span[contains(text(),'Create asset')])[1]") 
 	WebElement createAssetButton;
 	
 	@FindBy(xpath="//span[contains(text(),'View deleted assets')]")
 	static WebElement viewDeletedAssetsButton;
 	
-	@FindBy(xpath="//input[contains(@placeholder,'Search')]")
-	static WebElement searchBar;
+	@FindBy(xpath="//input[contains(@placeholder,'Search')]") 
+	WebElement searchBar;
 	
 	
 	public Assets() {
