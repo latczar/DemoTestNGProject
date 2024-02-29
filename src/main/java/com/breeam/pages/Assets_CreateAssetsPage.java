@@ -573,9 +573,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    String assetType = "Healthcare";
 	    String assetSubType = "Hospital";
 	    String grossInternalArea = "1000";
-	    Constant.nameOfAsset = generateRandomInt() + "Main Office Building" ;
+	    Constant.nameOfAsset = generateRandomInt() + "2015 UAT data" ;
 	    Constant.nameOfCopiedAssetV2 = "Copied Asset - " + Constant.nameOfAsset;
-	    String description = "Headquarters of the company";
+	    String description = "UAT test data";
 	    String yearOfConstruction = "2005";
 	    String assetLifecycle = "Pre design";
 	    String assetValue = "50000";
@@ -614,9 +614,9 @@ public class Assets_CreateAssetsPage extends CommonFunctions {
 	    clickAndEnterDescriptionInput(description);
 	    
 	 // For selecting a "Parent Asset"
-	    selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
+	    /*selectParentOrNeighbourAssetDropdownValue("Auto Test Regression - Neighbouring Asset", 
 	        parentAssetInput, 
-	        "(//span[normalize-space()='%s'])[1]");
+	        "(//span[normalize-space()='%s'])[1]");*/
 
 	    clickAndEnterYearOfConstructionInput(yearOfConstruction);
 	    clickAndEnterAssetLifecycleInput(assetLifecycle);
